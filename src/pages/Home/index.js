@@ -77,7 +77,7 @@ function Home() {
                                 <span>
                                     Chúng tôi đi khắp thế giới để tìm kiếm cà phê tuyệt vời. Trong quá trình đó, chúng
                                     tôi phát hiện ra những hạt đậu đặc biệt và hiếm đến nỗi chúng tôi có thể chờ đợi để
-                                    mang chúng về.
+                                    mang chúng về..
                                 </span>
                             </div>
                         </Grid>
