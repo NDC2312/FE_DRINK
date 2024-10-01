@@ -1,0 +1,56 @@
+.search {
+    width: 361px;
+    height: 40px;
+    position: relative;
+
+    input {
+        width: 100%;
+        height: 100%;
+        padding-left: 20px;
+        padding-right: 50px;
+        font-size: 1.6rem;
+        caret-color: red;
+        color: var(--black);
+        border: 1px solid #555;
+        border-radius: 30px;
+    }
+
+    .search-icon {
+        position: absolute;
+        right: 20px;
+        top: 11px;
+        color: #555;
+        cursor: pointer;
+
+        &::before {
+            content: '';
+            position: absolute;
+            right: 30px;
+            width: 1px;
+            height: 100%;
+            background-color: #555;
+        }
+    }
+
+    .search-xmark {
+        position: absolute;
+        right: 60px;
+        top: 13px;
+        color: #555;
+        cursor: pointer;
+    }
+
+    .wrapper {
+        width: 360px;
+        position: fixed;
+        margin-top: 5px;
+        max-height: 250px;
+        min-height: 50px;
+        padding: 15px 0;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 0 6px #999;
+        border-radius: 6px;
+        z-index: 99;
+    }
+}

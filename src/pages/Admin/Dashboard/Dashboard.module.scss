@@ -1,0 +1,36 @@
+.wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.over-view {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .achievements {
+        min-width: 260px;
+        max-width: 260px;
+        background-color: var(--white);
+        padding: 20px 20px;
+        border-radius: 20px;
+        > div {
+            display: flex;
+            align-items: center;
+            column-gap: 10px;
+            color: var(--secondary);
+            span {
+                font-size: 1.8rem;
+            }
+            div {
+                font-size: 1.4rem;
+            }
+        }
+
+        .count {
+            color: var(--primary);
+            font-size: 3.5rem;
+            font-weight: 700;
+        }
+    }
+}

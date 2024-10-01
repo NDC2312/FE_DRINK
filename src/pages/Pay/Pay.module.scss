@@ -1,0 +1,22 @@
+.wrapper {
+    margin-top: 170px;
+    width: 100%;
+
+    .container {
+        width: var(--width-default);
+        margin: auto;
+
+        .list {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background-color: var(--background);
+
+            li {
+                a {
+                    color: var(--white);
+                }
+            }
+        }
+    }
+}

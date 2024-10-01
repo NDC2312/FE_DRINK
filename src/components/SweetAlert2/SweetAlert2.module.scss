@@ -1,0 +1,23 @@
+.sweet-alert-button {
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+
+    h2 {
+        margin-top: -15px;
+        &::before {
+            display: none;
+        }
+    }
+    div {
+        font-size: 14px;
+        line-height: 1rem;
+    }
+    button {
+        background-color: var(--primary);
+        color: var(--white);
+        padding: 8px 24px;
+        font-size: 1.7rem;
+    }
+}

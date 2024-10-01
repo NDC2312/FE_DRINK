@@ -1,0 +1,55 @@
+.wrapper {
+    width: 100%;
+    position: relative;
+}
+.container {
+    .p-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: var(--gray-03);
+        padding: 8px 14px;
+        border: 1px solid var(--gray);
+        border-radius: 4px;
+    }
+    // table
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    table thead tr th {
+        text-align: center;
+        font-size: 1.7rem;
+        border-top: 1px solid var(--gray);
+        border-bottom: 1px solid var(--gray);
+        padding: 14px;
+    }
+    table tbody tr:hover {
+        background-color: rgba(0, 0, 0, 0.075);
+    }
+    table tr td {
+        padding: 14px;
+        border-top: 1px solid var(--gray);
+        vertical-align: middle;
+        text-align: center;
+    }
+    table tr td input[name='position'] {
+        width: 80px;
+        padding: 4px 0;
+        text-align: center;
+        font-size: 1.7rem;
+        border: 1px solid var(--gray);
+        font-weight: 400;
+        &:focus {
+            border: 1px solid var(--black);
+        }
+    }
+
+    table tbody tr td:last-child {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 4px;
+    }
+}

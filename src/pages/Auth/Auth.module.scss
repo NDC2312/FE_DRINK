@@ -1,0 +1,89 @@
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    background: url('https://s1.1zoom.me/b5050/899/starbucksHighball_glass_447909_1920x1080.jpg');
+    background-size: cover;
+    background-position: center;
+
+    .login {
+        position: absolute;
+        top: 50%;
+        left: 33%;
+        transform: translate(-50%, -50%);
+        background-color: var(--white);
+        padding: 30px 40px;
+        border: none;
+        border-radius: 8px;
+        z-index: 10;
+        overflow: hidden;
+
+        .header {
+            text-align: center;
+
+            img {
+                width: 40px;
+                height: 40px;
+            }
+
+            h4 {
+                font-size: 2.1rem;
+                font-weight: 500;
+                color: var(--primary-text);
+            }
+        }
+
+        .body {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+
+            .top {
+                padding: 10px 20px;
+                border: 1px solid var(--background);
+                border-radius: 20px;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                cursor: pointer;
+            }
+
+            .form {
+                margin-top: 30px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-self: self-start;
+                gap: 20px;
+
+                .label-auth {
+                    font-weight: 500;
+                    margin-bottom: -12px;
+                    font-size: 1.5rem;
+                }
+
+                .input-auth {
+                    padding: 0 0 2px;
+                    border-bottom: 2px solid #555;
+                    font-size: 1.7rem;
+                }
+
+                ::placeholder {
+                    font-size: 1.5rem;
+                }
+            }
+
+            .no-account {
+                display: flex;
+                gap: 6px;
+                font-size: 1.5rem;
+
+                a {
+                    color: var(--black);
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}

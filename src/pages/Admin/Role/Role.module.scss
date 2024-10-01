@@ -1,0 +1,48 @@
+.wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.container {
+    .update {
+        width: 100%;
+        margin: 20px 0;
+        text-align: right;
+    }
+    // table
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 25px;
+    }
+
+    table thead tr th {
+        text-align: left;
+        font-size: 2rem;
+        border-top: 1px solid var(--gray);
+        border-bottom: 1px solid var(--gray);
+        padding: 14px;
+    }
+    table thead tr th:nth-child(2) {
+        text-align: center;
+    }
+    table thead tr th:nth-child(3) {
+        text-align: center;
+    }
+
+    table tbody tr:hover {
+        background-color: rgba(0, 0, 0, 0.075);
+    }
+    table tbody tr td {
+        // display: ;
+        text-align: center;
+        padding: 14px;
+        font-weight: 400;
+        border-top: 1px solid var(--gray);
+        border-bottom: 1px solid var(--gray);
+        vertical-align: top;
+    }
+    table tr td:nth-child(1) {
+        text-align: left;
+    }
+}

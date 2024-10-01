@@ -1,0 +1,184 @@
+.wrapper {
+    --border-radius-all: 45px;
+    --background-btn-dark-blue: #007bff;
+
+    position: relative;
+    color: var(--white);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.35px;
+    border-radius: var(--border-radius-all);
+    padding: 0 20px;
+    border: 0;
+    transition: 0.2s all;
+    cursor: pointer;
+}
+
+// btn-large
+.large {
+    font-size: 1.7rem;
+    min-height: 46px;
+    padding: 10px 40px;
+    background: var(--background-btn-dark-blue);
+    transition: 0.5s ease;
+    &::after {
+        position: absolute;
+        content: '';
+        width: 0%;
+        height: 100%;
+        border-radius: var(--border-radius-all);
+        background: rgba(0, 0, 0, 0.06);
+        transform: translateX(0);
+        transition: 0.5s ease-out;
+    }
+    &:hover::after {
+        width: 100%;
+        transform: translateX(1);
+    }
+
+    .icon-right {
+        margin-left: 7px;
+    }
+    .icon-left {
+        margin-right: 7px;
+    }
+}
+
+// btn-small
+.small {
+    // min-height: 40px;
+    min-height: 36px;
+    font-size: 1.5rem;
+    background: var(--background-btn-dark-blue);
+    transition: 0.5s ease;
+    &::after {
+        position: absolute;
+        content: '';
+        width: 0%;
+        height: 100%;
+        border-radius: var(--border-radius-all);
+        background: rgba(0, 0, 0, 0.06);
+        transform: translateX(0);
+        transition: 0.5s ease-out;
+    }
+    &:hover::after {
+        width: 100%;
+        transform: translateX(1);
+    }
+}
+
+// btn-add-new
+.btn-add-new {
+    min-height: 40px;
+    font-size: 1.5rem;
+    background: var(--primary);
+    border-radius: 4px;
+    transition: 0.5s ease;
+    &::after {
+        position: absolute;
+        content: '';
+        width: 0%;
+        height: 100%;
+        border-radius: var(--border-radius-all);
+        background: rgba(0, 0, 0, 0.06);
+        transform: translateX(0);
+        transition: 0.5s ease-out;
+    }
+    &:hover::after {
+        width: 100%;
+        transform: translateX(1);
+    }
+}
+
+// full
+.full {
+    width: 100%;
+    min-height: 46px;
+    background-image: var(--background-image-btn);
+}
+// end full
+
+.btnAddNew {
+    margin-left: 20px;
+    font-size: 1.6rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 400;
+    color: var(--success);
+    border: 1px solid var(--success);
+    &:hover {
+        background-color: var(--success);
+        color: var(--white);
+    }
+}
+
+.btnDetail {
+    display: inline-block;
+    padding: 4px 8px;
+    color: var(--white);
+    font-size: 1.7rem;
+    line-height: 1.5;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    transition: 0.2s all;
+    cursor: pointer;
+
+    background-color: #6c757d;
+    &:hover {
+        background-color: #5a6268;
+    }
+}
+.btnEdit {
+    display: inline-block;
+    padding: 4px 8px;
+    color: var(--white);
+    font-size: 1.7rem;
+    line-height: 1.5;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    transition: 0.2s all;
+    cursor: pointer;
+    background-color: #ffc107;
+    color: var(--black);
+    &:hover {
+        background-color: #e0a800;
+    }
+}
+.btnDelete {
+    display: inline-block;
+    padding: 4px 8px;
+    color: var(--white);
+    font-size: 1.7rem;
+    line-height: 1.5;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    transition: 0.2s all;
+    cursor: pointer;
+    background-color: var(--red);
+    &:hover {
+        background-color: #c82333;
+    }
+}
+
+.btnConfirm {
+    display: inline-block;
+    padding: 4px 8px;
+    color: var(--white);
+    font-size: 1.7rem;
+    line-height: 1.5;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    transition: 0.2s all;
+    cursor: pointer;
+    background-color: var(--success);
+    &:hover {
+        background-color: #2b9343;
+    }
+}

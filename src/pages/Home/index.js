@@ -1,0 +1,328 @@
+import classNames from 'classnames/bind';
+import styles from './Home.module.scss';
+import { Link } from 'react-router-dom';
+import { Button, Grid } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight, faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faCalendar } from '@fortawesome/free-regular-svg-icons';
+import { useState } from 'react';
+
+import Slider from '~/layout/components/Slider';
+import { SliderCustomers } from '~/layout/components/Slider';
+import { drinksHomeData } from '~/utils/imageHome';
+import config from '~/config';
+import {
+    coffeeHouse,
+    space1,
+    space2,
+    space3,
+    blog1,
+    blog2,
+    blog3,
+    gallery,
+    gallery_1,
+    gallery_2,
+    gallery_3,
+    gallery_4,
+    bannerHoursBook,
+} from '~/utils/imageHome';
+import Menu from '~/components/Menu';
+
+const cx = classNames.bind(styles);
+
+function Home() {
+    const [isOpen, setIsOpen] = useState(false);
+    const [itemData, setItemData] = useState({});
+    const [showImg, setShowImg] = useState(false);
+    const [showImgSrc, setShowImgSrc] = useState('');
+
+    console.log(showImgSrc);
+    console.log(showImg);
+
+    const hanleShowImgSrc = (src) => {
+        setShowImgSrc(src);
+    };
+
+    const toggleOpen = (data) => {
+        setIsOpen(true);
+        setItemData(data);
+    };
+
+    const VND = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
+    return (
+        <>
+            <Slider />
+            <div className={cx('wrapper')}>
+                <div className={cx('wrapper-top')}>
+                    <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                        <Grid item md={6} xs={12}>
+                            <div className={cx('coffee-img')}>
+                                <img src={coffeeHouse} alt="coffeeHouse" width="653px" height="332px" />
+                            </div>
+                        </Grid>
+                        <Grid item md={6} xs={12}>
+                            <div className={cx('coffee-content')}>
+                                <div className={cx('heading')}>
+                                    <h2>Chúng tôi là</h2>
+                                    <span>Coffee NTK</span>
+                                </div>
+                                <div className={cx('day-time')}>
+                                    Thứ hai đến Thứ bảy <b>7:00am - 11:00pm</b> <span>| </span>
+                                    Hotline:
+                                    <a href="tel:19000211">1900 0211</a>
+                                </div>
+                                <span>
+                                    Chúng tôi đi khắp thế giới để tìm kiếm cà phê tuyệt vời. Trong quá trình đó, chúng
+                                    tôi phát hiện ra những hạt đậu đặc biệt và hiếm đến nỗi chúng tôi có thể chờ đợi để
+                                    mang chúng về.
+                                </span>
+                            </div>
+                        </Grid>
+                    </Grid>
+                </div>
+                <div className={cx('menu')}>
+                    <div className={cx('products')}>
+                        <Grid container xs={12} md={12}>
+                            <div className={cx('coffee-favorite')}>Những món cà phê được yêu thích nhất</div>
+                            {drinksHomeData.map((data, index) => (
+                                <Grid key={index} item xs={6} md={3}>
+                                    <div className={cx('list')}>
+                                        <div className={cx('list-img')}>
+                                            <img src={data.img} alt={data.name} />
+                                        </div>
+                                        <div className={cx('list-infor')}>
+                                            <span className={cx('name')}>{data.name}</span>
+                                            <span className={cx('price')}>{VND.format(data.price)}</span>
+
+                                            <Button
+                                                variant="outlined"
+                                                size="medium"
+                                                endIcon={<FontAwesomeIcon icon={faAngleRight} className="endicon" />}
+                                                sx={{
+                                                    fontSize: '1.3rem',
+                                                    backgroundColor: '#fff',
+                                                    color: '#006241',
+                                                    borderColor: '#006241',
+                                                    '&:hover': {
+                                                        borderColor: '#006241',
+                                                        backgroundColor: '#006241',
+                                                        color: '#fff',
+                                                    },
+                                                }}
+                                                onClick={() => toggleOpen(data)}
+                                            >
+                                                Đặt hàng
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </Grid>
+                            ))}
+                        </Grid>
+                        <div className={cx('view-more')}>
+                            <Link to={config.routes.categoryProducts}>Xem thêm</Link>
+                        </div>
+                    </div>
+                </div>
+                {isOpen && <Menu isOpen={setIsOpen} data={itemData} />}
+                <div className={cx('wrapper-top')}>
+                    <Grid container xs={12} md={12}>
+                        <Grid item xs={12} md={12} className={cx('title')}>
+                            <h2> Hình ảnh tại quán coffee</h2>
+                        </Grid>
+                        <Grid item md={6} xs={12}>
+                            <div
+                                className={cx('gallery-img-l')}
+                                onClick={() => {
+                                    setShowImg(!showImg);
+                                    hanleShowImgSrc(gallery_2);
+                                }}
+                            >
+                                <img src={gallery_2} alt="gallery_2" width="555px" height="555px" />
+                                <span className={cx('icon')}>
+                                    <FontAwesomeIcon icon={faSearch} fontSize={30} />
+                                </span>
+                            </div>
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                            <div className={cx('gallery_right')}>
+                                <div
+                                    className={cx('gallery-img-r')}
+                                    onClick={() => {
+                                        setShowImg(!showImg);
+                                        hanleShowImgSrc(gallery_1);
+                                    }}
+                                >
+                                    <img src={gallery_1} alt="gallery" width="260" height="260" />
+                                    <span className={cx('icon')}>
+                                        <FontAwesomeIcon icon={faSearch} fontSize={30} />
+                                    </span>
+                                </div>
+                                <div
+                                    className={cx('gallery-img-r')}
+                                    onClick={() => {
+                                        setShowImg(!showImg);
+                                        hanleShowImgSrc(gallery);
+                                    }}
+                                >
+                                    <img src={gallery} alt="gallery" width="260" height="260" />
+                                    <span className={cx('icon')}>
+                                        <FontAwesomeIcon icon={faSearch} fontSize={30} />
+                                    </span>
+                                </div>
+                                <div
+                                    className={cx('gallery-img-r')}
+                                    onClick={() => {
+                                        setShowImg(!showImg);
+                                        hanleShowImgSrc(gallery_3);
+                                    }}
+                                >
+                                    <img src={gallery_3} alt="gallery" width="260" height="260" />
+                                    <span className={cx('icon')}>
+                                        <FontAwesomeIcon icon={faSearch} fontSize={30} />
+                                    </span>
+                                </div>
+                                <div
+                                    className={cx('gallery-img-r')}
+                                    onClick={() => {
+                                        setShowImg(!showImg);
+                                        hanleShowImgSrc(gallery_4);
+                                    }}
+                                >
+                                    <img src={gallery_4} alt="gallery" width="260" height="260" />
+                                    <span className={cx('icon')}>
+                                        <FontAwesomeIcon icon={faSearch} fontSize={30} />
+                                    </span>
+                                </div>
+                            </div>
+                        </Grid>
+                    </Grid>
+                </div>
+                {showImg && (
+                    <div className={cx('gallery-img-full')} onClick={() => setShowImg(false)}>
+                        <div className={cx('img-full')} onClick={(e) => e.stopPropagation()}>
+                            <img src={showImgSrc} alt="" width="650" height="650" />
+                        </div>
+                    </div>
+                )}
+                <div className={cx('slider-customers')}>
+                    <h2>Khách hàng nói gì</h2>
+                    <SliderCustomers />
+                </div>
+                <div className={cx('hours-book')}>
+                    <div className={cx('hours-book-container')}>
+                        <div className={cx('hours-book-l')}>
+                            <div className={cx('hours-book-title')}>Chào mừng bạn!</div>
+                            <p>
+                                Hãy đến và trải nghiệm không gian ấm cúng, những ly cafe hảo hạng cùng với thực đơn
+                                phong phú. Đặc biệt, chúng tôi có chương trình khuyến mãi hấp dẫn: Giảm 20% cho đơn hàng
+                                đầu tiên khi bạn đặt bàn trực tuyến! Đừng bỏ lỡ cơ hội thưởng thức những khoảnh khắc
+                                tuyệt vời bên bạn bè và gia đình. Hãy đặt bàn ngay hôm nay và khám phá hương vị tuyệt
+                                vời của chúng tôi!
+                            </p>
+                            <div className={cx('phone-contact')}>
+                                <div>Số điện thoại</div>
+                                <span>+84 382 284 203</span>
+                            </div>
+                        </div>
+                        <div className={cx('hours-book-r')}>
+                            <div className={cx('book-img')}>
+                                <img src={bannerHoursBook} alt="" width="500" />
+                                <Link to={config.routes.setTable}>Đặt bàn</Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className={cx('wrapper-bottom')}>
+                    <h2 className={cx('blog-title')}>Blog</h2>
+                    <div className={cx('blog')}>
+                        <Grid container spacing={0} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                            <Grid item xs={12} md={4}>
+                                <div className={cx('blog-card')}>
+                                    <div className={cx('blog-img')}>
+                                        <img src={blog1} alt="space" />
+                                    </div>
+                                    <div className={cx('content')}>
+                                        <div className={cx('date-time')}>
+                                            <span className={cx('time')}>
+                                                <FontAwesomeIcon icon={faClock} />
+                                                <span> 00:02 </span>
+                                            </span>
+                                            |
+                                            <span className={cx('date')}>
+                                                <FontAwesomeIcon icon={faCalendar} />
+                                                <span> 31/03/2024</span>
+                                            </span>
+                                        </div>
+                                        <Link>STARBUCKS THE WATERFRONT SAIGON XIN CHÀO!</Link>
+                                        <p>
+                                            Nằm tại góc phố cà phê "hot hit" nhất trung tâm Quận 1 với chiếc view toàn
+                                            cảnh sông Sài Gòn và cầu Ba Son độc nhất vô nhị, Starbucks The Waterfront
+                                            Saigon mang đến một không gian thật chill, sẵn sàng để chào đón bạn
+                                        </p>
+                                    </div>
+                                </div>
+                            </Grid>
+                            <Grid item xs={12} md={4}>
+                                <div className={cx('blog-card')}>
+                                    <div className={cx('blog-img')}>
+                                        <img src={blog2} alt="blog" />
+                                    </div>
+                                    <div className={cx('content')}>
+                                        <div className={cx('date-time')}>
+                                            <span className={cx('time')}>
+                                                <FontAwesomeIcon icon={faClock} />
+                                                <span> 00:02 </span>
+                                            </span>
+                                            |
+                                            <span className={cx('date')}>
+                                                <FontAwesomeIcon icon={faCalendar} />
+                                                <span> 31/03/2024</span>
+                                            </span>
+                                        </div>
+                                        <Link>STARBUCKS THE WATERFRONT SAIGON XIN CHÀO!</Link>
+                                        <p>
+                                            Nằm tại góc phố cà phê "hot hit" nhất trung tâm Quận 1 với chiếc view toàn
+                                            cảnh sông Sài Gòn và cầu Ba Son độc nhất vô nhị, Starbucks The Waterfront
+                                            Saigon mang đến một không gian thật chill, sẵn sàng để chào đón bạn
+                                        </p>
+                                    </div>
+                                </div>
+                            </Grid>
+                            <Grid item xs={12} md={4}>
+                                <div className={cx('blog-card')}>
+                                    <div className={cx('blog-img')}>
+                                        <img src={blog3} alt="space" />
+                                    </div>
+                                    <div className={cx('content')}>
+                                        <div className={cx('date-time')}>
+                                            <span className={cx('time')}>
+                                                <FontAwesomeIcon icon={faClock} />
+                                                <span> 00:02 </span>
+                                            </span>
+                                            |
+                                            <span className={cx('date')}>
+                                                <FontAwesomeIcon icon={faCalendar} />
+                                                <span> 31/03/2024</span>
+                                            </span>
+                                        </div>
+                                        <Link>STARBUCKS THE WATERFRONT SAIGON XIN CHÀO!</Link>
+                                        <p>
+                                            Nằm tại góc phố cà phê "hot hit" nhất trung tâm Quận 1 với chiếc view toàn
+                                            cảnh sông Sài Gòn và cầu Ba Son độc nhất vô nhị, Starbucks The Waterfront
+                                            Saigon mang đến một không gian thật chill, sẵn sàng để chào đón bạn
+                                        </p>
+                                    </div>
+                                </div>
+                            </Grid>
+                        </Grid>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+}
+
+export default Home;

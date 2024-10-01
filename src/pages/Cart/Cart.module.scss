@@ -1,0 +1,230 @@
+.wrapper {
+    margin-top: 160px;
+    width: 100%;
+
+    .container {
+        width: var(--width-default);
+        height: 80vh;
+        margin: auto;
+
+        table,
+        tr,
+        td {
+            border: 1px solid #006252dd;
+        }
+
+        table {
+            width: 100%;
+
+            tbody {
+                width: 100%;
+            }
+        }
+
+        .table {
+            width: 100%;
+            max-height: 650px;
+            min-height: 600px;
+
+            overflow-y: auto;
+        }
+
+        .header {
+            width: 100%;
+            text-align: center;
+
+            background-color: var(--background);
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.8rem;
+
+            .h-product {
+                width: 60%;
+                padding: 8px 16px;
+            }
+            .h-price .h-qty .h-total {
+                width: 13.3333333333333%;
+                padding: 8px 16px;
+            }
+        }
+
+        .item-info {
+            width: 100%;
+            .item-product {
+                width: 100%;
+                padding: 8px 16px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .item-name {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    .item-image {
+                        width: 80px;
+                        height: 80px;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            border-radius: 8px;
+                        }
+                    }
+
+                    .name {
+                        color: var(--black);
+                        font-size: 1.6rem;
+                        font-weight: 500;
+                    }
+                }
+                .btn-remove {
+                    font-size: 1.9rem;
+                    cursor: pointer;
+                }
+            }
+
+            .item-price {
+                width: 13.3333333333333333%;
+                text-align: center;
+                color: var(--black);
+                font-size: 1.7rem;
+                font-weight: 500;
+            }
+
+            .item-qty {
+                width: 13.3333333333333333%;
+                text-align: center;
+                color: var(--black);
+                font-size: 1.7rem;
+                font-weight: 500;
+
+                .item-decrease {
+                    padding: 0px 10px;
+                    font-size: 2rem;
+                    cursor: pointer;
+                }
+
+                .qty {
+                    padding: 0 10px;
+                }
+
+                .item-increase {
+                    padding: 0px 10px;
+                    font-size: 2rem;
+                    cursor: pointer;
+                }
+            }
+
+            .total {
+                width: 13.3333333333333333%;
+                text-align: center;
+                color: var(--primary-text);
+                font-size: 1.7rem;
+                font-weight: 500;
+            }
+        }
+
+        // last
+        .last {
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            a {
+                display: flex;
+                align-items: center;
+                color: var(--primary-text);
+                font-size: 1.8rem;
+                font-weight: 600;
+                padding: 2px 3px;
+
+                .text {
+                    margin-left: 4px;
+                }
+            }
+
+            .sum-price {
+                color: var(--black);
+                font-size: 1.6rem;
+                font-weight: 500;
+                padding-right: 15px;
+
+                .total {
+                    color: red;
+                    font-size: 2.3rem;
+                    font-weight: 900;
+                }
+            }
+        }
+
+        // my bill
+
+        .pay {
+            min-width: 320px;
+            min-height: 280px;
+            margin-left: 10px;
+            border: 1px solid var(--background);
+
+            h4 {
+                color: var(--white);
+                font-size: 2rem;
+                text-align: center;
+                padding: 10px 0;
+                background-color: var(--background);
+                border-bottom: 1px solid var(--background);
+            }
+
+            .my-bill {
+                width: 100%;
+                padding: 0 20px;
+                .bill {
+                    padding: 15px 0 15px 0;
+                    border-bottom: 1px solid var(--background);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+
+                    .t-bill {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .title {
+                            font-weight: 400;
+                        }
+
+                        .discount {
+                            font-size: 1.7rem;
+                            font-weight: 500;
+                        }
+                    }
+                }
+                .total-amount {
+                    padding: 15px 0 15px 0;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    &::before {
+                        content: '(Đã bao gồm phiếu giảm giá)';
+                        position: absolute;
+                        width: 100%;
+                        top: 40px;
+                        left: 0;
+                        font-size: 1.3rem;
+                    }
+
+                    .amount {
+                        color: red;
+                        font-size: 2rem;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+}
