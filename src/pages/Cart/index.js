@@ -1,83 +1,70 @@
 import classNames from 'classnames/bind';
 import styles from './Cart.module.scss';
 import { Grid, Button } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 import { cartempty } from '~/utils/imageHome';
-import { decreaseCart, increaseCart, removeCart } from '~/redux/features/cartsSlice';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
 
 function Cart() {
-    const dispatch = useDispatch();
-
-    const data = useSelector((state) => state.carts.cartItem);
-    const total = useSelector((state) => state.carts.cartTotalAmount);
-
     let discount = 0;
 
-    if (total >= 200000) {
-        discount = 10000;
-    }
-    if (total >= 300000) {
-        discount = 15000;
-    }
-    if (total >= 400000) {
-        discount = 20000;
-    }
-    if (total >= 450000) {
-        discount = 25000;
-    }
-    if (total >= 500000) {
-        discount = 30000;
-    }
-    if (total >= 550000) {
-        discount = 35000;
-    }
-    if (total >= 600000) {
-        discount = 40000;
-    }
-    if (total >= 650000) {
-        discount = 45000;
-    }
-    if (total >= 700000) {
-        discount = 50000;
-    }
-    if (total >= 750000) {
-        discount = 55000;
-    }
-    if (total >= 800000) {
-        discount = 60000;
-    }
-    if (total >= 900000) {
-        discount = 70000;
-    }
-    if (total >= 1000000) {
-        discount = 100000;
-    }
+    // if (total >= 200000) {
+    //     discount = 10000;
+    // }
+    // if (total >= 300000) {
+    //     discount = 15000;
+    // }
+    // if (total >= 400000) {
+    //     discount = 20000;
+    // }
+    // if (total >= 450000) {
+    //     discount = 25000;
+    // }
+    // if (total >= 500000) {
+    //     discount = 30000;
+    // }
+    // if (total >= 550000) {
+    //     discount = 35000;
+    // }
+    // if (total >= 600000) {
+    //     discount = 40000;
+    // }
+    // if (total >= 650000) {
+    //     discount = 45000;
+    // }
+    // if (total >= 700000) {
+    //     discount = 50000;
+    // }
+    // if (total >= 750000) {
+    //     discount = 55000;
+    // }
+    // if (total >= 800000) {
+    //     discount = 60000;
+    // }
+    // if (total >= 900000) {
+    //     discount = 70000;
+    // }
+    // if (total >= 1000000) {
+    //     discount = 100000;
+    // }
 
-    const handleRemove = (item) => {
-        dispatch(removeCart(item));
-    };
+    const handleRemove = (item) => {};
 
-    const handleDecrease = (item) => {
-        dispatch(decreaseCart(item));
-    };
+    const handleDecrease = (item) => {};
 
-    const handleIncreaseQty = (item) => {
-        dispatch(increaseCart(item));
-    };
+    const handleIncreaseQty = (item) => {};
 
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
-                {data.length !== 0 ? (
+                {/* {.length !== 0 ? (
                     <Grid container justify="space-around" spacing={1}>
                         <Grid item xs={12} md={9}>
                             <div className={cx('table')}>
@@ -189,7 +176,7 @@ function Cart() {
                     </Grid>
                 ) : (
                     <img src={cartempty} alt="" />
-                )}
+                )} */}
             </div>
         </div>
     );

@@ -2,6 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Fragment } from 'react';
 
 import DefaultLayout from './layout/DefaultLayout';
+import DefaultLayoutAdmin from './layout/Admin/DefaultLayout';
+import Forbidden from './components/403/forbidden';
+
 import { publicRoute, privateRoute } from './Routes';
 
 function App() {
@@ -33,10 +36,9 @@ function App() {
 
                     {/* private */}
                     {privateRoute.map((route, index) => {
-                        const ProtectedRoute = route.protected;
+                        let Layout = DefaultLayoutAdmin;
                         const Page = route.component;
-                        let Layout = DefaultLayout;
-
+                        const ProtectedRoute = route.protected;
                         if (route.layout) {
                             Layout = route.layout;
                         } else if (route.layout === null) {
@@ -48,7 +50,7 @@ function App() {
                                 path={route.path}
                                 element={
                                     <Layout>
-                                        <ProtectedRoute>
+                                        <ProtectedRoute permission={route.permission}>
                                             <Page />
                                         </ProtectedRoute>
                                     </Layout>
@@ -56,6 +58,7 @@ function App() {
                             />
                         );
                     })}
+                    <Route path="/403" element={<Forbidden />} />
                 </Routes>
             </div>
         </Router>

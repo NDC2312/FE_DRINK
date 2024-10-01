@@ -3,18 +3,19 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyles from '~/components/GlobalStyles';
-
-import store from './redux/store';
+import allReducers from './reducers';
+import { thunk } from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+
+const store = createStore(allReducers, applyMiddleware(thunk));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
-        {/* <React.StrictMode> */}
         <GlobalStyles>
             <App />
         </GlobalStyles>
-        {/* </React.StrictMode> */}
     </Provider>,
 );
 

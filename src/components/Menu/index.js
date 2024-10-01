@@ -4,21 +4,15 @@ import { Grid, Button } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '~/redux/features/cartsSlice';
 
 const cx = classNames.bind(styles);
 
 function Menu({ isOpen, data }) {
     const [quantity, setQuantity] = useState(1);
     const [total, setTotal] = useState(data.price);
-    const dispatch = useDispatch();
-
-    const newData = { ...data, qty: quantity, total: total };
 
     const handleAddCart = () => {
         isOpen(false);
-        dispatch(addToCart(newData));
     };
 
     const handleSubtract = () => {

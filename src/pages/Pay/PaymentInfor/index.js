@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCustomerInfor } from '~/redux/features/customerInforSlice';
 import { useNavigate } from 'react-router-dom';
 
 import config from '~/config';
@@ -42,12 +41,9 @@ function PaymentInfor() {
 
     useEffect(() => {
         if (Object.keys(error).length === 0 && isSubmit) {
-            dispatch(addCustomerInfor(values));
             navigate(config.routes.paymentInformation);
         }
     }, [error]);
-
-    console.log(addCustomerInfor(values));
 
     const validate = (values) => {
         const errors = {};

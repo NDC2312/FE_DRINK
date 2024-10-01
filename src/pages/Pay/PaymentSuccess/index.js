@@ -9,15 +9,10 @@ import { Link } from 'react-router-dom';
 
 import config from '~/config';
 import success from '~/assets/Payment/success.jpg';
-import { clearCart } from '~/redux/features/cartsSlice';
 
 const cx = classNames.bind(styles);
 
 function PaymentSuccess() {
-    const data = useSelector((state) => state.dataCustomer.customerInfor);
-    const total = useSelector((state) => state.carts.cartTotalAmount);
-    const cart = useSelector((state) => state.carts.cartItem);
-
     const dispatch = useDispatch();
 
     const VND = Intl.NumberFormat('vi-vn', {
@@ -25,54 +20,13 @@ function PaymentSuccess() {
         currency: 'VND',
     });
 
-    const handleOnclick = () => {
-        dispatch(clearCart());
-    };
+    const handleOnclick = () => {};
 
     let discount = 0;
 
-    if (total >= 200000) {
-        discount = 10000;
-    }
-    if (total >= 300000) {
-        discount = 15000;
-    }
-    if (total >= 400000) {
-        discount = 20000;
-    }
-    if (total >= 450000) {
-        discount = 25000;
-    }
-    if (total >= 500000) {
-        discount = 30000;
-    }
-    if (total >= 550000) {
-        discount = 35000;
-    }
-    if (total >= 600000) {
-        discount = 40000;
-    }
-    if (total >= 650000) {
-        discount = 45000;
-    }
-    if (total >= 700000) {
-        discount = 50000;
-    }
-    if (total >= 750000) {
-        discount = 55000;
-    }
-    if (total >= 800000) {
-        discount = 60000;
-    }
-    if (total >= 900000) {
-        discount = 70000;
-    }
-    if (total >= 1000000) {
-        discount = 100000;
-    }
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('container')}>
+            {/* <div className={cx('container')}>
                 <ul className={cx('list')}>
                     <li>
                         <div className={cx('item')}>
@@ -174,7 +128,7 @@ function PaymentSuccess() {
                         </Button>
                     </Link>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

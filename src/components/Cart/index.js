@@ -6,7 +6,6 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTotal, removeCart } from '~/redux/features/cartsSlice';
 import { useEffect } from 'react';
 
 import { cartempty } from '~/utils/imageHome';
@@ -15,20 +14,7 @@ import config from '~/config';
 const cx = classNames.bind(styles);
 
 function Cart() {
-    const dispatch = useDispatch();
-
-    const carts = useSelector((state) => state.carts.cartItem);
-
-    useEffect(() => {
-        dispatch(getTotal());
-    }, [carts]);
-
-    const removeItem = (item) => {
-        dispatch(removeCart(item));
-    };
-
-    const quantityTotal = useSelector((state) => state.carts.cartTotalQuantity);
-    const priceTotal = useSelector((state) => state.carts.cartTotalAmount);
+    const removeItem = (item) => {};
 
     const VND = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
@@ -39,7 +25,7 @@ function Cart() {
             <div className={cx('wrapper')}>
                 <div className={cx('cart-shop')}>
                     <ShoppingCartOutlinedIcon sx={{ fontSize: 25 }} />
-                    <div className={cx('cart-number')}>{quantityTotal}</div>
+                    <div className={cx('cart-number')}></div>
                 </div>
 
                 <div className={cx('cart')}>
@@ -47,7 +33,7 @@ function Cart() {
                         <div className={cx('cart-infor')}>
                             <span>Giỏ hàng của bạn</span>
                         </div>
-                        {carts.length !== 0 ? (
+                        {/* {carts.length !== 0 ? (
                             <div className={cx('scroll-content')}>
                                 {carts.map((item, index) => (
                                     <div key={index} className={cx('cart-list')}>
@@ -86,13 +72,13 @@ function Cart() {
                         {carts.length !== 0 ? (
                             <div className={cx('cart-total')}>
                                 <span>Tổng: </span>
-                                <span className={cx('price-total')}>{VND.format(priceTotal)}</span>
+                                <span className={cx('price-total')}>{VND.format()}</span>
                             </div>
                         ) : (
                             <div className={cx('cart-empty')}>
                                 <span>Chưa có đơn hàng nào</span>
                             </div>
-                        )}
+                        )} */}
                         <Link to={config.routes.cart}>
                             <Button
                                 variant="outlined"

@@ -7,7 +7,6 @@ import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
-import { logo } from '~/utils/imageHome';
 import Cart from '~/components/Cart';
 import config from '~/config';
 import noAvatar from '~/assets/SignIn/no-avatar.png';
@@ -26,9 +25,6 @@ function Header() {
     };
 
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
-
-    const qty = useSelector((state) => state.carts.cartTotalQuantity);
-    const total = useSelector((state) => state.carts.cartTotalAmount);
 
     return (
         <header className={cx('wrapper')}>
@@ -242,11 +238,11 @@ function Header() {
                 <div className={cx('mobile-qty')}>
                     <span className={cx('title-cart')}>Giỏ hàng của bạn: </span>
                     <ShoppingCartOutlinedIcon sx={{ fontSize: 20, color: ' var(--primary-text)' }} />
-                    <span className={cx('cart-number')}>{qty}</span>
+                    <span className={cx('cart-number')}>{}</span>
                 </div>
                 <div className={cx('mobile-total')}>
                     <span className={cx('title-cart')}>Tổng tiền: </span>
-                    <span className={cx('total-number')}>{VND.format(total)}</span>
+                    <span className={cx('total-number')}>{VND.format()}</span>
                 </div>
             </div>
         </header>
