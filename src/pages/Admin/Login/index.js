@@ -100,9 +100,7 @@ function Login() {
                         />
                         <label htmlFor="remember">Ghi nhớ</label>
                     </div>
-                    <Button type="submit" full>
-                        Đăng nhập
-                    </Button>
+                    <button type="submit">Đăng nhập</button>
                 </form>
             </div>
         </div>
