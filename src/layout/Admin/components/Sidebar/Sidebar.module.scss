@@ -1,9 +1,84 @@
 // 323232 background
 
 .container {
-    width: 250px;
+    width: 240px;
     padding: 0 12px;
     overflow: hidden;
+}
+.menu-oke {
+    width: 70px;
+    .sidebar-header {
+        div {
+            div {
+                display: none;
+            }
+        }
+    }
+    .list {
+        p {
+            display: none;
+        }
+    }
+    .list-block {
+        margin-top: 5px;
+        p {
+            display: none;
+        }
+        .btn-open {
+            width: 48px;
+            height: 48px;
+            justify-content: center;
+            padding: 0;
+            margin-bottom: 5px;
+            &:hover {
+                border-radius: 50%;
+            }
+            span {
+                margin-right: 0;
+            }
+            .chevron-down {
+                // display: none;
+                left: 25px;
+            }
+        }
+        a {
+            width: 48px;
+            height: 48px;
+            justify-content: center;
+            padding: 0;
+            margin-bottom: 5px;
+            &:hover {
+                border-radius: 50%;
+            }
+            span {
+                margin-right: 0;
+            }
+        }
+        .active {
+            border-radius: 50%;
+        }
+        .block {
+            margin-bottom: 0px;
+        }
+        .menu-open {
+            max-height: 200px;
+            a {
+                margin: 5px;
+                padding-left: 30px;
+                span {
+                    margin-top: -8px;
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+    .list-block:last-child {
+        margin-top: 20px;
+        &::after {
+            width: 100%;
+            top: -10px;
+        }
+    }
 }
 
 .sidebar-header {
@@ -49,6 +124,7 @@ ul {
         .btn-open {
             position: relative;
             display: flex;
+            align-items: center;
             width: 100%;
             background-color: transparent;
             color: var(--black);
@@ -74,6 +150,7 @@ ul {
             display: flex;
             align-items: center;
             margin-top: 0;
+            margin-bottom: 10px;
             padding: 8px 12px;
             font-size: 1.7rem;
             font-weight: 500;
@@ -97,6 +174,7 @@ ul {
             background-color: #f6f6f8;
         }
         .block {
+            margin-bottom: 10px;
             max-height: 0;
             overflow: hidden;
             background-color: #f6f6f8;

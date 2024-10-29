@@ -1,89 +1,115 @@
 .wrapper {
+    position: relative;
     width: 100%;
-    height: 100vh;
-    background: url('https://s1.1zoom.me/b5050/899/starbucksHighball_glass_447909_1920x1080.jpg');
-    background-size: cover;
-    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .login {
-        position: absolute;
-        top: 50%;
-        left: 33%;
-        transform: translate(-50%, -50%);
-        background-color: var(--white);
-        padding: 30px 40px;
-        border: none;
-        border-radius: 8px;
-        z-index: 10;
-        overflow: hidden;
+.container {
+    margin-top: 50px;
+    background-color: var(--white);
+    width: 420px;
+    padding: 20px 30px 40px;
+    border-radius: 8px;
+    h2 {
+        text-align: center;
+        margin-bottom: 5px;
+        font-size: 3.8rem;
+        color: var(--orange);
+    }
+    > div {
+        margin: 15px 0;
+        color: #707070;
+        font-size: 1.4rem;
+        text-align: center;
+    }
+    .input-group {
+        position: relative;
+        width: 100%;
+        margin-bottom: 15px;
+        input {
+            margin-top: 3px;
+            width: 100%;
+            border: 1px solid var(--border-color-input);
+            padding: 12px 30px 12px 12px;
+            border-radius: 9999px;
+            font-size: 1.6rem;
+            &:focus {
+                border: 1px solid #000;
+            }
+        }
+        span {
+            position: absolute;
+            right: 15px;
+            top: 17px;
+            color: #707070;
+            cursor: pointer;
+        }
+        .active-password {
+            color: var(--black);
+        }
+    }
+    .remember {
+        display: flex;
+        align-items: center;
+        position: relative;
 
-        .header {
+        label {
+            margin-left: 5px;
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 0;
+        }
+        input[type='checkbox'] {
+            position: relative;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 1px solid var(--secondary);
+            background: white;
+            cursor: pointer;
+            transition: 0.3s all;
+            &:checked {
+                background-color: var(--primary);
+                border-color: var(--primary);
+            }
+        }
+        input[type='checkbox']:checked::before {
+            content: '\2714';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            color: var(--white);
+            font-weight: 600;
+        }
+    }
+    button {
+        margin-top: 25px;
+        font-size: 1.9rem;
+        background-image: var(--background-image-orange);
+    }
+    .register {
+        > div {
+            margin: 15px 0;
+            color: #707070;
+            font-size: 1.4rem;
             text-align: center;
-
-            img {
-                width: 40px;
-                height: 40px;
-            }
-
-            h4 {
-                font-size: 2.1rem;
-                font-weight: 500;
-                color: var(--primary-text);
+            margin-bottom: 20px;
+            a {
+                padding: 0 2px;
+                color: var(--orange);
+                font-weight: 600;
             }
         }
-
-        .body {
-            margin-top: 25px;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-
-            .top {
-                padding: 10px 20px;
-                border: 1px solid var(--background);
-                border-radius: 20px;
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                cursor: pointer;
-            }
-
-            .form {
-                margin-top: 30px;
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-self: self-start;
-                gap: 20px;
-
-                .label-auth {
-                    font-weight: 500;
-                    margin-bottom: -12px;
-                    font-size: 1.5rem;
-                }
-
-                .input-auth {
-                    padding: 0 0 2px;
-                    border-bottom: 2px solid #555;
-                    font-size: 1.7rem;
-                }
-
-                ::placeholder {
-                    font-size: 1.5rem;
-                }
-            }
-
-            .no-account {
-                display: flex;
-                gap: 6px;
-                font-size: 1.5rem;
-
-                a {
-                    color: var(--black);
-                    font-weight: 600;
-                }
-            }
+        span {
+            text-align: center;
         }
+    }
+    .auth_goggle {
+        display: flex;
+        justify-content: center;
     }
 }

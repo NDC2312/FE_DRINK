@@ -25,15 +25,12 @@ export const routes = {
     paymentInformation: '/payment-information',
     paymentSuccess: '/payment-success',
 
-    // set a table
-    setTable: '/dat-ban',
-
     //not thing
     notThing: '/not-thing',
 
     //form
-    signIn: '/sign-in',
-    signUp: '/sign-up',
+    signIn: '/dang-nhap',
+    signUp: '/dang-ki',
 
     admin: '/admin', // admin
     // ADMIN dashboard
@@ -80,4 +77,7 @@ export const routes = {
 
     // ADMIN Role
     adminRole: '/admin/role',
+
+    // ADMIN settings
+    adminSettings: '/admin/settings',
 };

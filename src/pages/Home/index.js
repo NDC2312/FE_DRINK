@@ -1,15 +1,16 @@
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
 import { Link } from 'react-router-dom';
-import { Button, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faClock, faCalendar } from '@fortawesome/free-regular-svg-icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Slider from '~/layout/components/Slider';
+import Button from '~/components/Button';
 import { SliderCustomers } from '~/layout/components/Slider';
-import { drinksHomeData } from '~/utils/imageHome';
+import * as homeService from '~/services/homeService';
 import config from '~/config';
 import {
     coffeeHouse,
@@ -31,14 +32,20 @@ import Menu from '~/components/Menu';
 const cx = classNames.bind(styles);
 
 function Home() {
+    const [data, setData] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [itemData, setItemData] = useState({});
     const [showImg, setShowImg] = useState(false);
     const [showImgSrc, setShowImgSrc] = useState('');
 
-    console.log(showImgSrc);
-    console.log(showImg);
-
+    useEffect(() => {
+        const fetch = async () => {
+            const res = await homeService.getFeatured();
+            setData(res.products);
+        };
+        fetch();
+    }, []);
+    console.log(data);
     const hanleShowImgSrc = (src) => {
         setShowImgSrc(src);
     };
@@ -85,41 +92,30 @@ function Home() {
                 </div>
                 <div className={cx('menu')}>
                     <div className={cx('products')}>
-                        <Grid container xs={12} md={12}>
+                        <Grid container>
                             <div className={cx('coffee-favorite')}>Những món cà phê được yêu thích nhất</div>
-                            {drinksHomeData.map((data, index) => (
-                                <Grid key={index} item xs={6} md={3}>
-                                    <div className={cx('list')}>
-                                        <div className={cx('list-img')}>
-                                            <img src={data.img} alt={data.name} />
+                            {data &&
+                                data.map((item, index) => (
+                                    <Grid key={index} item xs={6} md={3}>
+                                        <div className={cx('list')}>
+                                            <div className={cx('sale')}>{item.discountPercentage} %</div>
+                                            <div className={cx('list-img')}>
+                                                <img src={item.thumbnail} alt={item.title} />
+                                            </div>
+                                            <div className={cx('list-infor')}>
+                                                <span className={cx('name')}>{item.title}</span>
+                                                <span className={cx('price')}>{VND.format(item.priceNew)}</span>
+                                                <Button
+                                                    small
+                                                    iconRight={<FontAwesomeIcon icon={faAngleRight} fontSize={12} />}
+                                                    // onClick={() => toggleOpen(data)}
+                                                >
+                                                    Đặt hàng
+                                                </Button>
+                                            </div>
                                         </div>
-                                        <div className={cx('list-infor')}>
-                                            <span className={cx('name')}>{data.name}</span>
-                                            <span className={cx('price')}>{VND.format(data.price)}</span>
-
-                                            <Button
-                                                variant="outlined"
-                                                size="medium"
-                                                endIcon={<FontAwesomeIcon icon={faAngleRight} className="endicon" />}
-                                                sx={{
-                                                    fontSize: '1.3rem',
-                                                    backgroundColor: '#fff',
-                                                    color: '#006241',
-                                                    borderColor: '#006241',
-                                                    '&:hover': {
-                                                        borderColor: '#006241',
-                                                        backgroundColor: '#006241',
-                                                        color: '#fff',
-                                                    },
-                                                }}
-                                                onClick={() => toggleOpen(data)}
-                                            >
-                                                Đặt hàng
-                                            </Button>
-                                        </div>
-                                    </div>
-                                </Grid>
-                            ))}
+                                    </Grid>
+                                ))}
                         </Grid>
                         <div className={cx('view-more')}>
                             <Link to={config.routes.categoryProducts}>Xem thêm</Link>
@@ -128,7 +124,7 @@ function Home() {
                 </div>
                 {isOpen && <Menu isOpen={setIsOpen} data={itemData} />}
                 <div className={cx('wrapper-top')}>
-                    <Grid container xs={12} md={12}>
+                    <Grid container>
                         <Grid item xs={12} md={12} className={cx('title')}>
                             <h2> Hình ảnh tại quán coffee</h2>
                         </Grid>

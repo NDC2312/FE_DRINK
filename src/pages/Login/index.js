@@ -36,7 +36,6 @@ function Login() {
             email,
             password,
         };
-        console.log(data);
         const res = await AccountService.login(data);
         console.log(res);
         if (res.code === 200) {

@@ -8,23 +8,22 @@ import * as AccountService from '~/services/accountService';
 import { fetchCountAdviseAction } from '~/actions/countAdviseAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faDashboard,
+    faChartPie,
     faFileSignature,
+    faFileInvoice,
     faBoxOpen,
     faUsers,
     faComments,
-    faLayerGroup,
-    faUsersLine,
+    faCartShopping,
     faGears,
     faChevronDown,
     faCircle,
 } from '@fortawesome/free-solid-svg-icons';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-function Sidebar({ setHeaderText }) {
+function Sidebar({ setHeaderText, menu }) {
     const dispatch = useDispatch();
     const { permissions } = useSelector((state) => state.permissionReducer);
     const [isActive, setIsActive] = useState(() => {
@@ -40,37 +39,18 @@ function Sidebar({ setHeaderText }) {
 
     useEffect(() => {
         dispatch(fetchCountAdviseAction());
-        // localStorage.setItem('isActive', isActive);
         const fetchMyAccount = async () => {
             const res = await AccountService.myAccount();
             setUser(res);
         };
         fetchMyAccount();
-        // switch (isActive) {
-        //     case 0:
-        //          setHeaderText('Tổng Quan');
-        //     case 1:
-        //          setHeaderText('Danh mục sản phẩm');
-        //     case 2:
-        //          setHeaderText('Danh sách sản phẩm');
-        //     case 3:
-        //          setHeaderText('Nhóm quyền');
-        //     case 4:
-        //          setHeaderText('Phân quyền');
-        //     case 5:
-        //          setHeaderText('Danh sách tài khoản');
-        //     case 6:
-        //          setHeaderText('Tư vấn');
-        //     default:
-        //          break;
-        // }
     }, [isActive, setHeaderText, dispatch]);
     const handleActive = (index) => {
         setIsActive(index);
     };
 
     return (
-        <div className={cx('container')}>
+        <div className={cx('container', { 'menu-oke': menu })}>
             <div className={cx('sidebar-header')}>
                 {user && (
                     <div className={cx('info')}>
@@ -93,9 +73,9 @@ function Sidebar({ setHeaderText }) {
                         to={config.routes.adminDashBoard}
                     >
                         <span>
-                            <FontAwesomeIcon icon={faDashboard} />
+                            <FontAwesomeIcon icon={faChartPie} />
                         </span>
-                        Tổng quan
+                        <p>Tổng quan</p>
                     </Link>
                 </li>
                 {/* end dashboard  */}
@@ -105,9 +85,9 @@ function Sidebar({ setHeaderText }) {
                     <p>Bài viết</p>
                     <button className={cx('btn-open', { 'btn-active': show === 0 })} onClick={() => handleShow(0)}>
                         <span>
-                            <FontAwesomeIcon icon={faFileSignature} />
+                            <FontAwesomeIcon icon={faFileInvoice} />
                         </span>
-                        Bài viết
+                        <p> Bài viết</p>
                         <span className={cx('chevron-down')}>
                             <FontAwesomeIcon icon={faChevronDown} fontSize={10} />
                         </span>
@@ -124,7 +104,7 @@ function Sidebar({ setHeaderText }) {
                                 <span className={cx('chevron-down')}>
                                     <FontAwesomeIcon icon={faCircle} fontSize={6} />
                                 </span>
-                                Thêm mới
+                                <p> Thêm mới</p>
                             </Link>
                         )}
                         {permissions.includes('blogs-view') && (
@@ -138,7 +118,7 @@ function Sidebar({ setHeaderText }) {
                                 <span className={cx('chevron-down')}>
                                     <FontAwesomeIcon icon={faCircle} fontSize={6} />
                                 </span>
-                                Danh sách
+                                <p>Danh sách</p>
                             </Link>
                         )}
                         {permissions.includes('blogs-category-view') && (
@@ -152,7 +132,7 @@ function Sidebar({ setHeaderText }) {
                                 <span className={cx('chevron-down')}>
                                     <FontAwesomeIcon icon={faCircle} fontSize={6} />
                                 </span>
-                                Danh mục
+                                <p>Danh mục</p>
                             </Link>
                         )}
                     </div>
@@ -166,7 +146,7 @@ function Sidebar({ setHeaderText }) {
                         <span>
                             <FontAwesomeIcon icon={faBoxOpen} />
                         </span>
-                        Sản phẩm
+                        <p>Sản phẩm</p>
                         <span className={cx('chevron-down')}>
                             <FontAwesomeIcon icon={faChevronDown} fontSize={10} />
                         </span>
@@ -183,7 +163,7 @@ function Sidebar({ setHeaderText }) {
                                 <span className={cx('chevron-down')}>
                                     <FontAwesomeIcon icon={faCircle} fontSize={6} />
                                 </span>
-                                Thêm mới
+                                <p> Thêm mới</p>
                             </Link>
                         )}
                         {permissions.includes('products-view') && (
@@ -197,7 +177,7 @@ function Sidebar({ setHeaderText }) {
                                 <span className={cx('chevron-down')}>
                                     <FontAwesomeIcon icon={faCircle} fontSize={6} />
                                 </span>
-                                Danh sách
+                                <p>Danh sách</p>
                             </Link>
                         )}
                         {permissions.includes('products-category-view') && (
@@ -211,21 +191,33 @@ function Sidebar({ setHeaderText }) {
                                 <span className={cx('chevron-down')}>
                                     <FontAwesomeIcon icon={faCircle} fontSize={6} />
                                 </span>
-                                Danh mục
+                                <p> Danh mục</p>
                             </Link>
                         )}
                     </div>
                     <Link
-                        className={isActive === 5 ? cx('active') : ''}
+                        className={isActive === 8 ? cx('active') : ''}
                         onClick={() => {
-                            handleActive(5);
+                            handleActive(8);
                         }}
                         to={config.routes.adminAddProducts}
                     >
-                        <span className={cx('chevron-down')}>
-                            <FontAwesomeIcon icon={faCircle} fontSize={6} />
+                        <span>
+                            <FontAwesomeIcon icon={faCartShopping} />
                         </span>
-                        Thêm mới
+                        <p> Đơn hàng</p>
+                    </Link>
+                    <Link
+                        className={isActive === 9 ? cx('active') : ''}
+                        onClick={() => {
+                            handleActive(9);
+                        }}
+                        to={config.routes.adminAddProducts}
+                    >
+                        <span>
+                            <FontAwesomeIcon icon={faFileSignature} />
+                        </span>
+                        <p>Báo cáo</p>
                     </Link>
                 </li>
                 {/* end products  */}
@@ -234,33 +226,33 @@ function Sidebar({ setHeaderText }) {
                 <li className={cx('list-block')}>
                     <p>Khách hàng </p>
                     <Link
-                        className={isActive === 8 ? cx('active') : ''}
+                        className={isActive === 10 ? cx('active') : ''}
                         onClick={() => {
-                            handleActive(8);
+                            handleActive(10);
                         }}
                         to={config.routes.adminAdvise}
                     >
                         <span>
                             <FontAwesomeIcon icon={faUsers} />
                         </span>
-                        Khách hàng
+                        <p> Khách hàng</p>
                     </Link>
                     <Link
-                        className={isActive === 9 ? cx('active') : ''}
+                        className={isActive === 11 ? cx('active') : ''}
                         onClick={() => {
-                            handleActive(9);
+                            handleActive(11);
                         }}
                         to={config.routes.adminAdvise}
                     >
                         <span>
                             <FontAwesomeIcon icon={faComments} />
                         </span>
-                        Đánh giá
+                        <p> Đánh giá</p>
                     </Link>
                 </li>
                 {/* end customers */}
 
-                <li>
+                {/* <li>
                     {permissions.includes('role-view') && (
                         <Link
                             className={isActive === 3 ? cx('active') : ''}
@@ -307,14 +299,14 @@ function Sidebar({ setHeaderText }) {
                             Danh sách tài khoản
                         </Link>
                     )}
-                </li>
+                </li> */}
 
                 <li className={cx('list-block')}>
-                    <Link>
+                    <Link to={config.routes.adminSettings}>
                         <span>
                             <FontAwesomeIcon icon={faGears} />
                         </span>
-                        Cài đặt chung
+                        <p> Cài đặt chung</p>
                     </Link>
                 </li>
             </ul>

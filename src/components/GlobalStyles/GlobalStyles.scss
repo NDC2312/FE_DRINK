@@ -4,21 +4,38 @@
 :root {
     --white: #fff;
     --orange: #f57c48;
+    --primary: #007ff8;
+    --dark-blue: #0000cc;
     --primary-text: #e7b45a;
-    --background: #006251;
+    --background: #f57c48;
     --black: #000;
     --red: #ff0000;
     --box-shadow: 0 2px 5px 0 #888;
-
+    --gray: #ccc;
+    --gray-03: rgb(0 0 0 / 3%);
+    --secondary: #56595f;
+    --border-color-input: #999;
+    --success: #28a745;
     --width-default: 1250px;
     --height-bg: 650px;
     --height-ipad: 225px;
+
+    --background-image: linear-gradient(to right, #288be1df 0%, #00f1feb2 100%); //00f2fe //288ae1 //00f1feb2
+    --background-image-btn: linear-gradient(90deg, #007ef8 8.22%, #06abe9 83.62%);
+    --background-image-green: linear-gradient(to right, #0fd186 0%, #13d386 50%, #28dd87 100%);
+    --background-image-purple: linear-gradient(90deg, #5c5ed5 8.22%, #8141ee 83.62%);
+    --background-image-orange: linear-gradient(to right, #fabf28 0%, #ff7527 100%);
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+input,
+button {
+    outline: none;
+    border: none;
 }
 
 html {

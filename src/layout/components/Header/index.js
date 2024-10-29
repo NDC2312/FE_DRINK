@@ -1,16 +1,16 @@
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import { Link, NavLink } from 'react-router-dom';
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from 'react-redux';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { Fragment } from 'react';
 
 import Cart from '~/components/Cart';
 import config from '~/config';
 import noAvatar from '~/assets/SignIn/no-avatar.png';
 import Search from './Search';
+import * as ProductClient from '~/services/p-clientService';
 
 const cx = classNames.bind(styles);
 
@@ -18,11 +18,37 @@ function Header() {
     const menuRef = useRef();
 
     const [user, setUser] = useState(false);
+    const [data, setData] = useState([]);
     const [showMenu, setShowMenu] = useState(false);
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
     };
+
+    useEffect(() => {
+        const fetch = async () => {
+            const res = await ProductClient.getProductsCategory();
+            setData(res);
+        };
+        fetch();
+    }, []);
+
+    const tree = (data) => {
+        return (
+            <ul>
+                {data.map((item) => {
+                    return (
+                        <li>
+                            <Link>{item.title}</Link>
+                            {item.children && tree(item.children)}
+                        </li>
+                    );
+                })}
+            </ul>
+        );
+    };
+
+    console.log(data);
 
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
 
@@ -149,19 +175,7 @@ function Header() {
                             >
                                 Sản phẩm
                             </NavLink>
-                            <div className={cx('item-child')}>
-                                <ul className={cx('list')}>
-                                    <li>
-                                        <Link to={config.routes.categoryProducts}>Đồ uống</Link>
-                                    </li>
-                                    <li>
-                                        <Link to={config.routes.categorySnacks}>Đồ ăn tráng miệng</Link>
-                                    </li>
-                                    <li>
-                                        <Link to={config.routes.categoryFood}>Đồ ăn ngọt</Link>
-                                    </li>
-                                </ul>
-                            </div>
+                            {tree(data)}
                         </li>
 
                         <li className={cx('item')}>
@@ -237,7 +251,7 @@ function Header() {
             <div className={cx('cart-mobile')}>
                 <div className={cx('mobile-qty')}>
                     <span className={cx('title-cart')}>Giỏ hàng của bạn: </span>
-                    <ShoppingCartOutlinedIcon sx={{ fontSize: 20, color: ' var(--primary-text)' }} />
+                    {/* <ShoppingCartOutlinedIcon sx={{ fontSize: 20, color: ' var(--primary-text)' }} /> */}
                     <span className={cx('cart-number')}>{}</span>
                 </div>
                 <div className={cx('mobile-total')}>

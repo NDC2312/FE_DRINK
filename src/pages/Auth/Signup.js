@@ -1,108 +1,140 @@
-// import classNames from 'classnames/bind';
-// import styles from './Auth.module.scss';
-// import { Button } from '@mui/material';
-// import { Link } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
-// import { useFormik } from 'formik';
-// import { logo } from '~/utils/imageHome';
-// import googleLogo from '~/assets/SignIn/google.svg';
-// import config from '~/config';
+import styles from './Auth.module.scss';
+import classNames from 'classnames/bind';
 
-// const cx = classNames.bind(styles);
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import cookie from 'react-cookies';
+import { Link } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
-// function Signup() {
-//     const navigate = useNavigate();
+import Button from '~/components/Button';
+import * as AuthService from '~/services/authService';
+import config from '~/config';
 
-//     return (
-//         <>
-//             <div className={cx('wrapper')}>
+const cx = classNames.bind(styles);
 
-//                 <div className={cx('login')}>
-//                     <div className={cx('header')}>
-//                         <img src={logo} alt="" />
-//                         <h4>Đăng nhập hoặc tạo tài khoản</h4>
-//                     </div>
-//                     <div className={cx('body')}>
-//                         <div className={cx('top')} onClick={handleGGLogin}>
-//                             <img src={googleLogo} alt="google" />
-//                             <span className={cx('btn-google')}>Tiếp tục với Google</span>
-//                         </div>
-//                         <form className={cx('form')} onSubmit={formik.handleSubmit}>
-//                             <label className={cx('label-auth')}>Tên của bạn</label>
-//                             <input
-//                                 placeholder="Nhập tên của bạn"
-//                                 name="name"
-//                                 type="text"
-//                                 onChange={formik.handleChange}
-//                                 value={formik.values.name}
-//                                 className={cx('input-auth')}
-//                             />
-//                             {formik.errors.name ? <div className={cx('error')}>{formik.errors.name}</div> : null}
+function SignUp() {
+    const navigate = useNavigate();
 
-//                             <label className={cx('label-auth')}>Email</label>
-//                             <input
-//                                 placeholder="Nhập email của bạn"
-//                                 name="email"
-//                                 type="email"
-//                                 onChange={formik.handleChange}
-//                                 value={formik.values.email}
-//                                 className={cx('input-auth')}
-//                             />
-//                             {formik.errors.email ? <div className={cx('error')}>{formik.errors.email}</div> : null}
+    const [formData, setFormData] = useState({
+        name: '',
+        phone: 0,
+        email: '',
+        password: '',
+    });
+    const [showPassword, setShowPassword] = useState(false);
+    const [token, setToken] = useState('');
 
-//                             <label className={cx('label-auth')}>Mật khẩu</label>
-//                             <input
-//                                 placeholder="Nhập mật khẩu"
-//                                 name="password"
-//                                 type="password"
-//                                 className={cx('input-auth')}
-//                                 onChange={formik.handleChange}
-//                                 value={formik.values.password}
-//                             />
-//                             {formik.errors.password ? (
-//                                 <div className={cx('error')}>{formik.errors.password}</div>
-//                             ) : null}
-//                             <label className={cx('label-auth')}>Nhập lại mật khẩu</label>
-//                             <input
-//                                 placeholder="Nhập lại mật khẩu"
-//                                 name="confirmedPassword"
-//                                 onChange={formik.handleChange}
-//                                 value={formik.values.confirmedPassword}
-//                                 type="password"
-//                                 className={cx('input-auth')}
-//                             />
-//                             {formik.errors.confirmedPassword ? (
-//                                 <div className={cx('error')}>{formik.errors.confirmedPassword}</div>
-//                             ) : null}
-//                             <Button
-//                                 type="submit"
-//                                 variant="outlined"
-//                                 size="medium"
-//                                 sx={{
-//                                     color: 'var(--white)',
-//                                     background: 'var(--background)',
-//                                     fontSize: '1.2rem',
-//                                     border: '1px solid var(--background)',
-//                                     marginTop: '5px',
-//                                     marginBottom: '15px',
+    const handleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
 
-//                                     '&:hover': {
-//                                         color: 'var(--white)',
-//                                         background: 'var(--background)',
-//                                     },
-//                                 }}
-//                             >
-//                                 Đăng nhập
-//                             </Button>
-//                         </form>
-//                         <p className={cx('no-account')}>
-//                             Bạn đã có tài khoản<Link to="/signin">Đăng nhập</Link>
-//                         </p>
-//                     </div>
-//                 </div>
-//             </div>
-//         </>
-//     );
-// }
+    const handleUpdateForm = (field, value) => {
+        setFormData((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
 
-// export default Signup;
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(formData);
+        const res = await AuthService.register(formData);
+        console.log(res);
+        if (res.code === 200) {
+            setToken(res.tokenAuth);
+        }
+    };
+    if (token !== '') {
+        const oneDay = 24 * 60 * 60 * 1000;
+        cookie.save('tokenAuth', token, {
+            path: setTimeout(() => {
+                navigate(config.routes.home);
+            }, 1000),
+            expires: new Date(Date.now() + oneDay),
+        });
+    }
+    const handleSuccess = async (credentialResponse) => {
+        console.log(credentialResponse.credential);
+        try {
+            const res = await AuthService.googleAuth(credentialResponse.credential);
+            console.log(res);
+            alert('Success');
+        } catch (error) {}
+    };
+    const handleError = () => {
+        alert('Đăng nhập thất bại');
+    };
+
+    return (
+        <div className={cx('wrapper')}>
+            <div className={cx('container')}>
+                <h2>Đăng ký tài khoản</h2>
+                <div>Đăng ký ngay tài khoản để nhận được những ưu đãi hấp dẫn khi mua hàng</div>
+                <form onSubmit={handleSubmit}>
+                    <div className={cx('input-group')}>
+                        <input
+                            id="name"
+                            name="name"
+                            placeholder="Họ và tên"
+                            onChange={(e) => handleUpdateForm('name', e.target.value)}
+                        />
+                    </div>
+                    <div className={cx('input-group')}>
+                        <input
+                            type="phone"
+                            id="phone"
+                            name="phone"
+                            placeholder="Số điện thoại"
+                            onChange={(e) => handleUpdateForm('phone', e.target.value)}
+                        />
+                    </div>
+                    <div className={cx('input-group')}>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Email"
+                            onChange={(e) => handleUpdateForm('email', e.target.value)}
+                        />
+                    </div>
+                    <div className={cx('input-group')}>
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            id="password"
+                            name="password"
+                            placeholder="Mật khẩu"
+                            onChange={(e) => handleUpdateForm('password', e.target.value)}
+                        />
+                        {formData.password.length > 0 && (
+                            <span
+                                onClick={handleShowPassword}
+                                className={cx({ 'active-password': showPassword === true })}
+                            >
+                                <FontAwesomeIcon icon={faEye} fontSize={15} />
+                            </span>
+                        )}
+                    </div>
+                    <Button type="submit" full>
+                        Đăng nhập
+                    </Button>
+                    <div className={cx('register')}>
+                        <div>
+                            Nếu bạn đã có tài khoản, vui lòng
+                            <Link to={config.routes.signIn}>đăng nhập</Link>
+                            tại đây.
+                        </div>
+                        <div>Hoặc đăng nhập bằng</div>
+                        <div className={cx('auth_goggle')}>
+                            <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+}
+
+export default SignUp;

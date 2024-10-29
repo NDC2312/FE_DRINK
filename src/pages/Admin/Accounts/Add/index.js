@@ -60,12 +60,12 @@ function Add() {
         <div className={cx('wrapper')}>
             <form onSubmit={handleSubmit}>
                 <div className={cx('container')}>
-                    <div className={cx('upload-image')}>
-                        <div className={cx('form-control')}>
-                            <UploadToCloudinary handleImageChange={handleImageChange} />
-                        </div>
-                    </div>
                     <div className={cx('form-input-right')}>
+                        <div className={cx('upload-image')}>
+                            <div className={cx('form-control')}>
+                                <UploadToCloudinary handleImageChange={handleImageChange} />
+                            </div>
+                        </div>
                         <div className={cx('form-group')}>
                             <label htmlFor="fullName">Họ và tên *</label>
                             <input

@@ -104,13 +104,13 @@
         border-bottom: 1px solid var(--gray);
         padding: 14px;
     }
+
     table tbody tr:hover {
         background-color: rgba(0, 0, 0, 0.075);
     }
     table tr td {
         padding: 14px;
         border-top: 1px solid var(--gray);
-        vertical-align: middle;
         text-align: center;
     }
     table tr td input[name='position'] {
@@ -123,13 +123,6 @@
         &:focus {
             border: 1px solid var(--black);
         }
-    }
-
-    table tbody tr td:last-child {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        column-gap: 4px;
     }
 }
 
@@ -155,14 +148,13 @@
     color: var(--white);
 }
 .changeStatus {
-    color: var(--white);
-    font-size: 1.6rem;
     font-weight: 500;
-    padding: 6px 12px;
+    width: 6px;
+    height: 6px;
     border-radius: 16px;
 }
 .change-status-active {
-    background-color: var(--success);
+    background-color: #31a24c;
 }
 .change-status-inActive {
     background-color: var(--red);
@@ -176,6 +168,7 @@
 }
 .btn-edit {
     background-color: #ffc107;
+    margin-right: 7px;
     color: var(--black);
     &:hover {
         background-color: #e0a800;

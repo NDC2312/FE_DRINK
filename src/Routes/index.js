@@ -20,8 +20,8 @@ import Food from '~/pages/Product/Food';
 import Store from '~/pages/Store';
 
 // auth
-import Signin from '../pages/Auth/Signin';
-import Signup from '../pages/Auth/Signup';
+import Signin from '~/pages/Auth/Signin';
+import Signup from '~/pages/Auth/Signup';
 
 // pay
 import PaymentInfor from '~/pages/Pay/PaymentInfor';
@@ -78,6 +78,9 @@ import DetailPermissionGroup from '~/pages/Admin/PermissionGroup/Detail';
 // ADMIN Role
 import Role from '~/pages/Admin/Role';
 
+// ADMIN Settings
+import Settings from '~/pages/Admin/Settings';
+
 const publicRoute = [
     { path: config.routes.home, component: Home },
     { path: config.routes.cart, component: Cart },
@@ -104,8 +107,8 @@ const publicRoute = [
     { path: config.routes.aboutUs, component: AboutUs },
 
     // Form
-    { path: config.routes.sigin, component: Signin, layout: null },
-    { path: config.routes.sigup, component: Signup, layout: null },
+    { path: config.routes.signIn, component: Signin },
+    { path: config.routes.signUp, component: Signup },
 
     { path: config.routes.admin, component: Login, layout: null },
 
@@ -260,6 +263,8 @@ const privateRoute = [
     { path: config.routes.adminRole, component: Role, protected: ProtectedRoute, permission: 'role-view' },
     // advise
     { path: config.routes.adminAdvise, component: Advise, protected: ProtectedRoute },
+    // settings
+    { path: config.routes.adminSettings, component: Settings, protected: ProtectedRoute },
 ];
 
 export { publicRoute, privateRoute };

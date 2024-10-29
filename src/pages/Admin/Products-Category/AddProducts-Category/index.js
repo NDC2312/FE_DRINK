@@ -1,6 +1,6 @@
 import styles from './AddProductsCategory.module.scss';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Fragment } from 'react';
 
@@ -15,6 +15,7 @@ function AddProductsCategory() {
     const location = useLocation();
     const data = location.state.data;
 
+    const [productCategory, setProductCategory] = useState([]);
     const [dataProductCategory, setDateProductCategory] = useState({
         title: '',
         parent_id: '',
@@ -23,6 +24,15 @@ function AddProductsCategory() {
         thumbnail: '',
         description: '',
     });
+
+    useEffect(() => {
+        const fetch = async () => {
+            const res = await productCategoryService.getProductsCategory();
+            setProductCategory(res);
+        };
+        fetch();
+    }, []);
+
     const updateData = (field, value) => {
         setDateProductCategory((prev) => ({
             ...prev,
@@ -30,12 +40,16 @@ function AddProductsCategory() {
         }));
     };
 
-    const tree = (data) => {
+    const tree = (data, level = 1) => {
         return data.map((item) => {
+            const tam = Array(level + 1).join('-- ');
             return (
                 <Fragment key={item._id}>
-                    <option value={item._id}>{item.title}</option>
-                    {item.children && tree(item.children)}
+                    <option value={item._id}>
+                        {tam}
+                        {item.title}
+                    </option>
+                    {item.children && tree(item.children, level + 1)}
                 </Fragment>
             );
         });
@@ -54,7 +68,6 @@ function AddProductsCategory() {
         }
 
         console.log(data.parent_id);
-
         const res = await productCategoryService.AddProductsCategory(data);
         console.log(res);
     };
@@ -96,7 +109,7 @@ function AddProductsCategory() {
                                 <option value="" disabled>
                                     -- Chọn danh mục sản phẩm --
                                 </option>
-                                {tree(data)}
+                                {tree(productCategory)}
                             </select>
                         </div>
 
@@ -120,7 +133,6 @@ function AddProductsCategory() {
                     <EditorComponent
                         value={dataProductCategory.description}
                         onChange={(content) => updateData('description', content)}
-                        apiKey="co561hel5ob9nlckqm7pmmpv8dqwb7mait3oz2i9q68v6igt"
                     />
                 </div>
 

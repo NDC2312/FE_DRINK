@@ -1,10 +1,10 @@
 header {
     width: 100%;
-    position: fixed;
+    position: absolute;
     top: 0;
     height: var(--height-header-admin);
     z-index: 999;
-    background-color: #f2f4f6;
+    background-color: #f6f6f8;
 }
 .dark {
     background-color: #000;
@@ -19,7 +19,7 @@ header {
         align-items: center;
         .header-text {
             color: var(--black);
-            flex: 0 0 70%;
+            flex: 0 0 60%;
             h1 {
                 font-size: 3rem;
                 line-height: 4rem;

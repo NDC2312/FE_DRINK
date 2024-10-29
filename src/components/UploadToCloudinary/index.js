@@ -6,11 +6,13 @@ import axios from 'axios';
 
 const cx = classNames.bind(styles);
 
-const uploadImageToCloudinary = async (image) => {
+const uploadImageToCloudinary = async (image, folderName) => {
     const formData = new FormData();
     formData.append('file', image);
     formData.append('upload_preset', 'p2qqbz5d');
-
+    if (folderName) {
+        formData.append('folder', folderName);
+    }
     try {
         const response = await axios.post(`https://api.cloudinary.com/v1_1/dn2u3dcrh/upload`, formData);
         return response.data.secure_url;
@@ -32,15 +34,17 @@ const UploadToCloudinary = ({ handleImageChange, currentImage }) => {
             <input type="file" id="thumbnail" name="thumbnail" accept="image/*" onChange={handleImagePreview} />
             <div
                 style={{
-                    width: '200px',
-                    height: '200px',
+                    width: '100px',
+                    height: '100px',
                     border: '1px solid #000',
+                    overflow: 'hidden',
                 }}
             >
                 {imagePreview && (
                     <div
                         style={{
-                            padding: '20px',
+                            width: '100%',
+                            height: '100%',
                         }}
                     >
                         <img style={{ width: '100%', height: '100%' }} src={imagePreview} alt="Upload" />

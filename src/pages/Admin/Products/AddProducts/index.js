@@ -21,7 +21,6 @@ function AddProducts() {
         featured: false,
         status: 'active',
         thumbnail: '',
-        demo_url: '',
         description: '',
     });
     const [productCategory, setProductCategory] = useState([]);
@@ -45,15 +44,16 @@ function AddProducts() {
         const data = {
             ...productData,
         };
-        console.log(data);
-        // if (productData.thumbnail) {
-        //     const uploadImageUrl = await uploadImageToCloudinary(productData.thumbnail);
-        //     data.thumbnail = uploadImageUrl;
-        // } else {
-        //     data.thumbnail = '';
-        // }
-        // const res = await productService.addProduct(data);
-        // console.log(res);
+        console.log(productData);
+        if (productData.thumbnail) {
+            const folderName = 'be_coffee/products';
+            const uploadImageUrl = await uploadImageToCloudinary(productData.thumbnail, folderName);
+            data.thumbnail = uploadImageUrl;
+        } else {
+            data.thumbnail = '';
+        }
+        const res = await productService.addProduct(data);
+        console.log(res);
     };
 
     const render = (data, level = 1) => {
@@ -81,6 +81,7 @@ function AddProducts() {
                 <div className={cx('container')}>
                     <div className={cx('upload-image')}>
                         <div className={cx('form-control')}>
+                            <span>Chọn hình ảnh</span>
                             <UploadToCloudinary handleImageChange={handleImageChange} />
                         </div>
                     </div>
@@ -103,7 +104,7 @@ function AddProducts() {
                                 onChange={(e) => updateProductData('productCategoryId', e.target.value)}
                                 name="product_category_id"
                                 id="product_category_id"
-                                required
+                                // required
                             >
                                 <option value="" disabled>
                                     -- Chọn danh mục --
@@ -117,10 +118,10 @@ function AddProducts() {
                                 type="number"
                                 className={cx('form-control')}
                                 id="price"
-                                onChange={(e) => updateProductData('price', e.target.value)}
                                 name="price"
-                                value="0"
+                                value={productData.price}
                                 min="0"
+                                onChange={(e) => updateProductData('price', e.target.value)}
                             />
                         </div>
                         <div className={cx('form-group')}>
@@ -131,7 +132,7 @@ function AddProducts() {
                                 onChange={(e) => updateProductData('discountPercentage', e.target.value)}
                                 id="discount"
                                 name="discount"
-                                value="0"
+                                value={productData.discountPercentage}
                                 min="0"
                             />
                         </div>
@@ -147,16 +148,7 @@ function AddProducts() {
                                 placeholder="Vị trí tự động tăng"
                             />
                         </div>
-                        <div className={cx('form-group')}>
-                            <label htmlFor="demo_url">Demo URL</label>
-                            <input
-                                type="text"
-                                className={cx('form-control')}
-                                id="demo_url"
-                                name="demo_url"
-                                onChange={(e) => updateProductData('demo_url', e.target.value)}
-                            />
-                        </div>
+
                         <div className={cx('featured')}>
                             <div className={cx('form-check')}>
                                 <input

@@ -149,6 +149,7 @@ function Accounts() {
         fetch();
     }, []);
 
+    console.log(data);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -229,16 +230,15 @@ function Accounts() {
                                                         ? 'change-status-active'
                                                         : 'change-status-inActive'
                                                 }`,
-                                            )} ${styles.changeStatus}`}
+                                            )} `}
                                             onClick={() =>
                                                 handleChangeStatus(
                                                     data._id,
                                                     `${data.status === 'active' ? 'inActive' : 'active'}`,
                                                 )
                                             }
-                                        >
-                                            {data.status === 'active' ? 'Hoạt động' : 'Dừng hoạt động'}
-                                        </Button>
+                                            circle
+                                        ></Button>
                                     </td>
                                     <td>
                                         <Link

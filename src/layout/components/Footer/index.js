@@ -27,7 +27,7 @@ function Footer() {
                     </Grid>
 
                     <Grid item xs={12} md={6}>
-                        <Grid xs={12}>
+                        <Grid item xs={12}>
                             <div className={cx('about')}>
                                 <span className={cx('title')}>Chúng tôi là Coffee NTK</span>
                                 <div className={cx('content-us')}>
@@ -52,7 +52,7 @@ function Footer() {
                                 </div>
                             </div>
                         </Grid>
-                        <Grid xs={12}>
+                        <Grid item xs={12}>
                             <div className={cx('about')}>
                                 <div className={cx('about-follow')}>
                                     <span className={cx('title')}>Theo dõi chúng tôi:</span>
@@ -73,7 +73,7 @@ function Footer() {
                             </div>
                         </Grid>
 
-                        <Grid xs={12}>
+                        <Grid item xs={12}>
                             <div className={cx('services')}>
                                 <div className={cx('service')}>
                                     <span className={cx('title')}>Dịch vụ khách hàng</span>
