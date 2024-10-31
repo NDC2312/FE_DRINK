@@ -15,6 +15,7 @@ import TeaDamViTra from '~/pages/Tea/TeaDamViTra';
 import Products from '~/pages/Product/Products';
 import Snacks from '~/pages/Product/Snacks';
 import Food from '~/pages/Product/Food';
+import Detail from '~/pages/Product/Detail';
 
 // store
 import Store from '~/pages/Store';
@@ -100,6 +101,7 @@ const publicRoute = [
     { path: config.routes.categoryProducts, component: Products },
     { path: config.routes.categorySnacks, component: Snacks },
     { path: config.routes.categoryFood, component: Food },
+    { path: config.routes.detail, component: Detail },
 
     // store
     { path: config.routes.store, component: Store },

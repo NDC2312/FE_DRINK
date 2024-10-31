@@ -1,0 +1,128 @@
+.wrapper {
+    width: var(--width-default);
+    margin: auto;
+}
+
+.back {
+    padding-top: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    span {
+        margin-right: 5px;
+        font-size: 12px;
+    }
+    a {
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: var(--black);
+    }
+}
+
+.container {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+}
+
+.product-image {
+    width: 550px;
+    height: 480px;
+    img {
+        width: 480px;
+        height: 480px;
+        background-size: cover;
+    }
+}
+
+.product-details {
+    margin-left: 20px;
+    .product-details h1 {
+        font-size: 24px;
+        margin: 0;
+    }
+    .price {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        .price-old {
+            font-size: 20px;
+            color: #666;
+            margin: 10px 0;
+            text-decoration: line-through;
+            margin-right: 5px;
+        }
+    }
+    .price-new {
+        font-size: 28px;
+        color: var(--primary-text);
+        font-weight: 600;
+        margin: 0 0 10px 0;
+    }
+}
+
+.order {
+    display: flex;
+    align-items: center;
+    width: 370px;
+    height: 60px;
+    border: 1px solid var(--gray);
+    border-radius: 40px;
+    overflow: hidden;
+    .quantity {
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+    }
+
+    .quantity button {
+        width: 30px;
+        height: 30px;
+        background-color: #fff;
+        border: 1px solid var(--gray);
+        border-radius: 50%;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s all;
+        &:hover {
+            background: var(--primary-text);
+            border: 1px solid var(--primary-text);
+            color: var(--white);
+        }
+    }
+
+    .quantity input {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        background-color: #fff;
+        font-weight: 600;
+        border: 1px solid var(--gray);
+        border-radius: 50%;
+        margin: 0 8px;
+    }
+
+    .order-button {
+        flex: 1;
+        height: 100%;
+        margin-left: 15px;
+        background-color: var(--primary-text);
+        color: var(--white);
+        border: none;
+        border-radius: 40px;
+        font-size: 1.7rem;
+        font-weight: 700;
+        cursor: pointer;
+    }
+}
+
+.info {
+    margin-top: 30px;
+
+    .description {
+        margin-top: 15px;
+        font-size: 14px;
+        color: gray;
+    }
+}

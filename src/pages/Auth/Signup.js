@@ -118,7 +118,7 @@ function SignUp() {
                         )}
                     </div>
                     <Button type="submit" full>
-                        Đăng nhập
+                        Đăng ký tài khoản
                     </Button>
                     <div className={cx('register')}>
                         <div>

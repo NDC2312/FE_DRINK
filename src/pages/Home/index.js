@@ -42,6 +42,7 @@ function Home() {
         const fetch = async () => {
             const res = await homeService.getFeatured();
             setData(res.products);
+            console.log(res.products);
         };
         fetch();
     }, []);
@@ -51,8 +52,7 @@ function Home() {
     };
 
     const toggleOpen = (data) => {
-        setIsOpen(true);
-        setItemData(data);
+        console.log(data);
     };
 
     const VND = new Intl.NumberFormat('vi-VN', {
@@ -95,8 +95,8 @@ function Home() {
                         <Grid container>
                             <div className={cx('coffee-favorite')}>Những món cà phê được yêu thích nhất</div>
                             {data &&
-                                data.map((item, index) => (
-                                    <Grid key={index} item xs={6} md={3}>
+                                data.map((item) => (
+                                    <Grid key={item._id} item xs={6} md={3}>
                                         <div className={cx('list')}>
                                             <div className={cx('sale')}>{item.discountPercentage} %</div>
                                             <div className={cx('list-img')}>
@@ -108,9 +108,9 @@ function Home() {
                                                 <Button
                                                     small
                                                     iconRight={<FontAwesomeIcon icon={faAngleRight} fontSize={12} />}
-                                                    // onClick={() => toggleOpen(data)}
+                                                    to={config.routes.detail.replace(':slugProduct', item.slug)}
                                                 >
-                                                    Đặt hàng
+                                                    Xem chi tiết
                                                 </Button>
                                             </div>
                                         </div>

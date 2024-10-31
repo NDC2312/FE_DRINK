@@ -38,7 +38,7 @@ function Header() {
             <ul>
                 {data.map((item) => {
                     return (
-                        <li>
+                        <li key={item._id}>
                             <Link>{item.title}</Link>
                             {item.children && tree(item.children)}
                         </li>
@@ -48,7 +48,7 @@ function Header() {
         );
     };
 
-    console.log(data);
+    // console.log(data);
 
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
 

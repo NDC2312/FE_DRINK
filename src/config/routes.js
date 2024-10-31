@@ -32,6 +32,11 @@ export const routes = {
     signIn: '/dang-nhap',
     signUp: '/dang-ki',
 
+    // detail product
+    detail: '/detail/:slugProduct',
+
+    // cart
+
     admin: '/admin', // admin
     // ADMIN dashboard
     adminDashBoard: '/admin/dashboard',

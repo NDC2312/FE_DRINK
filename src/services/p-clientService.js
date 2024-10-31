@@ -8,3 +8,14 @@ export const getProductsCategory = async () => {
         error(error());
     }
 };
+
+export const detailProduct = async (slugProduct) => {
+    try {
+        console.log('oke', `products-client/detail/${slugProduct}`);
+        const res = await httpRequest.get(`products-client/detail/${slugProduct}`);
+        console.log(res);
+        return res.data;
+    } catch (error) {
+        error(error());
+    }
+};
