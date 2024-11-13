@@ -1,6 +1,7 @@
 import styles from './AddBlog.module.scss';
 import classNames from 'classnames/bind';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Fragment } from 'react';
 import * as blogsCategoryService from '~/services/blogs-categoryService';
@@ -8,10 +9,12 @@ import * as blogsService from '~/services/blogsService';
 import EditorComponent from '~/components/EditorComponent';
 import Button from '~/components/Button';
 import { UploadToCloudinary, uploadImageToCloudinary } from '~/components/UploadToCloudinary';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
 function AddBlogs() {
+    const navigate = useNavigate();
     const [productData, setProductData] = useState({
         title: '',
         blog_parent_id: '',
@@ -51,6 +54,7 @@ function AddBlogs() {
             data.thumbnail = '';
         }
         await blogsService.addBlogs(data);
+        navigate(config.routes.adminBlogs);
     };
 
     const render = (data, level = 1) => {

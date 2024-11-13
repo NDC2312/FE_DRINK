@@ -1,105 +1,31 @@
 import classNames from 'classnames/bind';
 import styles from './Cart.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faXmark } from '@fortawesome/free-solid-svg-icons';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import * as CartQuantity from '~/services/cartService';
 
-import { cartempty } from '~/utils/imageHome';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
 
 function Cart() {
-    const removeItem = (item) => {};
-
-    const VND = new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND',
-    });
+    const [quantity, setQuantity] = useState(0);
+    useEffect(() => {
+        const fetch = async () => {
+            setQuantity(await CartQuantity.totalQuantity());
+        };
+        fetch();
+    }, []);
     return (
         <>
             <div className={cx('wrapper')}>
                 <div className={cx('cart-shop')}>
-                    <ShoppingCartOutlinedIcon sx={{ fontSize: 25 }} />
-                    <div className={cx('cart-number')}></div>
-                </div>
-
-                <div className={cx('cart')}>
-                    <div className={cx('cart-content')}>
-                        <div className={cx('cart-infor')}>
-                            <span>Giỏ hàng của bạn</span>
-                        </div>
-                        {/* {carts.length !== 0 ? (
-                            <div className={cx('scroll-content')}>
-                                {carts.map((item, index) => (
-                                    <div key={index} className={cx('cart-list')}>
-                                        <div className={cx('item-thumb')}>
-                                            <img src={item.img} alt="" />
-                                        </div>
-
-                                        <div className={cx('item-title')}>
-                                            <div className={cx('item-name')}>{item.name}</div>
-                                            <div className={cx('item-size')}>Ice Regular</div>
-                                            <div className={cx('item-total')}>
-                                                <span className={cx('item-quantity')}>{item.cartQuantity}</span> X
-                                                <span className={cx('item-price')}>
-                                                    {' '}
-                                                    {VND.format(item.price * item.cartQuantity)}{' '}
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <button
-                                            className={cx('btn-close')}
-                                            onClick={() => {
-                                                removeItem(item);
-                                            }}
-                                        >
-                                            <FontAwesomeIcon icon={faXmark} />
-                                        </button>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div className={cx('nothing-in-cart')}>
-                                <img src={cartempty} alt="nothing" />
-                            </div>
-                        )}
-                        {carts.length !== 0 ? (
-                            <div className={cx('cart-total')}>
-                                <span>Tổng: </span>
-                                <span className={cx('price-total')}>{VND.format()}</span>
-                            </div>
-                        ) : (
-                            <div className={cx('cart-empty')}>
-                                <span>Chưa có đơn hàng nào</span>
-                            </div>
-                        )} */}
-                        <Link to={config.routes.cart}>
-                            <Button
-                                variant="outlined"
-                                size="large"
-                                endIcon={<FontAwesomeIcon icon={faAngleRight} className="endicon" />}
-                                sx={{
-                                    width: '100%',
-                                    fontSize: '1.5rem',
-                                    backgroundColor: '#fff',
-                                    color: '#006241',
-                                    borderColor: '#006241',
-                                    '&:hover': {
-                                        backgroundColor: '#006241',
-                                        color: '#fff',
-                                    },
-                                }}
-                            >
-                                Xem Chi Tiết
-                            </Button>
-                        </Link>
-                    </div>
+                    <Link to={config.routes.cart}>
+                        <FontAwesomeIcon icon={faCartShopping} fontSize={20} />
+                    </Link>
+                    <div className={cx('cart-number')}>{quantity}</div>
                 </div>
             </div>
         </>

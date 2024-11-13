@@ -58,3 +58,35 @@ export const orderSuccess = async (orderId) => {
         error(error());
     }
 };
+
+// list order
+export const getOrder = async (orderId) => {
+    try {
+        const res = await httpRequest.get(`order`);
+        return res.data;
+    } catch (error) {
+        error(error());
+    }
+};
+
+// change-status order
+export const changeStatusOrder = async (id, status) => {
+    try {
+        const res = await httpRequest.patch(`order/change-status/${id}`, { status });
+        console.log('res', res);
+        return res.data;
+    } catch (error) {
+        error(error());
+    }
+};
+
+// change-status order
+export const cancelOrder = async (id, status) => {
+    try {
+        const res = await httpRequest.patch(`order/change-status/${id}`, { status });
+        console.log('res', res);
+        return res.data;
+    } catch (error) {
+        error(error());
+    }
+};

@@ -3,15 +3,18 @@ import classNames from 'classnames/bind';
 import { useState, useEffect } from 'react';
 
 import { Fragment } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as productCategoryService from '~/services/product-categoryService';
 import * as productService from '~/services/productService';
 import EditorComponent from '~/components/EditorComponent';
 import Button from '~/components/Button';
 import { UploadToCloudinary, uploadImageToCloudinary } from '~/components/UploadToCloudinary';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
 function AddProducts() {
+    const navigate = useNavigate();
     const [productData, setProductData] = useState({
         title: '',
         productCategoryId: '',
@@ -54,6 +57,7 @@ function AddProducts() {
         }
         const res = await productService.addProduct(data);
         console.log(res);
+        navigate(config.routes.adminProducts);
     };
 
     const render = (data, level = 1) => {

@@ -45,7 +45,7 @@ function Header({ headerText }) {
             <div className={cx('wrapper')}>
                 <div className={cx('container')}>
                     <div className={cx('header-text')}>
-                        <h1>{headerText}</h1>
+                        {/* <h1>{headerText}</h1> */}
                         <span className={cx('date-now')}>{formatter.format(currentTime).replace(/\s+/g, ' ')}</span>
                     </div>
                     <div className={cx('h-right')}>

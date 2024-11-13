@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faClock, faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { useState, useEffect } from 'react';
+import cookie from 'react-cookies';
 
 import Slider from '~/layout/components/Slider';
 import Button from '~/components/Button';
@@ -37,22 +38,17 @@ function Home() {
     const [itemData, setItemData] = useState({});
     const [showImg, setShowImg] = useState(false);
     const [showImgSrc, setShowImgSrc] = useState('');
-
+    const token = cookie.load('tokenAuth');
     useEffect(() => {
         const fetch = async () => {
             const res = await homeService.getFeatured();
             setData(res.products);
-            console.log(res.products);
         };
         fetch();
-    }, []);
-    console.log(data);
+    }, [token]);
+
     const hanleShowImgSrc = (src) => {
         setShowImgSrc(src);
-    };
-
-    const toggleOpen = (data) => {
-        console.log(data);
     };
 
     const VND = new Intl.NumberFormat('vi-VN', {

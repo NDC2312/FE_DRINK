@@ -21,9 +21,9 @@ export const routes = {
     aboutUs: '/about-us',
 
     // pay
-    paymentInfor: '/payment-infor',
+    paymentInfor: '/checkout',
     paymentInformation: '/payment-information',
-    paymentSuccess: '/payment-success',
+    paymentSuccess: '/payment-success/:orderId',
 
     //not thing
     notThing: '/not-thing',
@@ -53,9 +53,6 @@ export const routes = {
     adminDetailBlogsCategory: '/admin/blogs-category/detail/:id',
     adminEditBlogsCategory: '/admin/blogs-category/edit/:id',
 
-    // ADMIN Advise
-    adminAdvise: '/admin/advise',
-
     // ADMIN Products
     adminProducts: '/admin/products',
     adminAddProducts: '/admin/products/add',
@@ -73,6 +70,21 @@ export const routes = {
     adminAddAccount: '/admin/account/add',
     adminDetailAccount: '/admin/account/detail/:id',
     adminEditAccount: '/admin/account/edit/:id',
+
+    // ADMIN ListAuth
+    adminAuth: '/admin/auth',
+    adminAddAuth: '/admin/auth/add',
+    adminDetailAuth: '/admin/auth/detail/:id',
+    adminEditAuth: '/admin/auth/edit/:id',
+
+    // ADMIN ListOrder
+    adminOrder: '/admin/order',
+
+    // ADMIN Report
+    adminReport: '/admin/report',
+    // adminAddAuth: '/admin/auth/add',
+    adminDetailOrder: '/admin/order/detail',
+    //adminEditAuth: '/admin/auth/edit',
 
     // ADMIN Permission
     adminPermissionGroup: '/admin/permission-group',

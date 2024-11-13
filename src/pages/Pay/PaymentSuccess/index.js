@@ -1,134 +1,126 @@
 import classNames from 'classnames/bind';
 import styles from './PaymentSuccess.module.scss';
-import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { useSelector, useDispatch } from 'react-redux';
-import { Button } from '@mui/material';
-import { Link } from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { useState, useEffect } from 'react';
+import { useLocation, useParams, Link } from 'react-router-dom';
+import Button from '~/components/Button';
+
+import * as CartService from '~/services/cartService';
 import config from '~/config';
 import success from '~/assets/Payment/success.jpg';
 
 const cx = classNames.bind(styles);
 
 function PaymentSuccess() {
-    const dispatch = useDispatch();
+    const { orderId } = useParams();
+    const location = useLocation();
+    const auth = location.state.auth;
+    const [data, setData] = useState([]);
 
+    useEffect(() => {
+        const fetch = async () => {
+            const res = await CartService.orderSuccess(orderId);
+            setData(res);
+        };
+        fetch();
+    }, [orderId]);
+
+    console.log('auth', data);
     const VND = Intl.NumberFormat('vi-vn', {
         style: 'currency',
         currency: 'VND',
     });
 
-    const handleOnclick = () => {};
-
-    let discount = 0;
-
     return (
         <div className={cx('wrapper')}>
-            {/* <div className={cx('container')}>
-                <ul className={cx('list')}>
-                    <li>
-                        <div className={cx('item')}>
-                            <div className={cx('icon')}>
-                                <ContactEmergencyIcon />
-                            </div>
-                            <p className={cx('text')}>Thông tin đơn hàng</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div className={cx('item')}>
-                            <div className={cx('icon')}>
-                                <AccountBalanceIcon />
-                            </div>
-                            <p className={cx('text')}>Thanh toán</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div className={cx('item', 'active')}>
-                            <div className={cx('icon')}>
-                                <CheckCircleIcon />
-                            </div>
-                            <p className={cx('text')}>Hoàn tất đặt hàng</p>
-                        </div>
-                    </li>
-                </ul>
-                <div className={cx('customer-information')}>
-                    <div className={cx('c-information')}>
-                        <div className={cx('success-img')}>
-                            <img src={success} alt="" />
-                        </div>
-                        <div className={cx('success')}>
-                            <h2 className={cx('title')}>Thông tin đơn hàng</h2>
-                            <div className={cx('infor')}>
-                                <span className={cx('text')}>Mã đơn hàng:</span>
-                                <span className={cx('name')}>23122003</span>
-                            </div>
-                            <div className={cx('infor')}>
-                                <span className={cx('text')}>Khách đặt hàng:</span>
-                                <span className={cx('name')}>{data.name}</span>
-                            </div>
-                            <div className={cx('infor')}>
-                                <span className={cx('text')}>Số điện thoại:</span>
-                                <span className={cx('name')}>{data.phone}</span>
-                            </div>
-                            <div className={cx('infor')}>
-                                <span className={cx('text')}>Giao tới:</span>
-                                <span className={cx('name')}>{data.address}</span>
-                            </div>
-                            <div className={cx('infor')}>
-                                <span className={cx('text')}>Phiếu giảm giá:</span>
-                                <span className={cx('name')}>{discount}</span>
-                            </div>
-                            <div className={cx('infor')}>
-                                <span className={cx('text')}>Tổng:</span>
-                                <span className={cx('name', 'total')}>{VND.format(total - discount)}</span>
-                            </div>
+            {data && (
+                <div className={cx('container')}>
+                    <div className={cx('header')}>NTK</div>
+                    <div className={cx('success-message')}>
+                        <p className={cx('thank-you')}>
+                            Cảm ơn bạn đã đặt hàng <FontAwesomeIcon icon={faCheckCircle} fontSize={30} />
+                        </p>
+                        <div>
+                            Một email xác nhận đã được gửi tới tnn231223@gmail.com.Xin vui lòng kiểm tra email của bạn
                         </div>
                     </div>
-                    <div className={cx('my-products')}>
-                        <h3 className={cx('p-header')}>Sản phẩm bạn đã mua</h3>
-                        <div className={cx('products')}>
-                            {cart.map((item, index) => (
-                                <div key={index} className={cx('c-wrapper')}>
-                                    <div className={cx('item')}>
-                                        <img src={item.img} alt="" />
-                                        <div className={cx('item-infor')}>
-                                            <span>{item.name}</span>
-                                            <span>Giá: {VND.format(item.price)}</span>
-                                            <span>Số lượng: {item.cartQuantity}</span>
+
+                    <div className={cx('order-info')}>
+                        <div className={cx('order-details')}>
+                            <div className={cx('section-title')}>Thông tin mua hàng</div>
+                            <p className={cx('info')}>
+                                <b>Họ và tên: </b>
+                                {auth.fullName}
+                            </p>
+                            <p className={cx('info')}>
+                                <b>Email: </b>
+                                {auth.email}
+                            </p>
+                            <p className={cx('info')}>
+                                <b>Số điện thoại: </b>
+                                {auth.phone}
+                            </p>
+                        </div>
+                        <div className={cx('shipping-info')}>
+                            <div className={cx('section-title')}>Địa chỉ nhận hàng</div>
+                            <p className={cx('info')}>
+                                <b>Địa chỉ: </b>
+                                {auth.address}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className={cx('order-info')}>
+                        <div className={cx('payment-info')}>
+                            <div className={cx('section-title')}>Phương thức thanh toán</div>
+                            <p>Thanh toán khi giao hàng (COD)</p>
+                        </div>
+                        <div className={cx('shipping-method')}>
+                            <div className={cx('section-title')}>Phương thức vận chuyển</div>
+                            <p>Giao hàng tận nơi</p>
+                        </div>
+                    </div>
+
+                    <div className={cx('order')}>
+                        <div className={cx('order-summary')}>
+                            <h3>Đơn hàng </h3>
+                            {data &&
+                                data.map((item) => (
+                                    <div key={item._id}>
+                                        <div className={cx('order-item')}>
+                                            <img src={item.productInfo.thumbnail} alt={item.productInfo.title} />
+                                            <p className={cx('name-product')}>{item.productInfo.title}</p>
+                                            <span className={cx('price')}>{VND.format(item.priceNew)}</span>
                                         </div>
                                     </div>
+                                ))}
+
+                            <div className={cx('totals')}>
+                                <div>
+                                    Tạm tính
+                                    {data && <span className={cx('price')}>{VND.format(data[0].totalPrice)}</span>}
                                 </div>
-                            ))}
+                                <div>
+                                    Phí vận chuyển <span className={cx('price')}>40.000 ₫</span>
+                                </div>
+                                <div className={cx('total')}>
+                                    <strong>Tổng cộng</strong>{' '}
+                                    <span className={cx('price-total')}>
+                                        {data && VND.format(data[0].totalPrice + 40000)}
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <Link to={config.routes.home}>
-                        <Button
-                            variant="outline"
-                            size="large"
-                            sx={{
-                                width: '100%',
-
-                                color: 'var(--white)',
-                                backgroundColor: 'var(--background)',
-                                borderColor: 'none',
-                                fontSize: '1.4rem',
-
-                                '&:hover': {
-                                    color: 'var(--white)',
-                                    backgroundColor: 'var(--background)',
-                                    borderColor: 'none',
-                                },
-                            }}
-                            onClick={handleOnclick}
-                        >
+                    <div className={cx('actions')}>
+                        <Button to={config.routes.home} large>
                             Tiếp tục mua hàng
                         </Button>
-                    </Link>
+                    </div>
                 </div>
-            </div> */}
+            )}
         </div>
     );
 }

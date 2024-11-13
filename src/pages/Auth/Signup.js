@@ -3,7 +3,6 @@ import classNames from 'classnames/bind';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import cookie from 'react-cookies';
 import { Link } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,13 +18,12 @@ function SignUp() {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        name: '',
+        fullName: '',
         phone: 0,
         email: '',
         password: '',
     });
     const [showPassword, setShowPassword] = useState(false);
-    const [token, setToken] = useState('');
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword);
@@ -40,22 +38,14 @@ function SignUp() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        //console.log(formData);
         console.log(formData);
         const res = await AuthService.register(formData);
         console.log(res);
         if (res.code === 200) {
-            setToken(res.tokenAuth);
+            navigate(config.routes.signIn);
         }
     };
-    if (token !== '') {
-        const oneDay = 24 * 60 * 60 * 1000;
-        cookie.save('tokenAuth', token, {
-            path: setTimeout(() => {
-                navigate(config.routes.home);
-            }, 1000),
-            expires: new Date(Date.now() + oneDay),
-        });
-    }
     const handleSuccess = async (credentialResponse) => {
         console.log(credentialResponse.credential);
         try {
@@ -76,15 +66,15 @@ function SignUp() {
                 <form onSubmit={handleSubmit}>
                     <div className={cx('input-group')}>
                         <input
-                            id="name"
-                            name="name"
+                            id="fullName"
+                            name="fullName"
                             placeholder="Họ và tên"
-                            onChange={(e) => handleUpdateForm('name', e.target.value)}
+                            onChange={(e) => handleUpdateForm('fullName', e.target.value)}
                         />
                     </div>
                     <div className={cx('input-group')}>
                         <input
-                            type="phone"
+                            type="number"
                             id="phone"
                             name="phone"
                             placeholder="Số điện thoại"

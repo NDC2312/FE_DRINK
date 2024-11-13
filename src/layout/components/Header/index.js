@@ -3,8 +3,8 @@ import styles from './Header.module.scss';
 import { Link, NavLink } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Fragment } from 'react';
+import { faBars, faSearch, faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import cookie from 'react-cookies';
 
 import Cart from '~/components/Cart';
 import config from '~/config';
@@ -16,8 +16,8 @@ const cx = classNames.bind(styles);
 
 function Header() {
     const menuRef = useRef();
+    const [token, setToken] = useState(cookie.load('tokenAuth') || null);
 
-    const [user, setUser] = useState(false);
     const [data, setData] = useState([]);
     const [showMenu, setShowMenu] = useState(false);
 
@@ -31,7 +31,7 @@ function Header() {
             setData(res);
         };
         fetch();
-    }, []);
+    }, [token]);
 
     const tree = (data) => {
         return (
@@ -47,8 +47,10 @@ function Header() {
             </ul>
         );
     };
-
-    // console.log(data);
+    const handleLogout = async () => {
+        cookie.remove('tokenAuth');
+        setToken(null);
+    };
 
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
 
@@ -68,14 +70,7 @@ function Header() {
                     </form> */}
                     {/* <Search /> */}
                     <div className={cx('action')}>
-                        {user ? (
-                            <div className={cx('userLogin')}>
-                                <img className={cx('img-user')} src={user.photoURL ? user.photoURL : noAvatar} alt="" />
-                                <Link to="/" className={cx('log-out')}>
-                                    <div className={cx('logout-text')}> Đăng xuất</div>
-                                </Link>
-                            </div>
-                        ) : (
+                        {token === null ? (
                             <div>
                                 <Link to={config.routes.signIn} className={cx('account')}>
                                     <span>Đăng nhập / </span>
@@ -83,6 +78,11 @@ function Header() {
                                 <Link to={config.routes.signUp} className={cx('account')}>
                                     <span>Đăng kí</span>
                                 </Link>
+                            </div>
+                        ) : (
+                            <div className={cx('userLogin')}>
+                                {/* <img className={cx('img-user')} src={user.photoURL ? user.photoURL : noAvatar} alt="" /> */}
+                                <button onClick={handleLogout}>Đăng xuất</button>
                             </div>
                         )}
                     </div>
@@ -238,11 +238,7 @@ function Header() {
                         </li>
                     </ul>
                     <div className={cx('cart')}>
-                        <div className={cx('search')}>
-                            <span>
-                                <FontAwesomeIcon icon={faSearch} fontSize={20} />
-                            </span>
-                        </div>
+                        <div className={cx('search')}></div>
                         <Cart />
                     </div>
                     <div onClick={toggleMenu} className={showMenu ? styles['menu-overlay'] : ''}></div>

@@ -35,7 +35,6 @@ function SignIn() {
         }));
     };
 
-    const [token, setToken] = useState('');
     const [remember, setRemember] = useState(false);
     // useEffect(() => {
     //     const email = cookie.load('email');
@@ -49,38 +48,29 @@ function SignIn() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const res = await AuthService.login(formData);
-        console.log(res);
         if (res.code === 200) {
-            setToken(res.tokenAuth);
-            // dispatch(setPermission(res.permissions));
-            // if (remember) {
-            //     const thirty = 30 * 24 * 60 * 60 * 1000;
-            //     cookie.save('email', email, { expires: new Date(Date.now() + thirty) });
-            //     cookie.save('password', password, { expires: new Date(Date.now() + thirty) });
-            // } else {
-            //     cookie.remove('email');
-            //     cookie.remove('password');
-            // }
+            const tenDay = 10 * 24 * 60 * 60 * 1000;
+            cookie.save('tokenAuth', res.tokenAuth, {
+                path: '/',
+                expires: new Date(Date.now() + tenDay),
+            });
+            navigate(config.routes.home);
         } else {
             alert('not found');
         }
     };
 
-    if (token !== '') {
-        const oneDay = 24 * 60 * 60 * 1000;
-        cookie.save('tokenAuth', token, {
-            path: setTimeout(() => {
-                navigate(config.routes.home);
-            }, 1000),
-            expires: new Date(Date.now() + oneDay),
-        });
-    }
     const handleSuccess = async (credentialResponse) => {
         console.log(credentialResponse.credential);
         try {
             const res = await AuthService.googleAuth(credentialResponse.credential);
-            console.log(res);
-            alert('Success');
+            const tenDay = 10 * 24 * 60 * 60 * 1000;
+            cookie.save('tokenAuth', res.tokenAuth, {
+                path: setTimeout(() => {
+                    navigate(config.routes.home);
+                }, 800),
+                expires: new Date(Date.now() + tenDay),
+            });
         } catch (error) {}
     };
     const handleError = () => {

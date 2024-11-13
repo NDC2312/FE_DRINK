@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AccountService from '~/services/accountService';
 
-import { fetchCountAdviseAction } from '~/actions/countAdviseAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faChartPie,
@@ -38,7 +37,6 @@ function Sidebar({ setHeaderText, menu }) {
     };
 
     useEffect(() => {
-        dispatch(fetchCountAdviseAction());
         const fetchMyAccount = async () => {
             const res = await AccountService.myAccount();
             setUser(res);
@@ -200,7 +198,7 @@ function Sidebar({ setHeaderText, menu }) {
                         onClick={() => {
                             handleActive(8);
                         }}
-                        to={config.routes.adminAddProducts}
+                        to={config.routes.adminOrder}
                     >
                         <span>
                             <FontAwesomeIcon icon={faCartShopping} />
@@ -212,7 +210,7 @@ function Sidebar({ setHeaderText, menu }) {
                         onClick={() => {
                             handleActive(9);
                         }}
-                        to={config.routes.adminAddProducts}
+                        to={config.routes.adminReport}
                     >
                         <span>
                             <FontAwesomeIcon icon={faFileSignature} />
@@ -230,7 +228,7 @@ function Sidebar({ setHeaderText, menu }) {
                         onClick={() => {
                             handleActive(10);
                         }}
-                        to={config.routes.adminAdvise}
+                        to={config.routes.adminAuth}
                     >
                         <span>
                             <FontAwesomeIcon icon={faUsers} />
@@ -242,7 +240,6 @@ function Sidebar({ setHeaderText, menu }) {
                         onClick={() => {
                             handleActive(11);
                         }}
-                        to={config.routes.adminAdvise}
                     >
                         <span>
                             <FontAwesomeIcon icon={faComments} />

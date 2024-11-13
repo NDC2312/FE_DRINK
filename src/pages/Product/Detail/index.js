@@ -8,6 +8,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 import * as clientService from '~/services/p-clientService';
+import * as CartService from '~/services/cartService';
 
 const cx = classNames.bind(styles);
 
@@ -46,7 +47,13 @@ function Detail() {
     const handleBlur = () => {
         if (quantity === '' || Number(quantity) < 1) setQuantity(1);
     };
-    console.log('data', data);
+
+    const handleOrder = async (productId, quantity) => {
+        console.log(productId);
+        console.log(quantity);
+
+        await CartService.addProduct(productId, quantity);
+    };
     return (
         <div className={cx('wrapper')}>
             <div className={cx('back')}>
@@ -72,7 +79,14 @@ function Detail() {
                             <input type="text" value={quantity} onChange={handleQuantityChange} onBlur={handleBlur} />
                             <button onClick={handleIncrease}>+</button>
                         </div>
-                        <button className={cx('order-button')}>ĐẶT HÀNG</button>
+                        <button
+                            onClick={() => {
+                                handleOrder(data._id, quantity);
+                            }}
+                            className={cx('order-button')}
+                        >
+                            ĐẶT HÀNG
+                        </button>
                     </div>
                     <div className={cx('info')}>
                         <b>Thông tin</b>

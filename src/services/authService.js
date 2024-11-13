@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import httpRequest from '~/components/utils/httpRequest';
 import { success, error } from '~/components/SweetAlert2';
 
@@ -17,6 +19,7 @@ export const register = async (data) => {
 export const login = async (data) => {
     try {
         const res = await httpRequest.post('auth/login', data);
+        console.log('res.data', res.data);
         return res.data;
     } catch (error) {}
 };
@@ -27,16 +30,21 @@ export const googleAuth = async (token) => {
     return res.data;
 };
 
-export const myAccount = async () => {
+export const myAuth = async (tokenAuth) => {
     try {
-        const res = await httpRequest.get('account/my-account');
+        console.log(tokenAuth);
+
+        const res = await axios.get('https://be-drink.vercel.app/api/v1/auth/myAuth', {
+            headers: { Authorization: `Bearer ${tokenAuth}` },
+        });
+        console.log('res', res.data);
         return res.data;
     } catch (error) {}
 };
 
-export const getAccount = async (params) => {
+export const getAuth = async (params) => {
     try {
-        const res = await httpRequest.get('account');
+        const res = await httpRequest.get('auth');
         return res.data;
     } catch (error) {}
 };
@@ -65,9 +73,9 @@ export const changeMultiAccount = async (data) => {
     }
 };
 
-export const deleteAccount = async (id) => {
+export const deleteAuth = async (id) => {
     try {
-        const res = await httpRequest.patch(`account/delete/${id}`);
+        const res = await httpRequest.patch(`auth/delete/${id}`);
         if (res.data.code === 200) {
             success(res.data.message);
         } else {
@@ -76,16 +84,16 @@ export const deleteAccount = async (id) => {
     } catch (error) {}
 };
 
-export const detailAccount = async (id) => {
+export const detailAuth = async (id) => {
     try {
-        const res = await httpRequest.get(`account/detail/${id}`);
+        const res = await httpRequest.get(`auth/detail/${id}`);
         return res.data;
     } catch (error) {}
 };
 
-export const editAccount = async (id, data) => {
+export const editAuth = async (id, data) => {
     try {
-        const res = await httpRequest.patch(`account/edit/${id}`, data);
+        const res = await httpRequest.patch(`auth/edit/${id}`, data);
         if (res.data.code === 200) {
             success(res.data.message);
         } else {

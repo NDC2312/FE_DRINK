@@ -38,7 +38,6 @@ import config from '~/config';
 
 import Dashboard from '~/pages/Admin/Dashboard';
 import Login from '~/pages/Admin/Login';
-import Advise from '~/pages/Admin/Advise';
 
 // ADMIN Blogs
 import BlogsInAdmin from '~/pages/Admin/Blogs';
@@ -70,6 +69,16 @@ import AddAccounts from '~/pages/Admin/Accounts/Add';
 import EditAccounts from '~/pages/Admin/Accounts/Edit';
 import DetailAccounts from '~/pages/Admin/Accounts/Detail';
 
+// ADMIN Auth
+import Auth from '~/pages/Admin/Auth';
+import AddAuth from '~/pages/Admin/Auth/Add';
+import EditAuth from '~/pages/Admin/Auth/Edit';
+import DetailAuth from '~/pages/Admin/Auth/Detail';
+
+// ADMIN Order
+import Order from '~/pages/Admin/Order';
+import DetailOrder from '~/pages/Admin/Order';
+
 //ADMIN Permission-Group
 import PermissionGroup from '~/pages/Admin/PermissionGroup';
 import AddPermissionGroup from '~/pages/Admin/PermissionGroup/Add';
@@ -81,6 +90,7 @@ import Role from '~/pages/Admin/Role';
 
 // ADMIN Settings
 import Settings from '~/pages/Admin/Settings';
+import Report from '~/pages/Admin/Report';
 
 const publicRoute = [
     { path: config.routes.home, component: Home },
@@ -113,14 +123,15 @@ const publicRoute = [
     { path: config.routes.signUp, component: Signup },
 
     { path: config.routes.admin, component: Login, layout: null },
+    { path: config.routes.paymentInfor, component: PaymentInfor, layout: null },
 
     // {path: config.routes.signIn, component: signIn}
+
+    { path: config.routes.paymentSuccess, component: PaymentSuccess, layout: null },
 ];
 
 const privateRoute = [
-    { path: config.routes.paymentInfor, component: PaymentInfor, protected: ProtectedRoute },
     { path: config.routes.paymentInformation, component: PaymentInformation, protected: ProtectedRoute },
-    { path: config.routes.paymentSuccess, component: PaymentSuccess, protected: ProtectedRoute },
 
     { path: config.routes.adminDashBoard, component: Dashboard, protected: ProtectedRoute },
     // blogs
@@ -240,6 +251,24 @@ const privateRoute = [
         permission: 'accounts-edit',
     },
 
+    // order
+    {
+        path: config.routes.adminOrder,
+        component: Order,
+        protected: ProtectedRoute,
+    },
+    {
+        path: config.routes.adminDetailOrder,
+        component: DetailOrder,
+        protected: ProtectedRoute,
+    },
+
+    // report
+    {
+        path: config.routes.adminReport,
+        component: Report,
+        protected: ProtectedRoute,
+    },
     // permission-group
     {
         path: config.routes.adminPermissionGroup,
@@ -263,8 +292,13 @@ const privateRoute = [
 
     // role
     { path: config.routes.adminRole, component: Role, protected: ProtectedRoute, permission: 'role-view' },
-    // advise
-    { path: config.routes.adminAdvise, component: Advise, protected: ProtectedRoute },
+
+    // auth
+    { path: config.routes.adminAuth, component: Auth, protected: ProtectedRoute },
+    { path: config.routes.adminAddAuth, component: AddAuth, protected: ProtectedRoute },
+    { path: config.routes.adminDetailAuth, component: DetailAuth, protected: ProtectedRoute },
+    { path: config.routes.adminEditAuth, component: EditAuth, protected: ProtectedRoute },
+
     // settings
     { path: config.routes.adminSettings, component: Settings, protected: ProtectedRoute },
 ];

@@ -247,14 +247,13 @@
     }
     .cart {
         position: absolute;
-        display: flex;
-        align-items: center;
-        column-gap: 15px;
+        // display: flex;
+        // align-items: center;
+        // column-gap: 15px;
         right: 30px;
 
-        // search
-        .search {
-            color: var(--white);
+        .icon-cart {
+            color: var(--primary-text);
             cursor: pointer;
         }
     }

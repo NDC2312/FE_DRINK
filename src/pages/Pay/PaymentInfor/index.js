@@ -1,49 +1,59 @@
 import classNames from 'classnames/bind';
 import styles from './PaymentInfor.module.scss';
-import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faUser, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import cookie from 'react-cookies';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
+import * as AuthService from '~/services/authService';
+import * as CartService from '~/services/cartService';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
 
 function PaymentInfor() {
-    const initialValues = { name: '', phone: '', address: '' };
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const [values, setValues] = useState(initialValues);
-    const [error, setError] = useState({});
-    const [isSubmit, setIsSubmit] = useState(false);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setValues({ ...values, [name]: value });
-    };
-
-    const handleBlur = () => {
-        setError(validate(values));
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setError(validate(values));
-        setIsSubmit(true);
-    };
+    const Navigate = useNavigate();
+    const tokenAuth = cookie.load('tokenAuth');
+    const [auth, setAuth] = useState({});
+    const [cart, setCart] = useState([]);
+    const [values, setValues] = useState({
+        email: '',
+        fullName: '',
+        phone: '',
+        address: '',
+        note: '',
+    });
 
     useEffect(() => {
-        if (Object.keys(error).length === 0 && isSubmit) {
-            navigate(config.routes.paymentInformation);
+        const fetchAuthData = async () => {
+            const myAuth = await AuthService.myAuth(tokenAuth);
+            const cart = await CartService.getCart();
+            setAuth(myAuth);
+            setCart(cart);
+            console.log(myAuth);
+            if (myAuth !== null) {
+                setValues((prev) => ({
+                    ...prev,
+                    email: myAuth.email || '',
+                    fullName: myAuth.fullName || '',
+                    phone: myAuth.phone || '',
+                    address: myAuth.address || '',
+                }));
+            }
+        };
+        if (tokenAuth !== null) {
+            fetchAuthData();
         }
-    }, [error]);
+    }, [tokenAuth]);
+
+    const handleChange = (field, value) => {
+        setValues((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
 
     const validate = (values) => {
         const errors = {};
@@ -51,127 +61,150 @@ function PaymentInfor() {
             errors.name = 'Họ tên không được để trống';
         }
         if (!values.phone) {
-            errors.phone = 'Số điện thoại không được để chống';
+            errors.phone = 'Số điện thoại không được để trống';
         } else if (values.phone.length < 10) {
             errors.phone = 'Số điện thoại không hợp lệ';
         }
         if (!values.address) {
-            errors.address = 'Địa chỉ không được để chống';
+            errors.address = 'Địa chỉ không được để trống';
         }
         return errors;
     };
 
+    const VND = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const order = await CartService.order(auth._id, values);
+        Navigate(`/payment-success/${order._id}`, { state: { auth } });
+    };
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
-                <ul className={cx('list')}>
-                    <li>
-                        <div className={cx('item', 'active')}>
-                            <div className={cx('icon')}>
-                                <ContactEmergencyIcon />
+                <form onSubmit={handleSubmit}>
+                    <h2>Coffee NTK</h2>
+                    <div className={cx('checkout')}>
+                        <div className={cx('shipping-info')}>
+                            <div className={cx('shipping-header')}>
+                                <h3>Thông tin nhận hàng</h3>
+                                {!tokenAuth && (
+                                    <Link to={config.routes.signIn}>
+                                        <FontAwesomeIcon icon={faUser} /> Đăng nhập
+                                    </Link>
+                                )}
                             </div>
-                            <p className={cx('text')}>Thông tin đơn hàng</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div className={cx('item')}>
-                            <div className={cx('icon')}>
-                                <AccountBalanceIcon />
-                            </div>
-                            <p className={cx('text')}>Thanh toán</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div className={cx('item')}>
-                            <div className={cx('icon')}>
-                                <CheckCircleIcon />
-                            </div>
-                            <p className={cx('text')}>Hoàn tất đặt hàng</p>
-                        </div>
-                    </li>
-                </ul>
-                <div className={cx('customer')}>
-                    <div className={cx('customer-information')}>
-                        <h5 className={cx('title')}>Thông tin khách hàng</h5>
-                        <input
-                            onBlur={handleBlur}
-                            type="text"
-                            name="name"
-                            values={initialValues.name}
-                            onChange={handleChange}
-                            placeholder="Họ và tên (VD: Trần Nhật Nam)"
-                        />
-                        <p className={cx('error')}>{error.name}</p>
 
-                        <input
-                            onBlur={handleBlur}
-                            name="phone"
-                            type="text"
-                            placeholder="Số điện thoại(bắt buộc)"
-                            onChange={handleChange}
-                            values={initialValues}
-                        />
-                        <p className={cx('error')}>{error.phone}</p>
-                        <h5 className={cx('title')}>Nhập địa chỉ của bạn </h5>
-                        <input
-                            onBlur={handleBlur}
-                            type="text"
-                            name="address"
-                            placeholder="Địa chỉ nhận hàng(bắt buộc)"
-                            onChange={handleChange}
-                            values={initialValues}
-                        />
-                        <p className={cx('error')}>{error.address}</p>
-                        <input type="text" placeholder="Ghi chú" className={cx('notes')} />
+                            <div className={cx('form-group')}>
+                                <label>Email</label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    defaultValue={auth.email || ''}
+                                    onChange={(e) => handleChange('email', e.target.value)}
+                                />
+                            </div>
+                            <div className={cx('form-group')}>
+                                <label>Họ và tên</label>
+                                <input
+                                    type="text"
+                                    name="fullName"
+                                    defaultValue={auth.fullName || ''}
+                                    onChange={(e) => handleChange('fullName', e.target.value)}
+                                />
+                            </div>
+                            <div className={cx('form-group')}>
+                                <label>Số điện thoại </label>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    defaultValue={auth.phone || ''}
+                                    onChange={(e) => handleChange('phone', e.target.value)}
+                                />
+                            </div>
+                            <div className={cx('form-group')}>
+                                <label>Địa chỉ </label>
+                                <input
+                                    type="text"
+                                    name="address"
+                                    defaultValue={auth.address || ''}
+                                    onChange={(e) => handleChange('address', e.target.value)}
+                                />
+                            </div>
+
+                            <div className={cx('form-group')}>
+                                <label>Ghi chú (nếu có)</label>
+                                <textarea name="note" onChange={(e) => handleChange('note', e.target.value)}></textarea>
+                            </div>
+                        </div>
+                        <div className={cx('delivery-payment')}>
+                            <h3 className={cx('delivery-h3')}>Vận chuyển</h3>
+                            <div className={cx('payment')}>
+                                <input
+                                    type="radio"
+                                    id="delivery"
+                                    checked={values.address !== ''}
+                                    name="delivery"
+                                    className={cx('radio-input')}
+                                    readOnly
+                                />
+                                <label htmlFor="delivery">Giao hàng tận nơi</label>
+                                <span>40.000 ₫</span>
+                            </div>
+                            <h3 className={cx('payment-h3')}>Thanh toán</h3>
+                            <div className={cx('payment')}>
+                                <input type="radio" id="cod" name="payment" className={cx('radio-input')} />
+                                <label htmlFor="cod">Thanh toán khi giao hàng (COD)</label>
+                                <FontAwesomeIcon icon={faMoneyBill} />
+                            </div>
+                        </div>
+
+                        <div className={cx('order-summary')}>
+                            <h3>Đơn hàng </h3>
+                            {cart.products &&
+                                cart.products.map((item) => (
+                                    <div key={item._id}>
+                                        <div className={cx('order-item')}>
+                                            <img src={item.productInfo.thumbnail} alt={item.productInfo.title} />
+                                            <p className={cx('name-product')}>{item.productInfo.title}</p>
+                                            <span className={cx('price')}>{VND.format(item.priceNew)}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            <div className={cx('discount')}>
+                                <input type="text" placeholder="Nhập mã giảm giá" />
+                                <button>Áp dụng</button>
+                            </div>
+                            <div className={cx('totals')}>
+                                <div>
+                                    Tạm tính
+                                    {cart.products && (
+                                        <span className={cx('price')}>{VND.format(cart.products[0].totalPrice)}</span>
+                                    )}
+                                </div>
+                                <div>
+                                    Phí vận chuyển <span className={cx('price')}>40.000 ₫</span>
+                                </div>
+                                <div className={cx('total')}>
+                                    <strong>Tổng cộng</strong>{' '}
+                                    <span className={cx('price-total')}>
+                                        {cart.products && VND.format(cart.products[0].totalPrice + 40000)}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className={cx('order')}>
+                                <Link to={config.routes.cart}>
+                                    <FontAwesomeIcon icon={faChevronLeft} /> Quay về giỏ hàng
+                                </Link>
+                                <button type="submit" className={cx('order-button')}>
+                                    ĐẶT HÀNG
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div className={cx('btn')}>
-                        <Link to={config.routes.categoryProducts}>
-                            <Button
-                                variant="outlined"
-                                size="large"
-                                sx={{
-                                    color: 'var(--white)',
-                                    background: 'var(--background)',
-                                    fontSize: '1.3rem',
-                                    borderColor: 'var(--background)',
-                                    '&:hover': {
-                                        color: 'var(--white)',
-                                        background: 'var(--background)',
-                                        borderColor: 'var(--background)',
-                                    },
-                                }}
-                            >
-                                <span className={cx('icon-l')}>
-                                    <FontAwesomeIcon icon={faChevronLeft} />
-                                </span>
-                                Mua thêm sản phẩm
-                            </Button>
-                        </Link>
-                        <Link to={config.routes.paymentInformation}>
-                            <Button
-                                variant="outlined"
-                                size="large"
-                                sx={{
-                                    color: 'var(--white)',
-                                    background: 'var(--background)',
-                                    borderColor: 'var(--background)',
-                                    fontSize: '1.3rem',
-                                    '&:hover': {
-                                        color: 'var(--white)',
-                                        background: 'var(--background)',
-                                        borderColor: 'var(--background)',
-                                    },
-                                }}
-                                onClick={handleSubmit}
-                            >
-                                Tiếp tục
-                                <span className={cx('icon-r')}>
-                                    <FontAwesomeIcon icon={faChevronRight} />
-                                </span>
-                            </Button>
-                        </Link>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     );

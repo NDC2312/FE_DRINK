@@ -1,5 +1,5 @@
 .wrapper {
-    margin-top: 160px;
+    margin-top: 200px;
     width: 100%;
 
     .container {
@@ -7,64 +7,64 @@
         height: 80vh;
         margin: auto;
 
-        table,
-        tr,
-        td {
-            // border: 1px solid #006252dd;
-        }
-
-        table {
-            width: 100%;
-
-            tbody {
-                width: 100%;
-            }
-        }
-
         .table {
             width: 100%;
-            max-height: 650px;
-            min-height: 600px;
-
+            max-height: 520px;
+            min-height: 440px;
+            overflow: hidden;
+            border: solid 1px #ebebeb;
             overflow-y: auto;
         }
-
-        .header {
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        tbody {
+            width: 100%;
+        }
+        thead {
             width: 100%;
             text-align: center;
+            color: var(--black);
 
-            background-color: var(--background);
-            color: var(--white);
-            font-weight: 600;
-            font-size: 1.8rem;
-
-            .h-product {
-                width: 60%;
-                padding: 8px 16px;
+            th {
+                font-size: 1.7rem;
+                font-weight: 500;
+                padding: 8px 0;
+                border-left: solid 1px #ebebeb;
+                border-bottom: solid 1px #ebebeb;
+                background: #f7f7f7;
             }
-            .h-price .h-qty .h-total {
-                width: 13.3333333333333%;
-                padding: 8px 16px;
+            .h-product {
+                border-left: none;
+            }
+
+            .h-information {
+                width: 30%;
+            }
+            .h-product {
+                width: 20%;
+            }
+            .h-price,
+            .h-qty,
+            .h-total {
+                width: 15%;
             }
         }
 
         .item-info {
             width: 100%;
+            text-align: center;
             .item-product {
-                width: 100%;
-                padding: 8px 16px;
+                padding: 12px 0;
                 display: flex;
-                align-items: center;
-                justify-content: space-between;
-
+                justify-content: center;
                 .item-name {
                     display: flex;
                     align-items: center;
-                    gap: 10px;
                     .item-image {
-                        width: 80px;
-                        height: 80px;
-
+                        width: 120px;
+                        height: 120px;
                         img {
                             width: 100%;
                             height: 100%;
@@ -72,158 +72,214 @@
                             border-radius: 8px;
                         }
                     }
-
-                    .name {
-                        color: var(--black);
-                        font-size: 1.6rem;
-                        font-weight: 500;
-                    }
+                }
+            }
+            .item-information {
+                .name {
+                    padding: 0 12px;
+                    color: var(--black);
+                    font-size: 1.6rem;
+                    font-weight: 400;
+                    margin-bottom: 10px;
                 }
                 .btn-remove {
-                    font-size: 1.9rem;
+                    // margin-top: 5px;
+                    padding: 6px 26px;
+                    font-size: 1.5rem;
+                    color: var(--secondary);
+                    border-radius: 20px;
                     cursor: pointer;
+                    border: none;
+                    transition: 0.2s ease;
+                    &:hover {
+                        background: var(--red);
+                        color: var(--white);
+                        box-shadow: 0px 2px 5px var(--red);
+                    }
                 }
             }
 
             .item-price {
-                width: 13.3333333333333333%;
-                text-align: center;
                 color: var(--black);
-                font-size: 1.7rem;
-                font-weight: 500;
+                font-size: 1.6rem;
+                font-weight: 400;
             }
 
             .item-qty {
-                width: 13.3333333333333333%;
-                text-align: center;
                 color: var(--black);
-                font-size: 1.7rem;
-                font-weight: 500;
-
+                font-size: 1.6rem;
+                font-weight: 400;
+                .qty {
+                    display: inline-block;
+                    overflow: hidden;
+                    border: 1px solid #ebebeb;
+                    border-radius: 20px;
+                }
                 .item-decrease {
-                    padding: 0px 10px;
+                    padding: 6px 10px;
                     font-size: 2rem;
                     cursor: pointer;
+                    &:hover {
+                        background: #ebebeb;
+                    }
                 }
 
-                .qty {
-                    padding: 0 10px;
+                .qty-number {
+                    padding: 6px 10px;
                 }
 
                 .item-increase {
-                    padding: 0px 10px;
+                    padding: 6px 10px;
                     font-size: 2rem;
                     cursor: pointer;
+                    &:hover {
+                        background: #ebebeb;
+                    }
                 }
             }
 
             .total {
-                width: 13.3333333333333333%;
                 text-align: center;
-                color: var(--primary-text);
-                font-size: 1.7rem;
+                color: var(--black);
+                font-size: 1.6rem;
                 font-weight: 500;
             }
         }
 
         // last
         .last {
-            margin-top: 25px;
+            width: 100%;
+            margin-top: 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            a {
-                display: flex;
+            .back {
+                display: inline-flex;
                 align-items: center;
-                color: var(--primary-text);
-                font-size: 1.8rem;
-                font-weight: 600;
-                padding: 2px 3px;
+                background: #ebebeb;
+                color: var(--secondary);
+                font-size: 1.5rem;
+                font-weight: 500;
+                padding: 14px 16px;
+                border-radius: 20px;
+                transition: 0.2s ease-in;
+                &:hover {
+                    background: var(--primary-text);
+                    color: var(--black);
+                }
 
                 .text {
                     margin-left: 4px;
                 }
             }
 
-            .sum-price {
-                color: var(--black);
-                font-size: 1.6rem;
-                font-weight: 500;
-                padding-right: 15px;
+            .payment {
+                display: flex;
+                align-items: center;
+                .sum-price {
+                    color: var(--black);
+                    font-size: 1.6rem;
+                    font-weight: 500;
+                    padding-right: 15px;
 
-                .total {
-                    color: red;
-                    font-size: 2.3rem;
-                    font-weight: 900;
+                    .total {
+                        color: var(--primary-text);
+                        font-size: 2.3rem;
+                        font-weight: 900;
+                    }
                 }
             }
         }
 
         // my bill
 
-        .pay {
-            min-width: 320px;
-            min-height: 280px;
-            margin-left: 10px;
-            border: 1px solid var(--background);
+        // .pay {
+        //     min-width: 320px;
+        //     min-height: 280px;
+        //     margin-left: 10px;
+        //     border: 1px solid #ebebeb;
 
-            h4 {
-                color: var(--white);
-                font-size: 2rem;
-                text-align: center;
-                padding: 10px 0;
-                background-color: var(--background);
-                border-bottom: 1px solid var(--background);
+        //     h4 {
+        //         color: var(--black);
+        //         font-size: 2rem;
+        //         text-align: center;
+        //         padding: 10px 0;
+        //         background-color: #f7f7f7;
+        //         border-bottom: 1px solid #ebebeb;
+        //     }
+
+        //     .my-bill {
+        //         width: 100%;
+        //         padding: 0 20px;
+        //         .bill {
+        //             padding: 15px 0 15px 0;
+        //             border-bottom: 1px solid #ebebeb;
+        //             display: flex;
+        //             flex-direction: column;
+        //             gap: 20px;
+
+        //             .t-bill {
+        //                 display: flex;
+        //                 justify-content: space-between;
+        //                 align-items: center;
+
+        //                 input {
+        //                     padding: 8px 8px;
+        //                     border: 1px solid var(--border-color-input);
+        //                     border-radius: 6px;
+        //                 }
+        //                 button {
+        //                     padding: 8px;
+        //                     background: #ebebeb;
+        //                     border: 1px solid #ebebeb;
+        //                     color: var(--black);
+        //                     font-size: 1.5rem;
+        //                     font-weight: 500;
+        //                     border-radius: 6px;
+        //                     cursor: pointer;
+        //                 }
+        //             }
+        //         }
+        //         .total-amount {
+        //             padding: 15px 0 15px 0;
+        //             position: relative;
+        //             display: flex;
+        //             align-items: center;
+        //             justify-content: space-between;
+
+        //             &::before {
+        //                 content: '(Đã bao gồm phiếu giảm giá)';
+        //                 position: absolute;
+        //                 width: 100%;
+        //                 top: 40px;
+        //                 left: 0;
+        //                 font-size: 1.3rem;
+        //             }
+
+        //             .total {
+        //                 color: var(--red);
+        //                 font-size: 2rem;
+        //                 font-weight: 600;
+        //             }
+        //         }
+        //     }
+        // }
+        .cart-empty {
+            padding-top: 120px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            h2 {
+                color: var(--primary-text);
+                font-size: 3rem;
             }
-
-            .my-bill {
-                width: 100%;
-                padding: 0 20px;
-                .bill {
-                    padding: 15px 0 15px 0;
-                    border-bottom: 1px solid var(--background);
-                    display: flex;
-                    flex-direction: column;
-                    gap: 20px;
-
-                    .t-bill {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-
-                        .title {
-                            font-weight: 400;
-                        }
-
-                        .discount {
-                            font-size: 1.7rem;
-                            font-weight: 500;
-                        }
-                    }
-                }
-                .total-amount {
-                    padding: 15px 0 15px 0;
-                    position: relative;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-
-                    &::before {
-                        content: '(Đã bao gồm phiếu giảm giá)';
-                        position: absolute;
-                        width: 100%;
-                        top: 40px;
-                        left: 0;
-                        font-size: 1.3rem;
-                    }
-
-                    .amount {
-                        color: red;
-                        font-size: 2rem;
-                        font-weight: 600;
-                    }
-                }
+            img {
+                width: 300px;
+                height: 300px;
             }
         }
     }
