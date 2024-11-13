@@ -98,13 +98,13 @@ function AddBlogs() {
                             />
                         </div>
                         <div className={cx('form-group')}>
-                            <label htmlFor="product_category_id">Danh mục bài viết</label>
+                            <label htmlFor="blog_parent_id">Danh mục bài viết</label>
                             <select
                                 className={cx('form-control')}
-                                onChange={(e) => updateProductData('productCategoryId', e.target.value)}
-                                name="product_category_id"
-                                id="product_category_id"
-                                value=""
+                                onChange={(e) => updateProductData('blog_parent_id', e.target.value)}
+                                name="blog_parent_id"
+                                id="blog_parent_id"
+                                value={productData.blog_parent_id || ''}
                             >
                                 <option value="" disabled>
                                     -- Chọn danh mục --

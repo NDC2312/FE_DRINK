@@ -46,12 +46,12 @@ function Report() {
         const fetch = async () => {
             const res = await OrderService.getOrder();
             setData(res.cart);
-            setTotalOrder(res.cart.totalOrder);
+            setTotalOrder(res.totalOrder);
         };
         fetch();
     }, []);
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
-    console.log(data);
+    console.log(totalOrder);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -59,8 +59,23 @@ function Report() {
                     <div>Báo cáo</div>
                     <div className={cx('act-product')}>
                         <div>
-                            <div> Tổng số đơn hàng: 12</div>
-                            <div>Tổng giá trị: 12</div>
+                            <div> Tổng số đơn hàng: {totalOrder}</div>
+                            <div>
+                                Tổng giá trị :{' '}
+                                {/* {data && data.length > 0
+                                    ? VND.format(
+                                          data.reduce((total, order) => {
+                                              return (
+                                                  total +
+                                                  order[0].products.reduce(
+                                                      (orderTotal, product) => orderTotal + product.totalPrice,
+                                                      0,
+                                                  )
+                                              );
+                                          }, 0),
+                                      )
+                                    : 'Không có dữ liệu'} */}
+                            </div>
                         </div>
 
                         <div className={cx('act-product-status')}></div>

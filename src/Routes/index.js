@@ -26,7 +26,6 @@ import Signup from '~/pages/Auth/Signup';
 
 // pay
 import PaymentInfor from '~/pages/Pay/PaymentInfor';
-import PaymentInformation from '~/pages/Pay/PaymentInformation';
 import PaymentSuccess from '~/pages/Pay/PaymentSuccess';
 import ProtectedRoute from '~/components/ProtectedRoute';
 // about us
@@ -131,8 +130,6 @@ const publicRoute = [
 ];
 
 const privateRoute = [
-    { path: config.routes.paymentInformation, component: PaymentInformation, protected: ProtectedRoute },
-
     { path: config.routes.adminDashBoard, component: Dashboard, protected: ProtectedRoute },
     // blogs
     {

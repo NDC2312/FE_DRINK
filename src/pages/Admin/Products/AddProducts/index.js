@@ -17,7 +17,7 @@ function AddProducts() {
     const navigate = useNavigate();
     const [productData, setProductData] = useState({
         title: '',
-        productCategoryId: '',
+        product_category_id: '',
         price: 0,
         discountPercentage: 0,
         position: '',
@@ -74,7 +74,7 @@ function AddProducts() {
             );
         });
     };
-
+    console.log(productData.product_category_id);
     const handleImageChange = (imageUrl) => {
         updateProductData('thumbnail', imageUrl);
     };
@@ -105,10 +105,11 @@ function AddProducts() {
                             <label htmlFor="product_category_id">Danh mục sản phẩm</label>
                             <select
                                 className={cx('form-control')}
-                                onChange={(e) => updateProductData('productCategoryId', e.target.value)}
+                                onChange={(e) => updateProductData('product_category_id', e.target.value)}
                                 name="product_category_id"
                                 id="product_category_id"
-                                // required
+                                value={productData.product_category_id || ''}
+                                required
                             >
                                 <option value="" disabled>
                                     -- Chọn danh mục --

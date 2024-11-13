@@ -22,7 +22,6 @@ export const routes = {
 
     // pay
     paymentInfor: '/checkout',
-    paymentInformation: '/payment-information',
     paymentSuccess: '/payment-success/:orderId',
 
     //not thing

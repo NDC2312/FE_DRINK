@@ -63,6 +63,7 @@ export const orderSuccess = async (orderId) => {
 export const getOrder = async (orderId) => {
     try {
         const res = await httpRequest.get(`order`);
+        console.log(res);
         return res.data;
     } catch (error) {
         error(error());

@@ -27,12 +27,12 @@ function PaymentSuccess() {
         fetch();
     }, [orderId]);
 
-    console.log('auth', data);
+    // console.log('auth', data);
     const VND = Intl.NumberFormat('vi-vn', {
         style: 'currency',
         currency: 'VND',
     });
-
+    console.log(data);
     return (
         <div className={cx('wrapper')}>
             {data && (
@@ -90,8 +90,8 @@ function PaymentSuccess() {
                                 data.map((item) => (
                                     <div key={item._id}>
                                         <div className={cx('order-item')}>
-                                            <img src={item.productInfo.thumbnail} alt={item.productInfo.title} />
-                                            <p className={cx('name-product')}>{item.productInfo.title}</p>
+                                            {/* <img src={item.productInfo.thumbnail} alt={item.productInfo.title} /> */}
+                                            {/* <p className={cx('name-product')}>{item.productInfo.title}</p> */}
                                             <span className={cx('price')}>{VND.format(item.priceNew)}</span>
                                         </div>
                                     </div>
@@ -100,7 +100,7 @@ function PaymentSuccess() {
                             <div className={cx('totals')}>
                                 <div>
                                     Tạm tính
-                                    {data && <span className={cx('price')}>{VND.format(data[0].totalPrice)}</span>}
+                                    {/* {data && <span className={cx('price')}>{VND.format(data[0].totalPrice)}</span>} */}
                                 </div>
                                 <div>
                                     Phí vận chuyển <span className={cx('price')}>40.000 ₫</span>
@@ -108,7 +108,7 @@ function PaymentSuccess() {
                                 <div className={cx('total')}>
                                     <strong>Tổng cộng</strong>{' '}
                                     <span className={cx('price-total')}>
-                                        {data && VND.format(data[0].totalPrice + 40000)}
+                                        {/* {data && VND.format(data[0].totalPrice + 40000)} */}
                                     </span>
                                 </div>
                             </div>
