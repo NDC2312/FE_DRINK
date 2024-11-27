@@ -146,7 +146,7 @@ function BlogsInAdmin() {
             console.log(res.message);
         }
     };
-
+    console.log(data);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -222,8 +222,8 @@ function BlogsInAdmin() {
                             <th>STT</th>
                             <th>Hình ảnh</th>
                             <th>Tiêu đề</th>
-                            <th>Giá</th>
-                            <th>Vị trí sản phẩm</th>
+                            <th>Mô tả</th>
+                            <th>Vị trí</th>
                             <th>Trạng thái</th>
                             <th>Người tạo</th>
                             <th>Người cập nhập</th>
@@ -242,7 +242,7 @@ function BlogsInAdmin() {
                                         <img src={item.thumbnail} alt={item.title} width="60px" height="60px" />
                                     </td>
                                     <td>{item.title}</td>
-                                    <td>{item.price}$</td>
+                                    <td>{item.description}</td>
                                     <td>
                                         <input
                                             type="number"
@@ -278,32 +278,24 @@ function BlogsInAdmin() {
                                                     `${item.status === 'active' ? 'inActive' : 'active'}`,
                                                 )
                                             }
-                                        >
-                                            {item.status === 'active' ? 'Hoạt động' : 'Dừng hoạt động'}
-                                        </Button>
+                                        ></Button>
                                     </td>
                                     <td>{item.accountFullName}</td>
                                     <td>{item.updateFullName}</td>
                                     <td>
-                                        <Link
-                                            to={config.routes.adminDetailBlogs.replace(':id', item._id)}
-                                            className={`${cx('btn-detail')} ${styles.btn}`}
-                                        >
+                                        <Button to={config.routes.adminDetailBlogs.replace(':id', item._id)} btnDetail>
                                             Chi tiết
-                                        </Link>
-                                        <Link
+                                        </Button>
+                                        <Button
                                             to={config.routes.adminEditBlogs.replace(':id', item._id)}
                                             state={{ product: item }}
-                                            className={`${cx('btn-edit')} ${styles.btn}`}
+                                            btnEdit
                                         >
                                             Sửa
-                                        </Link>
-                                        <button
-                                            onClick={() => handleBtnDelete(data._id)}
-                                            className={`${cx('btn-delete')} ${styles.btn}`}
-                                        >
+                                        </Button>
+                                        <Button onClick={() => handleBtnDelete(data._id)} btnDelete>
                                             Xóa
-                                        </button>
+                                        </Button>
                                     </td>
                                 </tr>
                             ))}

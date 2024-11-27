@@ -158,8 +158,11 @@ ul {
             transition: 0.3s ease-in-out;
             &:hover {
                 background-color: var(--primary);
-                color: var(--white);
                 border-radius: 8px;
+                color: var(--white);
+            }
+            &:hover p {
+                color: var(--white);
             }
             span {
                 margin-right: 30px;
@@ -169,6 +172,9 @@ ul {
             background-color: var(--primary);
             color: var(--white);
             border-radius: 8px;
+        }
+        .active p {
+            color: var(--white);
         }
         .btn-active {
             background-color: #f6f6f8;

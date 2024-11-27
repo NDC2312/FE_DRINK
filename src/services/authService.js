@@ -32,12 +32,9 @@ export const googleAuth = async (token) => {
 
 export const myAuth = async (tokenAuth) => {
     try {
-        console.log(tokenAuth);
-
         const res = await axios.get('https://be-drink.vercel.app/api/v1/auth/myAuth', {
-            headers: { Authorization: `Bearer ${tokenAuth}` },
+            headers: { Authorization: `Bearer ${tokenAuth}`, 'Content-Type': 'application/json' },
         });
-        console.log('res', res.data);
         return res.data;
     } catch (error) {}
 };
@@ -99,5 +96,32 @@ export const editAuth = async (id, data) => {
         } else {
             error(res.data.message);
         }
+    } catch (error) {}
+};
+
+export const forgetPassword = async (email) => {
+    try {
+        const res = await axios.post(
+            'https://be-drink.vercel.app/api/v1/auth/password/forgot',
+            { email: email },
+            { headers: { 'Content-Type': 'application/json' } },
+        );
+        console.log(res);
+
+        return res.data;
+    } catch (error) {}
+};
+
+export const otpPassword = async (data) => {
+    try {
+        const res = await httpRequest.post(`auth/password/otp`, data);
+        return res.data;
+    } catch (error) {}
+};
+
+export const resetPassword = async (data) => {
+    try {
+        const res = await httpRequest.post(`auth/password/reset`, data);
+        return res.data;
     } catch (error) {}
 };

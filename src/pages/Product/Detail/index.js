@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateCart as updateCartAction } from '~/actions/cartActions';
 
 import * as clientService from '~/services/p-clientService';
 import * as CartService from '~/services/cartService';
@@ -13,6 +15,7 @@ import * as CartService from '~/services/cartService';
 const cx = classNames.bind(styles);
 
 function Detail() {
+    const dispatch = useDispatch();
     const [data, setData] = useState({});
     const [quantity, setQuantity] = useState(1);
     const { slugProduct } = useParams();
@@ -49,10 +52,8 @@ function Detail() {
     };
 
     const handleOrder = async (productId, quantity) => {
-        console.log(productId);
-        console.log(quantity);
-
         await CartService.addProduct(productId, quantity);
+        dispatch(updateCartAction());
     };
     return (
         <div className={cx('wrapper')}>
@@ -75,9 +76,13 @@ function Detail() {
                     <p className={cx('price-new')}>{VND.format(data.priceNew)}</p>
                     <div className={cx('order')}>
                         <div className={cx('quantity')}>
-                            <button onClick={handleDecrease}>-</button>
+                            <button onClick={handleDecrease} className={cx('ooo')}>
+                                -
+                            </button>
                             <input type="text" value={quantity} onChange={handleQuantityChange} onBlur={handleBlur} />
-                            <button onClick={handleIncrease}>+</button>
+                            <button onClick={handleIncrease} className={cx('ooo')}>
+                                +
+                            </button>
                         </div>
                         <button
                             onClick={() => {

@@ -76,9 +76,8 @@
     }
 
     .quantity button {
-        width: 30px;
-        height: 30px;
         background-color: #fff;
+        margin-top: 0;
         border: 1px solid var(--gray);
         border-radius: 50%;
         font-size: 18px;
@@ -106,6 +105,7 @@
     .order-button {
         flex: 1;
         height: 100%;
+        margin-top: 0;
         margin-left: 15px;
         background-color: var(--primary-text);
         color: var(--white);

@@ -4,9 +4,14 @@ export const getProductsCategory = async () => {
     try {
         const res = await httpRequest.get('products-client/products-category');
         return res.data;
-    } catch (error) {
-        error(error());
-    }
+    } catch (error) {}
+};
+
+export const getProductsCategorySlug = async (slug) => {
+    try {
+        const res = await httpRequest.get(`products-client/category/${slug}`);
+        return res.data;
+    } catch (error) {}
 };
 
 export const detailProduct = async (slugProduct) => {
@@ -15,7 +20,5 @@ export const detailProduct = async (slugProduct) => {
         const res = await httpRequest.get(`products-client/detail/${slugProduct}`);
         console.log(res);
         return res.data;
-    } catch (error) {
-        error(error());
-    }
+    } catch (error) {}
 };

@@ -30,7 +30,7 @@ function PaymentInfor() {
         const fetchAuthData = async () => {
             const myAuth = await AuthService.myAuth(tokenAuth);
             const cart = await CartService.getCart();
-            setAuth(myAuth);
+            setAuth(myAuth.auth);
             setCart(cart);
             console.log(myAuth);
             if (myAuth !== null) {

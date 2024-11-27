@@ -24,9 +24,9 @@ function DefaultLayoutAdmin({ children }) {
                 </div>
             </div>
             <div className={cx('container', { 'menu-open-container': menu })}>
-                <span className={cx('bars')} onClick={handleChangeSidebar}>
+                {/* <span className={cx('bars')} onClick={handleChangeSidebar}>
                     <FontAwesomeIcon icon={faBars} fontSize={23} />
-                </span>
+                </span> */}
                 <Header headerText={headerText} />
                 <div className={cx('content')}>{children}</div>
             </div>

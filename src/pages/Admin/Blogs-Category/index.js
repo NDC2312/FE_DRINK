@@ -199,19 +199,16 @@ function BlogsCategoryInAdmin() {
                             </Button>
                         </td>
                         <td>
-                            <Link
-                                to={config.routes.adminDetailBlogsCategory.replace(':id', item._id)}
-                                className={`${cx('btn-detail')} ${styles.btn}`}
-                            >
+                            <Button to={config.routes.adminDetailBlogsCategory.replace(':id', item._id)} btnDetail>
                                 Chi tiết
-                            </Link>
-                            <Link
+                            </Button>
+                            <Button
                                 to={config.routes.adminEditBlogsCategory.replace(':id', item._id)}
-                                className={`${cx('btn-edit')} ${styles.btn}`}
+                                btnEdit
                                 state={{ product: item }}
                             >
                                 Sửa
-                            </Link>
+                            </Button>
                             <Button btnDelete onClick={() => handleBtnDelete(item._id)}>
                                 Xóa
                             </Button>

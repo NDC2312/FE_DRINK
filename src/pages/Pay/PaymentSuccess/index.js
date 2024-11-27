@@ -66,7 +66,7 @@ function PaymentSuccess() {
                         <div className={cx('shipping-info')}>
                             <div className={cx('section-title')}>Địa chỉ nhận hàng</div>
                             <p className={cx('info')}>
-                                <b>Địa chỉ: </b>
+                                <b>Địa chỉ: Dai hoc thu dau mot</b>
                                 {auth.address}
                             </p>
                         </div>
@@ -90,9 +90,9 @@ function PaymentSuccess() {
                                 data.map((item) => (
                                     <div key={item._id}>
                                         <div className={cx('order-item')}>
-                                            {/* <img src={item.productInfo.thumbnail} alt={item.productInfo.title} /> */}
-                                            {/* <p className={cx('name-product')}>{item.productInfo.title}</p> */}
-                                            <span className={cx('price')}>{VND.format(item.priceNew)}</span>
+                                            <img src={item.productInfo.thumbnail} alt={item.productInfo.title} />
+                                            <p className={cx('name-product')}>{item.productInfo.title}</p>
+                                            <span className={cx('price')}>{VND.format(20000)}</span>
                                         </div>
                                     </div>
                                 ))}
@@ -100,7 +100,7 @@ function PaymentSuccess() {
                             <div className={cx('totals')}>
                                 <div>
                                     Tạm tính
-                                    {/* {data && <span className={cx('price')}>{VND.format(data[0].totalPrice)}</span>} */}
+                                    {data && <span className={cx('price')}>{VND.format(50000)}</span>}
                                 </div>
                                 <div>
                                     Phí vận chuyển <span className={cx('price')}>40.000 ₫</span>

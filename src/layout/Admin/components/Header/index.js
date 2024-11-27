@@ -49,7 +49,7 @@ function Header({ headerText }) {
                         <span className={cx('date-now')}>{formatter.format(currentTime).replace(/\s+/g, ' ')}</span>
                     </div>
                     <div className={cx('h-right')}>
-                        <div className={cx('header-btn-switch')}>
+                        {/* <div className={cx('header-btn-switch')}>
                             <button className={cx('btn-switch')} onClick={handleSwitch}>
                                 {darkMode ? (
                                     <span className={cx('icon-moon')}>
@@ -61,10 +61,12 @@ function Header({ headerText }) {
                                     </span>
                                 )}
                             </button>
+                        </div> */}
+                        <div>
+                            <Button onClick={handleLogout} small>
+                                Log out
+                            </Button>
                         </div>
-                        <Button onClick={handleLogout} small>
-                            Log out
-                        </Button>
                     </div>
                 </div>
             </div>

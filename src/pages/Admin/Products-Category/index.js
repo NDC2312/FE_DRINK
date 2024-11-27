@@ -198,9 +198,7 @@ function ProductsCategory() {
                                 onClick={() =>
                                     handleChangeStatus(item._id, `${item.status === 'active' ? 'inActive' : 'active'}`)
                                 }
-                            >
-                                {item.status === 'active' ? 'Hoạt động' : 'Dừng hoạt động'}
-                            </Button>
+                            ></Button>
                         </td>
                         <td>
                             <Link

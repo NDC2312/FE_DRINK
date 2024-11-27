@@ -1,4 +1,4 @@
-import styles from './Auth.module.scss';
+import styles from './Auth2.module.scss';
 import classNames from 'classnames/bind';
 
 import { useState } from 'react';

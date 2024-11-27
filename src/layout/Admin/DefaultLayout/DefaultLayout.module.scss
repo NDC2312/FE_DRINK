@@ -1,5 +1,4 @@
 .wrapper {
-    width: 100%;
     display: flex;
     position: relative;
     transition: 0.5s all;
@@ -12,7 +11,7 @@
         width: 240px;
         top: 0;
         left: 0;
-        overflow-x: hidden;
+        overflow-y: auto;
         height: 100%;
     }
     .menu-open {
@@ -24,12 +23,16 @@
 
 .container {
     margin-left: 240px;
+    width: 100%;
+    overflow-x: hidden;
     padding: 0 30px;
     background-color: #f6f6f8;
     transition: 0.5s all;
-    width: calc(100% - 250px);
+
     .content {
         margin-top: calc(var(--height-header-admin) + 20px);
+        max-width: 100%;
+        overflow-x: hidden;
     }
 }
 .bars {
@@ -40,16 +43,16 @@
     cursor: pointer;
     z-index: 99999;
 }
-.container.menu-open-container {
-    margin-left: 70px;
-    padding: 0 60px;
-    width: calc(100% - 70px);
-    .bars {
-        position: relative;
-        top: 40px;
-        left: -3%;
-    }
-}
+// .container.menu-open-container {
+//     margin-left: 70px;
+//     padding: 0 60px;
+//     width: calc(100% - 70px);
+//     .bars {
+//         position: relative;
+//         top: 40px;
+//         left: -3%;
+//     }
+// }
 
 .content {
     input[type='checkbox'] {

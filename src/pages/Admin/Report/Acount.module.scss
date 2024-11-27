@@ -101,6 +101,8 @@
     table thead tr th {
         text-align: center;
         font-size: 1.7rem;
+        background: none;
+        color: var(--black);
         border-top: 1px solid var(--gray);
         border-bottom: 1px solid var(--gray);
         padding: 14px;

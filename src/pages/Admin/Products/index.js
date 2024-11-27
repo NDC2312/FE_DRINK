@@ -219,7 +219,6 @@ function ProductInAdmin() {
                             <th>
                                 <input type="checkbox" name="checkAll" onClick={handleCheckAll} />
                             </th>
-                            <th>STT</th>
                             <th>Hình ảnh</th>
                             <th>Tiêu đề</th>
                             <th>Giá</th>
@@ -237,7 +236,6 @@ function ProductInAdmin() {
                                     <td>
                                         <input type="checkbox" value={item._id} name="id" />
                                     </td>
-                                    <td>{index + 1}</td>
                                     <td>
                                         <img src={item.thumbnail} alt={item.title} width="60px" height="60px" />
                                     </td>
@@ -278,32 +276,27 @@ function ProductInAdmin() {
                                                     `${item.status === 'active' ? 'inActive' : 'active'}`,
                                                 )
                                             }
-                                        >
-                                            {item.status === 'active' ? 'Hoạt động' : 'Dừng hoạt động'}
-                                        </Button>
+                                        ></Button>
                                     </td>
                                     <td>{item.accountFullName}</td>
                                     <td>{item.updateFullName}</td>
                                     <td>
-                                        <Link
+                                        <Button
                                             to={config.routes.adminDetailProducts.replace(':id', item._id)}
-                                            className={`${cx('btn-detail')} ${styles.btn}`}
+                                            btnDetail
                                         >
-                                            Chi tiết
-                                        </Link>
-                                        <Link
+                                            Xem
+                                        </Button>
+                                        <Button
                                             to={config.routes.adminEditProducts.replace(':id', item._id)}
                                             state={{ product: item }}
-                                            className={`${cx('btn-edit')} ${styles.btn}`}
+                                            btnEdit
                                         >
                                             Sửa
-                                        </Link>
-                                        <button
-                                            onClick={() => handleBtnDelete(data._id)}
-                                            className={`${cx('btn-delete')} ${styles.btn}`}
-                                        >
+                                        </Button>
+                                        <Button onClick={() => handleBtnDelete(data._id)} btnDelete>
                                             Xóa
-                                        </button>
+                                        </Button>
                                     </td>
                                 </tr>
                             ))}

@@ -1,66 +1,76 @@
 import classNames from 'classnames/bind';
 import styles from './Products.module.scss';
-import { Grid, Button } from '@mui/material';
-import { useState } from 'react';
+import { Grid } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-import { productDrinks } from '~/utils/imageProducts';
-import Product from '..';
+import Button from '~/components/Button';
+import * as ProductClient from '~/services/p-clientService';
+import { useParams } from 'react-router-dom';
 import { slider2 } from '~/utils/imageHome';
-import Menu from '~/components/Menu';
 import SliderBanner from '~/components/Slider';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
 function Products() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [itemData, setItemData] = useState({});
-
-    const toggleOpen = (data) => {
-        setIsOpen(true);
-        setItemData(data);
+    const { slug } = useParams();
+    const [data, setData] = useState([]);
+    console.log(slug);
+    useEffect(() => {
+        const fetch = async () => {
+            const res = await ProductClient.getProductsCategorySlug(slug);
+            setData(res);
+        };
+        fetch();
+    }, [slug]);
+    const convertSlugToTitle = (slug) => {
+        return slug
+            .replace(/-/g, ' ') // Thay dấu '-' thành dấu cách
+            .replace(/\b\w/g, (char) => char.toUpperCase()); // Viết hoa chữ cái đầu mỗi từ
     };
+    const title = convertSlugToTitle(slug);
+
+    console.log(data);
 
     const VND = new Intl.NumberFormat('vi-Vn', { style: 'currency', currency: 'VND' });
     return (
         <>
             <SliderBanner image={slider2} />
-            <Product />
             <div className={cx('wrapper')}>
                 <div className={cx('container')}>
-                    <Grid container rowSpacing={5} spacing={0}>
-                        {productDrinks.map((data, index) => (
-                            <Grid key={index} item xs={6} md={3}>
-                                <div className={cx('item')}>
-                                    <div className={cx('item-img')}>
-                                        <img src={data.img} alt="" />
-                                    </div>
-                                    <div className={cx('item-info')}>
-                                        <div className={cx('item-name')}>{data.name}</div>
-                                        <div className={cx('item-decs')}>{data.decs}</div>
-                                        <div className={cx('item-price')}>{VND.format(data.price)}</div>
-                                    </div>
-                                    <Button
-                                        variant="outlined"
-                                        size="medium"
-                                        sx={{
-                                            fontSize: '1.3rem',
-                                            backgroundColor: '#fff',
-                                            color: '#006241',
-                                            borderColor: '#006241',
-                                            '&:hover': {
-                                                backgroundColor: '#006241',
-                                                color: '#fff',
-                                            },
-                                        }}
-                                        onClick={() => toggleOpen(data)}
-                                    >
-                                        Đặt hàng
-                                    </Button>
-                                </div>
+                    <div className={cx('menu')}>
+                        <div className={cx('products')}>
+                            <Grid container>
+                                <div className={cx('coffee-favorite')}>{title}</div>
+                                {data &&
+                                    data.map((item) => (
+                                        <Grid key={item._id} item xs={6} md={3}>
+                                            <div className={cx('list')}>
+                                                <div className={cx('sale')}>{item.discountPercentage} %</div>
+                                                <div className={cx('list-img')}>
+                                                    <img src={item.thumbnail} alt={item.title} />
+                                                </div>
+                                                <div className={cx('list-infor')}>
+                                                    <span className={cx('name')}>{item.title}</span>
+                                                    <span className={cx('price')}>{VND.format(item.priceNew)}</span>
+                                                    <Button
+                                                        small
+                                                        iconRight={
+                                                            <FontAwesomeIcon icon={faAngleRight} fontSize={12} />
+                                                        }
+                                                        to={config.routes.detail.replace(':slugProduct', item.slug)}
+                                                    >
+                                                        Xem chi tiết
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </Grid>
+                                    ))}
                             </Grid>
-                        ))}
-                        {isOpen && <Menu isOpen={setIsOpen} data={itemData} />}
-                    </Grid>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

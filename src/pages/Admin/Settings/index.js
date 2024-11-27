@@ -20,14 +20,13 @@ function Settings() {
                 <ul>
                     <li className={cx('list-block')}>
                         <p>Giao diện</p>
-                        <div>
-                            <Link to={config.routes.adminAddProducts}>
-                                <span>
-                                    <FontAwesomeIcon icon={faBoxOpen} />
-                                </span>
-                                Chỉnh sửa giao diện
-                            </Link>
-                        </div>
+
+                        <Link to={config.routes.adminAddProducts}>
+                            <span>
+                                <FontAwesomeIcon icon={faBoxOpen} />
+                            </span>
+                            Chỉnh sửa giao diện
+                        </Link>
                     </li>
                     <li className={cx('list-block')}>
                         <p>Tài khoản</p>

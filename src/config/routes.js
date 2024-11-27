@@ -1,6 +1,7 @@
 export const routes = {
     home: '/',
     cart: '/cart',
+    myAuth: '/thong-tin-ca-nhan',
 
     //coffee
     coffeeAtHome: '/coffee-tai-nha',
@@ -10,7 +11,7 @@ export const routes = {
     device: '/device-coffee',
 
     //product
-    categoryProducts: '/category-products',
+    categoryProducts: '/category-products/:slug',
     categorySnacks: '/category-snacks',
     categoryFood: '/category-food',
 
@@ -29,6 +30,9 @@ export const routes = {
 
     //form
     signIn: '/dang-nhap',
+    forgotPassword: '/quen-mat-khau',
+    optPassword: '/xac-thuc-ma-otp',
+    resetPassword: '/doi-mat-khau-moi',
     signUp: '/dang-ki',
 
     // detail product

@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
-import Header from '~/layout/components/Header';
 import Footer from '~/layout/components/Footer';
 
 import Button from '~/components/Button';
@@ -17,7 +16,7 @@ import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-function SignIn() {
+function ResetPassword() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -96,8 +95,8 @@ function SignIn() {
         <div>
             <div className={cx('wrapper')}>
                 <div className={cx('container')}>
-                    <h2>Đăng nhập tài khoản</h2>
-                    <div>Bạn đã có tài khoản vui lòng đăng nhập ở đây</div>
+                    <h2>Quên mật khẩu</h2>
+                    <div>Nhập email của bạn để lấy lại mật khẩu</div>
                     <form onSubmit={handleSubmit}>
                         <div className={cx('input-group')}>
                             <input
@@ -109,46 +108,13 @@ function SignIn() {
                                 onChange={(e) => handleUpdateForm('email', e.target.value)}
                             />
                         </div>
-                        <div className={cx('input-group')}>
-                            <input
-                                type={showPassword ? 'text' : 'password'}
-                                id="password"
-                                name="password"
-                                placeholder="Mật khẩu"
-                                defaultValue={formData.password ? formData.password : ''}
-                                onChange={(e) => handleUpdateForm('password', e.target.value)}
-                            />
-                            {formData.password.length > 0 && (
-                                <span
-                                    onClick={handleShowPassword}
-                                    className={cx({ 'active-password': showPassword === true })}
-                                >
-                                    <FontAwesomeIcon icon={faEye} fontSize={15} />
-                                </span>
-                            )}
-                        </div>
-                        <div className={cx('remember')}>
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    id="remember"
-                                    name="remember"
-                                    checked={remember}
-                                    onChange={() => setRemember(!remember)}
-                                />
-                                <label htmlFor="remember">Ghi nhớ</label>
-                            </div>
-                            <div className={cx('forgot-password')}>
-                                <Link to={config.routes.forgotPassword}>Quên mật khẩu</Link>
-                            </div>
-                        </div>
                         <Button type="submit" full>
                             Đăng nhập
                         </Button>
                         <div className={cx('register')}>
                             <div>
-                                Nếu bạn chưa có tài khoản, vui lòng đăng ký
-                                <Link to={config.routes.signUp}>đăng kí</Link>
+                                Nếu bạn đã có tài khoản, vui lòng
+                                <Link to={config.routes.signIn}>đăng nhập</Link>
                                 tại đây.
                             </div>
                             <div>Hoặc đăng nhập bằng</div>
@@ -164,4 +130,4 @@ function SignIn() {
     );
 }
 
-export default SignIn;
+export default ResetPassword;

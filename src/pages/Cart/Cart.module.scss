@@ -31,6 +31,7 @@
                 font-size: 1.7rem;
                 font-weight: 500;
                 padding: 8px 0;
+                color: var(--black);
                 border-left: solid 1px #ebebeb;
                 border-bottom: solid 1px #ebebeb;
                 background: #f7f7f7;
@@ -103,11 +104,13 @@
                 color: var(--black);
                 font-size: 1.6rem;
                 font-weight: 400;
+                text-align: center;
             }
 
             .item-qty {
                 color: var(--black);
                 font-size: 1.6rem;
+                text-align: center;
                 font-weight: 400;
                 .qty {
                     display: inline-block;

@@ -100,6 +100,8 @@
     table thead tr th {
         text-align: center;
         font-size: 1.7rem;
+        background: none;
+        color: var(--black);
         border-top: 1px solid var(--gray);
         border-bottom: 1px solid var(--gray);
         padding: 14px;
@@ -162,13 +164,15 @@
 
 .btn-detail {
     background-color: #6c757d;
+
     &:hover {
         background-color: #5a6268;
     }
 }
 .btn-edit {
     background-color: #ffc107;
-    margin-right: 7px;
+    margin-right: 5px;
+    margin-left: 5px;
     color: var(--black);
     &:hover {
         background-color: #e0a800;

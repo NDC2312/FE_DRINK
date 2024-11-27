@@ -58,7 +58,7 @@ function Login() {
         cookie.save('token', token, {
             path: setTimeout(() => {
                 navigate(config.routes.adminDashBoard);
-            }, 2000),
+            }, 500),
             expires: new Date(Date.now() + oneDay),
         });
     }

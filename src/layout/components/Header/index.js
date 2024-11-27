@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import cookie from 'react-cookies';
 
+import * as AuthService from '~/services/authService';
 import Cart from '~/components/Cart';
 import config from '~/config';
 import noAvatar from '~/assets/SignIn/no-avatar.png';
@@ -16,22 +17,26 @@ const cx = classNames.bind(styles);
 
 function Header() {
     const menuRef = useRef();
-    const [token, setToken] = useState(cookie.load('tokenAuth') || null);
-
+    const [token, setToken] = useState(false);
     const [data, setData] = useState([]);
     const [showMenu, setShowMenu] = useState(false);
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
     };
-
     useEffect(() => {
         const fetch = async () => {
             const res = await ProductClient.getProductsCategory();
             setData(res);
+            const tokenAuth = cookie.load('tokenAuth');
+            if (tokenAuth) {
+                const myAuth = await AuthService.myAuth(tokenAuth);
+
+                setToken(!!tokenAuth);
+            }
         };
         fetch();
-    }, [token]);
+    }, []);
 
     const tree = (data) => {
         return (
@@ -39,7 +44,7 @@ function Header() {
                 {data.map((item) => {
                     return (
                         <li key={item._id}>
-                            <Link>{item.title}</Link>
+                            <Link to={`/category-products/${item.slug}`}>{item.title}</Link>
                             {item.children && tree(item.children)}
                         </li>
                     );
@@ -49,9 +54,8 @@ function Header() {
     };
     const handleLogout = async () => {
         cookie.remove('tokenAuth');
-        setToken(null);
+        setToken(false);
     };
-
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
 
     return (
@@ -70,7 +74,21 @@ function Header() {
                     </form> */}
                     {/* <Search /> */}
                     <div className={cx('action')}>
-                        {token === null ? (
+                        {token ? (
+                            <div className={cx('userLogin')}>
+                                <img className={cx('img-user')} src={noAvatar} alt="" />
+                                {/* <div className={cx('user')}>Xin chào: {auth.fullName}</div> */}
+
+                                <ul className={cx('menu')}>
+                                    <li>
+                                        <Link to={config.routes.myAuth}>Thông tin cá nhân</Link>
+                                    </li>
+                                    <li>
+                                        <button onClick={handleLogout}>Đăng xuất</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        ) : (
                             <div>
                                 <Link to={config.routes.signIn} className={cx('account')}>
                                     <span>Đăng nhập / </span>
@@ -78,11 +96,6 @@ function Header() {
                                 <Link to={config.routes.signUp} className={cx('account')}>
                                     <span>Đăng kí</span>
                                 </Link>
-                            </div>
-                        ) : (
-                            <div className={cx('userLogin')}>
-                                {/* <img className={cx('img-user')} src={user.photoURL ? user.photoURL : noAvatar} alt="" /> */}
-                                <button onClick={handleLogout}>Đăng xuất</button>
                             </div>
                         )}
                     </div>

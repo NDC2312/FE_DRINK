@@ -100,6 +100,8 @@
     table thead tr th {
         text-align: center;
         font-size: 1.7rem;
+        background: none;
+        color: var(--black);
         border-top: 1px solid var(--gray);
         border-bottom: 1px solid var(--gray);
         padding: 14px;
@@ -124,16 +126,15 @@
             border: 1px solid var(--black);
         }
     }
-    table tbody tr td:nth-child(5) {
-        color: var(--red);
-        font-weight: 500;
-    }
 
     table tbody tr td:last-child {
         display: flex;
         align-items: center;
         justify-content: center;
         column-gap: 4px;
+        button {
+            margin-top: 0;
+        }
     }
 }
 
@@ -162,7 +163,7 @@
     color: var(--white);
     font-size: 1.6rem;
     font-weight: 500;
-    padding: 6px 12px;
+    padding: 8px;
     border-radius: 16px;
 }
 .change-status-active {
@@ -172,25 +173,6 @@
     background-color: var(--red);
 }
 
-.btn-detail {
-    background-color: #6c757d;
-    &:hover {
-        background-color: #5a6268;
-    }
-}
-.btn-edit {
-    background-color: #ffc107;
-    color: var(--black);
-    &:hover {
-        background-color: #e0a800;
-    }
-}
-.btn-delete {
-    background-color: var(--red);
-    &:hover {
-        background-color: #c82333;
-    }
-}
 // END BTN
 
 // DETAIL

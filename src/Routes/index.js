@@ -90,6 +90,10 @@ import Role from '~/pages/Admin/Role';
 // ADMIN Settings
 import Settings from '~/pages/Admin/Settings';
 import Report from '~/pages/Admin/Report';
+import Account from '~/pages/Account';
+import ForgotPassword from '~/pages/Auth/forgot-password';
+import OtpPassword from '~/pages/Auth/otp-password';
+import ResetPassword from '~/pages/Auth/reset-password';
 
 const publicRoute = [
     { path: config.routes.home, component: Home },
@@ -120,6 +124,9 @@ const publicRoute = [
     // Form
     { path: config.routes.signIn, component: Signin },
     { path: config.routes.signUp, component: Signup },
+    { path: config.routes.forgotPassword, component: ForgotPassword },
+    { path: config.routes.optPassword, component: OtpPassword },
+    { path: config.routes.resetPassword, component: ResetPassword },
 
     { path: config.routes.admin, component: Login, layout: null },
     { path: config.routes.paymentInfor, component: PaymentInfor, layout: null },
@@ -127,6 +134,7 @@ const publicRoute = [
     // {path: config.routes.signIn, component: signIn}
 
     { path: config.routes.paymentSuccess, component: PaymentSuccess, layout: null },
+    { path: config.routes.myAuth, component: Account },
 ];
 
 const privateRoute = [

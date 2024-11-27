@@ -62,25 +62,22 @@ function PermissionGroup() {
                                 <td>{data.title}</td>
                                 <td>{data.description}</td>
                                 <td>
-                                    <Link
+                                    <Button
                                         to={config.routes.adminDetailPermissionGroup.replace(':id', data._id)}
-                                        className={`${cx('btn-detail')} ${styles.btn}`}
+                                        btnDetail
                                     >
                                         Chi tiết
-                                    </Link>
-                                    <Link
+                                    </Button>
+                                    <Button
                                         to={config.routes.adminEditPermissionGroup.replace(':id', data._id)}
                                         state={{ product: data }}
-                                        className={`${cx('btn-edit')} ${styles.btn}`}
+                                        btnEdit
                                     >
                                         Sửa
-                                    </Link>
-                                    <button
-                                        onClick={() => handleBtnDelete(data._id)}
-                                        className={`${cx('btn-delete')} ${styles.btn}`}
-                                    >
+                                    </Button>
+                                    <Button onClick={() => handleBtnDelete(data._id)} btnDelete>
                                         Xóa
-                                    </button>
+                                    </Button>
                                 </td>
                             </tr>
                         ))}

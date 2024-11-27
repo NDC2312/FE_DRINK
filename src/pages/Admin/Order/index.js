@@ -118,17 +118,10 @@ function Order() {
         }
     };
 
-    const handleBtnDelete = async (productID, newStatus) => {
-        if (window.confirm('Bạn chắc chắn muốn hủy sản phẩm này chứ.')) {
-            await OrderService.changeStatusOrder(productID, newStatus);
-            setData((prev) => prev.map((item) => (item._id === productID ? { ...item, status: newStatus } : item)));
-        }
-    };
-
     useEffect(() => {
         const fetch = async () => {
             const res = await OrderService.getOrder();
-            setData(res.cart);
+            setData(res.order);
         };
         fetch();
     }, []);
@@ -200,11 +193,7 @@ function Order() {
                                     <td>{data._id}</td>
                                     <td>{new Date(data.createdAt).toLocaleString()}</td>
                                     <td>{data.userInfo.fullName}</td>
-                                    <td>
-                                        {data.products && data.products[0]
-                                            ? VND.format(data.products[0].totalPrice)
-                                            : 'Không có dữ liệu'}
-                                    </td>
+                                    <td>{VND.format(data.totalPrice)}</td>
                                     <td>Thanh toán khi giao hàng (COD)</td>
                                     <td>
                                         <Button

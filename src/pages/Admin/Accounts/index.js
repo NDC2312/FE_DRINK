@@ -241,25 +241,22 @@ function Accounts() {
                                         ></Button>
                                     </td>
                                     <td>
-                                        <Link
+                                        <Button
                                             to={config.routes.adminDetailAccount.replace(':id', data._id)}
-                                            className={`${cx('btn-detail')} ${styles.btn}`}
+                                            btnDetail
                                         >
                                             Chi tiết
-                                        </Link>
-                                        <Link
+                                        </Button>
+                                        <Button
                                             to={config.routes.adminEditAccount.replace(':id', data._id)}
                                             state={{ account: data }}
-                                            className={`${cx('btn-edit')} ${styles.btn}`}
+                                            btnEdit
                                         >
                                             Sửa
-                                        </Link>
-                                        <button
-                                            onClick={() => handleBtnDelete(data._id)}
-                                            className={`${cx('btn-delete')} ${styles.btn}`}
-                                        >
+                                        </Button>
+                                        <Button onClick={() => handleBtnDelete(data._id)} btnDelete>
                                             Xóa
-                                        </button>
+                                        </Button>
                                     </td>
                                 </tr>
                             ))}

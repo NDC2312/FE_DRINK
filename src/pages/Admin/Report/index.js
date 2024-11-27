@@ -18,7 +18,7 @@ function Report() {
     //change status va changeMulti chua hoan thien
     const [data, setData] = useState([]);
     const [totalOrder, setTotalOrder] = useState(0);
-    const [status, setStatus] = useState('');
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const [keyword, setKeyword] = useState('');
 
@@ -37,21 +37,16 @@ function Report() {
         },
     ];
 
-    const handleChangeStatus = async (productID, newStatus) => {
-        await OrderService.changeStatusOrder(productID, newStatus);
-        setData((prev) => prev.map((item) => (item._id === productID ? { ...item, status: newStatus } : item)));
-    };
-
     useEffect(() => {
         const fetch = async () => {
             const res = await OrderService.getOrder();
-            setData(res.cart);
+            setData(res.order);
             setTotalOrder(res.totalOrder);
+            setTotalPrice(res.totalPrice);
         };
         fetch();
     }, []);
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
-    console.log(totalOrder);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -59,22 +54,11 @@ function Report() {
                     <div>Báo cáo</div>
                     <div className={cx('act-product')}>
                         <div>
-                            <div> Tổng số đơn hàng: {totalOrder}</div>
                             <div>
-                                Tổng giá trị :{' '}
-                                {/* {data && data.length > 0
-                                    ? VND.format(
-                                          data.reduce((total, order) => {
-                                              return (
-                                                  total +
-                                                  order[0].products.reduce(
-                                                      (orderTotal, product) => orderTotal + product.totalPrice,
-                                                      0,
-                                                  )
-                                              );
-                                          }, 0),
-                                      )
-                                    : 'Không có dữ liệu'} */}
+                                Tổng số đơn hàng: <b>{totalOrder}</b>
+                            </div>
+                            <div>
+                                Tổng giá trị: <b>{totalPrice}</b>
                             </div>
                         </div>
 
@@ -87,29 +71,27 @@ function Report() {
                 <table>
                     <thead>
                         <tr>
-                            <th>Tên sản phẩm</th>
+                            <th>Khách hàng</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
                             <th>Đơn hàng</th>
                             <th>Ngày đặt</th>
-                            <th>Khách hàng</th>
+
                             <th>Tổng tiền</th>
                             <th>Hình thức thanh toán</th>
                             <th>Trạng thái</th>
-                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         {data &&
                             data.map((data) => (
                                 <tr key={data._id}>
-                                    <td>{data.products.title}</td>
+                                    <td>{data.userInfo.fullName}</td>
+                                    <td>{data.userInfo.phone}</td>
+                                    <td>{data.userInfo.address}</td>
                                     <td>{data._id}</td>
                                     <td>{new Date(data.createdAt).toLocaleString()}</td>
-                                    <td>{data.userInfo.fullName}</td>
-                                    <td>
-                                        {data.products && data.products[0]
-                                            ? VND.format(data.products[0].totalPrice)
-                                            : 'Không có dữ liệu'}
-                                    </td>
+                                    <td>{VND.format(data.totalPrice)}</td>
                                     <td>Thanh toán khi giao hàng (COD)</td>
                                     <td>
                                         <Button
@@ -132,31 +114,6 @@ function Report() {
                                                 ? 'Hủy'
                                                 : 'Đã xử lý'}
                                         </Button>
-                                    </td>
-                                    <td>
-                                        {data.status === 'spending' && (
-                                            <div>
-                                                <Button
-                                                    btnConfirm
-                                                    onClick={() =>
-                                                        handleChangeStatus(
-                                                            data._id,
-                                                            `${data.status === 'finish' ? 'spending' : 'finish'}`,
-                                                        )
-                                                    }
-                                                >
-                                                    <FontAwesomeIcon icon={faCheck} />
-                                                </Button>
-                                                <Button
-                                                    onClick={() =>
-                                                        handleChangeStatus(data._id, `${(data.status = 'cancel')}`)
-                                                    }
-                                                    btnDelete
-                                                >
-                                                    <FontAwesomeIcon icon={faXmark} />
-                                                </Button>
-                                            </div>
-                                        )}
                                     </td>
                                 </tr>
                             ))}
