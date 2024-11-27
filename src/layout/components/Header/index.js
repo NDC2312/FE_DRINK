@@ -181,7 +181,7 @@ function Header() {
                         <li className={cx('item')}>
                             <NavLink
                                 onClick={toggleMenu}
-                                to={config.routes.categoryProducts}
+                                // to={config.routes.categoryProducts}
                                 style={({ isActive }) => ({
                                     color: isActive ? 'var(--primary-text)' : '',
                                 })}
