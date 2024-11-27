@@ -140,10 +140,9 @@ function ProductInAdmin() {
 
     const handleBtnDelete = async (id) => {
         if (window.confirm('Bạn chắc chắn muốn xóa sản phẩm này chứ.')) {
-            const res = await productService.deleteProduct(id);
+            await productService.deleteProduct(id);
             const update = data.filter((item) => item._id !== id);
             setData(update);
-            console.log(res.message);
         }
     };
 
@@ -294,7 +293,7 @@ function ProductInAdmin() {
                                         >
                                             Sửa
                                         </Button>
-                                        <Button onClick={() => handleBtnDelete(data._id)} btnDelete>
+                                        <Button onClick={() => handleBtnDelete(item._id)} btnDelete>
                                             Xóa
                                         </Button>
                                     </td>

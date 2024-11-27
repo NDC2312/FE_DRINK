@@ -101,11 +101,7 @@ export const editAuth = async (id, data) => {
 
 export const forgetPassword = async (email) => {
     try {
-        const res = await axios.post(
-            'https://be-drink.vercel.app/api/v1/auth/password/forgot',
-            { email: email },
-            { headers: { 'Content-Type': 'application/json' } },
-        );
+        const res = await httpRequest.post('auth/password/forgot', { email });
         console.log(res);
 
         return res.data;
