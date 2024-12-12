@@ -2,7 +2,7 @@ import axios from 'axios';
 import cookie from 'react-cookies';
 
 const httpRequest = axios.create({
-    baseURL: 'http://be-drink.vercel.app/api/v1/',
+    baseURL: 'https://be-drink.vercel.app/api/v1/',
     headers: {
         'Content-Type': 'application/json',
     },
