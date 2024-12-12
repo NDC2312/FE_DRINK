@@ -28,11 +28,11 @@ function Order() {
             status: '',
         },
         {
-            name: 'Hoạt động',
+            name: 'Đã xử lý',
             status: 'active',
         },
         {
-            name: 'Dừng hoạt động',
+            name: 'Bị hủy',
             status: 'inActive',
         },
     ];
@@ -126,7 +126,7 @@ function Order() {
         fetch();
     }, []);
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
-
+    console.log(data);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -162,9 +162,9 @@ function Order() {
                         <div className={cx('act-product-status')}></div>
                         <div className={cx('form-input')}>
                             <Search setKeyword={setKeyword} />
-                            <Link to={config.routes.adminAddAccount} className={`${cx('btn')} ${styles.add}`}>
+                            {/* <Link to={config.routes.adminAddAccount} className={`${cx('btn')} ${styles.add}`}>
                                 + Thêm mới
-                            </Link>
+                            </Link> */}
                         </div>
                     </div>
                 </div>

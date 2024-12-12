@@ -35,6 +35,20 @@ export const addProduct = async (productId, quantity) => {
     }
 };
 
+export const removeProduct = async (productId) => {
+    try {
+        const res = await httpRequest.get(`cart/delete/${productId}`, { withCredentials: true });
+        console.log(res);
+        if (res.data.code === 200) {
+            success(res.data.message);
+        } else {
+            error(res.data.message);
+        }
+    } catch (error) {
+        error(error());
+    }
+};
+
 export const order = async (user_id, userInfo) => {
     try {
         const res = await httpRequest.post(`checkout/order/${user_id}`, userInfo, { withCredentials: true });

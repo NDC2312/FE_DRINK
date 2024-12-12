@@ -235,7 +235,7 @@ function Sidebar({ setHeaderText, menu }) {
                         </span>
                         <p> Khách hàng</p>
                     </Link>
-                    <Link
+                    {/* <Link
                         className={isActive === 11 ? cx('active') : ''}
                         onClick={() => {
                             handleActive(11);
@@ -245,7 +245,7 @@ function Sidebar({ setHeaderText, menu }) {
                             <FontAwesomeIcon icon={faComments} />
                         </span>
                         <p> Đánh giá</p>
-                    </Link>
+                    </Link> */}
                 </li>
                 {/* end customers */}
 

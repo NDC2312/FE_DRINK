@@ -16,7 +16,8 @@ const cx = classNames.bind(styles);
 function PaymentSuccess() {
     const { orderId } = useParams();
     const location = useLocation();
-    const auth = location.state.auth;
+    const auth = location.state.values;
+    const auth2 = location.state.auth;
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -42,9 +43,7 @@ function PaymentSuccess() {
                         <p className={cx('thank-you')}>
                             Cảm ơn bạn đã đặt hàng <FontAwesomeIcon icon={faCheckCircle} fontSize={30} />
                         </p>
-                        <div>
-                            Một email xác nhận đã được gửi tới tnn231223@gmail.com.Xin vui lòng kiểm tra email của bạn
-                        </div>
+                        <div>Một email xác nhận đã được gửi tới {auth2.email} Xin vui lòng kiểm tra email của bạn</div>
                     </div>
 
                     <div className={cx('order-info')}>
@@ -52,21 +51,21 @@ function PaymentSuccess() {
                             <div className={cx('section-title')}>Thông tin mua hàng</div>
                             <p className={cx('info')}>
                                 <b>Họ và tên: </b>
-                                {auth.fullName}
+                                {auth2.fullName}
                             </p>
                             <p className={cx('info')}>
                                 <b>Email: </b>
-                                {auth.email}
+                                {auth2.email}
                             </p>
                             <p className={cx('info')}>
                                 <b>Số điện thoại: </b>
-                                {auth.phone}
+                                {auth2.phone}
                             </p>
                         </div>
                         <div className={cx('shipping-info')}>
                             <div className={cx('section-title')}>Địa chỉ nhận hàng</div>
                             <p className={cx('info')}>
-                                <b>Địa chỉ: Dai hoc thu dau mot</b>
+                                <b>Địa chỉ: </b>
                                 {auth.address}
                             </p>
                         </div>
@@ -92,23 +91,18 @@ function PaymentSuccess() {
                                         <div className={cx('order-item')}>
                                             <img src={item.productInfo.thumbnail} alt={item.productInfo.title} />
                                             <p className={cx('name-product')}>{item.productInfo.title}</p>
-                                            <span className={cx('price')}>{VND.format(20000)}</span>
+                                            <p className={cx('price')}>{VND.format(item.price)}</p>
                                         </div>
                                     </div>
                                 ))}
 
                             <div className={cx('totals')}>
-                                <div>
-                                    Tạm tính
-                                    {data && <span className={cx('price')}>{VND.format(50000)}</span>}
-                                </div>
-                                <div>
-                                    Phí vận chuyển <span className={cx('price')}>40.000 ₫</span>
-                                </div>
                                 <div className={cx('total')}>
                                     <strong>Tổng cộng</strong>{' '}
                                     <span className={cx('price-total')}>
-                                        {/* {data && VND.format(data[0].totalPrice + 40000)} */}
+                                        {data.length > 0 && (
+                                            <span className={cx('price')}>{VND.format(data[0].totalPrice)}</span>
+                                        )}
                                     </span>
                                 </div>
                             </div>

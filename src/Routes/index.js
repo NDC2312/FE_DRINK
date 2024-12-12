@@ -94,6 +94,7 @@ import Account from '~/pages/Account';
 import ForgotPassword from '~/pages/Auth/forgot-password';
 import OtpPassword from '~/pages/Auth/otp-password';
 import ResetPassword from '~/pages/Auth/reset-password';
+import BlogDetail from '~/pages/AboutUs/BlogDetail';
 
 const publicRoute = [
     { path: config.routes.home, component: Home },
@@ -120,6 +121,7 @@ const publicRoute = [
     { path: config.routes.store, component: Store },
 
     { path: config.routes.aboutUs, component: AboutUs },
+    { path: config.routes.blogDetail, component: BlogDetail },
 
     // Form
     { path: config.routes.signIn, component: Signin },

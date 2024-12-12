@@ -42,13 +42,19 @@ function Search() {
         }
         if (searchValue) {
             axios
-                .get(`http://localhost:3000/course?q=${searchValue}`)
+                .get(`http://localhost:5000/api/v1/products-client/search?name=${searchValue}`)
                 .then((response) => response.data)
-                .then((data) => setSearchResults(data));
+                .then((data) => setSearchResults(data.data));
         } else {
             setSearchResults([]);
         }
     }, [searchValue]);
+
+    const handleResultClick = (event) => {
+        event.preventDefault(); // Ngăn việc đóng khi nhấn vào link
+    };
+
+    console.log(searchResults);
     return (
         <>
             <form className={cx('search')}>
@@ -70,7 +76,7 @@ function Search() {
                 )}
 
                 {showResult && searchResults.length > 0 && (
-                    <div className={cx('wrapper')}>
+                    <div className={cx('wrapper')} onMouseDown={(event) => handleResultClick(event)}>
                         {searchResults.map((data) => (
                             <AccountItem key={data.id} data={data} />
                         ))}

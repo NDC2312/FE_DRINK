@@ -25,11 +25,20 @@ function Products() {
         };
         fetch();
     }, [slug]);
-    const convertSlugToTitle = (slug) => {
-        return slug
-            .replace(/-/g, ' ') // Thay dấu '-' thành dấu cách
-            .replace(/\b\w/g, (char) => char.toUpperCase()); // Viết hoa chữ cái đầu mỗi từ
+
+    const slugToTitleMap = {
+        'ca-phe-the-gioi': 'Cà phê thế giới',
+        'ca-phe-viet': 'Cà phê việt',
+        'tra-viet': 'Trà việt',
+        'do-uong-nuoc-giai-khat': 'Đồ uống nước giải khát',
+        'do-an': 'Đồ ăn',
+        'do-an-ngot': 'Đồ ăn ngọt',
+        'do-an-vat': 'Đồ ăn vặt',
+        // Thêm các mục khác
     };
+
+    const convertSlugToTitle = (slug) => slugToTitleMap[slug] || 'Không tìm thấy tiêu đề';
+
     const title = convertSlugToTitle(slug);
 
     console.log(data);
@@ -37,7 +46,7 @@ function Products() {
     const VND = new Intl.NumberFormat('vi-Vn', { style: 'currency', currency: 'VND' });
     return (
         <>
-            <SliderBanner image={slider2} />
+            {/* <SliderBanner image={slider2} /> */}
             <div className={cx('wrapper')}>
                 <div className={cx('container')}>
                     <div className={cx('menu')}>

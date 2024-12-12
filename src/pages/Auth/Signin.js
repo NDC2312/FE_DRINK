@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import Header from '~/layout/components/Header';
 import Footer from '~/layout/components/Footer';
+import { useDispatch } from 'react-redux';
+import { login } from '~/actions/authAction';
 
 import Button from '~/components/Button';
 import * as AuthService from '~/services/authService';
@@ -18,6 +20,7 @@ import config from '~/config';
 const cx = classNames.bind(styles);
 
 function SignIn() {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -70,6 +73,7 @@ function SignIn() {
                 });
                 navigate(config.routes.home);
             }
+            dispatch(login());
         } else {
             alert('not found');
         }

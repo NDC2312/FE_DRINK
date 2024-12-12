@@ -101,23 +101,55 @@ export const editAuth = async (id, data) => {
 
 export const forgetPassword = async (email) => {
     try {
-        const res = await httpRequest.post('auth/password/forgot', { email });
+        const res = await axios.post(
+            'http://localhost:5000/api/v1/auth/password/forgot',
+            {
+                email,
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            },
+        );
         console.log(res);
-
-        return res.data;
+        if (res.data.code === 200) {
+            return res.data;
+        } else {
+            error(res.data.message);
+        }
     } catch (error) {}
 };
 
 export const otpPassword = async (data) => {
     try {
-        const res = await httpRequest.post(`auth/password/otp`, data);
-        return res.data;
+        const res = await axios.post('http://localhost:5000/api/v1/auth/password/otp', data, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        console.log(res);
+        if (res.data.code === 200) {
+            return res.data;
+        } else {
+            error(res.data.message);
+        }
     } catch (error) {}
 };
 
 export const resetPassword = async (data) => {
     try {
-        const res = await httpRequest.post(`auth/password/reset`, data);
-        return res.data;
+        const res = await axios.post('http://localhost:5000/api/v1/auth/password/reset', data, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        console.log(res);
+        if (res.data.code === 200) {
+            success(res.data.message);
+            return res.data;
+        } else {
+            error(res.data.message);
+        }
     } catch (error) {}
 };

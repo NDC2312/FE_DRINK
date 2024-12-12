@@ -24,9 +24,13 @@ function Cart() {
     }, []);
     console.log('data.products', data.products);
 
-    let discount = 0;
-
-    const handleRemove = (item) => {};
+    const handleRemove = async (productId) => {
+        await CartProducts.removeProduct(productId);
+        setData((prevData) => ({
+            ...prevData,
+            products: prevData.products.filter((item) => item.product_id !== productId),
+        }));
+    };
 
     const handleDecrease = (item) => {};
 
@@ -67,12 +71,12 @@ function Cart() {
                                                     </td>
                                                     <td className={cx('item-information')}>
                                                         <p className={cx('name')}>{item.productInfo.title}</p>
-                                                        <span
+                                                        <p
                                                             className={cx('btn-remove')}
-                                                            // onClick={() => handleRemove(item)}
+                                                            onClick={() => handleRemove(item.product_id)}
                                                         >
                                                             <FontAwesomeIcon icon={faTrashCan} />
-                                                        </span>
+                                                        </p>
                                                     </td>
                                                     <td className={cx('item-price')}>
                                                         <span>{VND.format(item.priceNew)}</span>

@@ -5,20 +5,26 @@ import { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import cookie from 'react-cookies';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { logout } from '~/actions/authAction';
 import * as AuthService from '~/services/authService';
 import Cart from '~/components/Cart';
 import config from '~/config';
 import noAvatar from '~/assets/SignIn/no-avatar.png';
 import Search from './Search';
 import * as ProductClient from '~/services/p-clientService';
+import * as BlogClient from '~/services/b-clientService';
 
 const cx = classNames.bind(styles);
 
 function Header() {
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    const dispatch = useDispatch();
+
     const menuRef = useRef();
-    const [token, setToken] = useState(false);
     const [data, setData] = useState([]);
+    const [blog, setBlog] = useState([]);
     const [showMenu, setShowMenu] = useState(false);
 
     const toggleMenu = () => {
@@ -27,12 +33,12 @@ function Header() {
     useEffect(() => {
         const fetch = async () => {
             const res = await ProductClient.getProductsCategory();
+            const blog = await BlogClient.getBlogCategory();
             setData(res);
-            const tokenAuth = cookie.load('tokenAuth');
+            setBlog(blog);
+            const tokenAuth = await cookie.load('tokenAuth');
             if (tokenAuth) {
-                const myAuth = await AuthService.myAuth(tokenAuth);
-
-                setToken(!!tokenAuth);
+                await AuthService.myAuth(tokenAuth);
             }
         };
         fetch();
@@ -52,29 +58,40 @@ function Header() {
             </ul>
         );
     };
+
+    const treeBlog = (data) => {
+        return (
+            <ul>
+                {data.map((item) => {
+                    return (
+                        <li key={item._id}>
+                            <Link to={`/about-us/${item.slug}`}>{item.title}</Link>
+                            {item.children && treeBlog(item.children)}
+                        </li>
+                    );
+                })}
+            </ul>
+        );
+    };
+
     const handleLogout = async () => {
+        dispatch(logout());
         cookie.remove('tokenAuth');
-        setToken(false);
     };
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
-
+    console.log(blog);
     return (
         <header className={cx('wrapper')}>
             <div className={cx('h-top')}>
                 <div className={cx('inner')}>
-                    <span onClick={toggleMenu} className={cx('menu-btn')}>
+                    {/* <span onClick={toggleMenu} className={cx('menu-btn')}>
                         <FontAwesomeIcon icon={faBars} />
-                    </span>
+                    </span> */}
 
                     <span>Chào mừng bạn đến với Coffee NTK.</span>
 
-                    {/* <form className={cx('search')}>
-                        <input placeholder="Tìm kiếm..." />
-                        
-                    </form> */}
-                    {/* <Search /> */}
                     <div className={cx('action')}>
-                        {token ? (
+                        {isLoggedIn ? (
                             <div className={cx('userLogin')}>
                                 <img className={cx('img-user')} src={noAvatar} alt="" />
                                 {/* <div className={cx('user')}>Xin chào: {auth.fullName}</div> */}
@@ -130,12 +147,12 @@ function Header() {
                                 Trang Chủ
                             </NavLink>
                         </li>
-                        <li className={cx('item')}>
+                        {/* <li className={cx('item')}>
                             <NavLink
                                 onClick={toggleMenu}
                                 to={config.routes.coffeeAtHome}
                                 style={({ isActive }) => ({
-                                    color: isActive ? 'var(--primary-text)' : '',
+                                    color: isActive ? ' var(--primary-text)' : '',
                                 })}
                             >
                                 Cà Phê
@@ -150,21 +167,33 @@ function Header() {
                                     </li>
                                 </ul>
                             </div>
+                        </li> */}
+                        <li className={cx('item')}>
+                            <NavLink
+                                onClick={toggleMenu}
+                                to={config.routes.categorySnacks}
+                                style={({ isActive }) => ({
+                                    color: isActive ? ' var(--primary-text)' : '',
+                                })}
+                            >
+                                Menu
+                            </NavLink>
+                            {tree(data)}
                         </li>
                         <li className={cx('item')}>
                             <NavLink
                                 onClick={toggleMenu}
                                 to={config.routes.device}
                                 style={({ isActive }) => ({
-                                    color: isActive ? 'var(--primary-text)' : '',
+                                    color: isActive ? ' var(--primary-text)' : '',
                                 })}
                             >
                                 Giới thiệu
                             </NavLink>
                         </li>
-                    </ul>
+                        {/* </ul> */}
 
-                    <ul className={`${styles.menu} ${showMenu ? styles['menu-open'] : ''} `} ref={menuRef}>
+                        {/* <ul className={`${styles.menu} ${showMenu ? styles['menu-open'] : ''} `} ref={menuRef}>
                         <li className={cx('nav-logo')}>
                             <NavLink
                                 onClick={toggleMenu}
@@ -176,27 +205,15 @@ function Header() {
                                 NTK
                             </NavLink>
                         </li>
-                    </ul>
-                    <ul className={`${styles.menu} ${showMenu ? styles['menu-open'] : ''} `} ref={menuRef}>
-                        <li className={cx('item')}>
-                            <NavLink
-                                onClick={toggleMenu}
-                                // to={config.routes.categoryProducts}
-                                style={({ isActive }) => ({
-                                    color: isActive ? 'var(--primary-text)' : '',
-                                })}
-                            >
-                                Sản phẩm
-                            </NavLink>
-                            {tree(data)}
-                        </li>
+                    </ul> */}
+                        {/* <ul className={`${styles.menu} ${showMenu ? styles['menu-open'] : ''} `} ref={menuRef}> */}
 
                         <li className={cx('item')}>
                             <NavLink
                                 onClick={toggleMenu}
                                 to={config.routes.store}
                                 style={({ isActive }) => ({
-                                    color: isActive ? '#006421' : '',
+                                    color: isActive ? ' var(--primary-text)' : '',
                                 })}
                             >
                                 Cửa hàng
@@ -208,50 +225,18 @@ function Header() {
                                 onClick={toggleMenu}
                                 to={config.routes.aboutUs}
                                 style={({ isActive }) => ({
-                                    color: isActive ? '#006421' : '',
+                                    color: isActive ? ' var(--primary-text)' : '',
                                 })}
                             >
                                 Bài viết
                             </NavLink>
-                            {/* <ul className={cx('item-about')}>
-                                <li className={cx('list-item')}>
-                                    <Link to={config.routes.notThing}>
-                                        <h6 className={cx('item-tittle')}>Di Sản </h6>
-                                    </Link>
-                                    <ul className={cx('item-intro')}>
-                                        <li>Cà phê</li>
-                                        <li>Dịch vụ khách hàng</li>
-                                        <li>Tầm nhìn</li>
-                                        <li>Cam kết với cộng đồng</li>
-                                    </ul>
-                                </li>
-                                <li className={cx('list-item')}>
-                                    <Link to={config.routes.notThing}>
-                                        <h6 className={cx('item-tittle')}>Công ty</h6>
-                                    </Link>
-                                    <ul className={cx('item-intro')}>
-                                        <li>Tuyên bố về sứ mệnh</li>
-                                        <li>Đạo đức và Tuân thủ trong kinh doanh</li>
-                                        <li>Sự đa dạng tại starbucks</li>
-                                        <li>Chính sách trực tuyến</li>
-                                    </ul>
-                                </li>
-                                <li className={cx('list-item')}>
-                                    <Link to={config.routes.notThing}>
-                                        <h6 className={cx('item-tittle')}>Cơ hội nghề nghiệp</h6>
-                                    </Link>
-                                    <ul className={cx('item-intro')}>
-                                        <li>Nhân viên pha chế</li>
-                                        <li>Giám sát ca</li>
-                                        <li>Quản lý của hanhg</li>
-                                        <li>Các vị trí khác</li>
-                                    </ul>
-                                </li>
-                            </ul> */}
+                            {treeBlog(blog)}
                         </li>
                     </ul>
                     <div className={cx('cart')}>
-                        <div className={cx('search')}></div>
+                        <div className={cx('search')}>
+                            <Search />
+                        </div>
                         <Cart />
                     </div>
                     <div onClick={toggleMenu} className={showMenu ? styles['menu-overlay'] : ''}></div>

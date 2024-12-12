@@ -33,19 +33,15 @@ function PaymentInfor() {
             setAuth(myAuth.auth);
             setCart(cart);
             console.log(myAuth);
-            if (myAuth !== null) {
-                setValues((prev) => ({
-                    ...prev,
-                    email: myAuth.email || '',
-                    fullName: myAuth.fullName || '',
-                    phone: myAuth.phone || '',
-                    address: myAuth.address || '',
-                }));
-            }
+            setValues({
+                email: myAuth.auth?.email || '',
+                fullName: myAuth.auth?.fullName || '',
+                phone: myAuth.auth?.phone || '',
+                address: myAuth.auth?.address || '',
+                note: '',
+            });
         };
-        if (tokenAuth !== null) {
-            fetchAuthData();
-        }
+        fetchAuthData();
     }, [tokenAuth]);
 
     const handleChange = (field, value) => {
@@ -78,8 +74,9 @@ function PaymentInfor() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(values);
         const order = await CartService.order(auth._id, values);
-        Navigate(`/payment-success/${order._id}`, { state: { auth } });
+        Navigate(`/payment-success/${order._id}`, { state: { values, auth } });
     };
     return (
         <div className={cx('wrapper')}>
@@ -102,7 +99,7 @@ function PaymentInfor() {
                                 <input
                                     type="email"
                                     name="email"
-                                    defaultValue={auth.email || ''}
+                                    value={values.email}
                                     onChange={(e) => handleChange('email', e.target.value)}
                                 />
                             </div>
@@ -111,7 +108,7 @@ function PaymentInfor() {
                                 <input
                                     type="text"
                                     name="fullName"
-                                    defaultValue={auth.fullName || ''}
+                                    value={values.fullName}
                                     onChange={(e) => handleChange('fullName', e.target.value)}
                                 />
                             </div>
@@ -120,7 +117,7 @@ function PaymentInfor() {
                                 <input
                                     type="tel"
                                     name="phone"
-                                    defaultValue={auth.phone || ''}
+                                    value={values.phone}
                                     onChange={(e) => handleChange('phone', e.target.value)}
                                 />
                             </div>
@@ -129,7 +126,7 @@ function PaymentInfor() {
                                 <input
                                     type="text"
                                     name="address"
-                                    defaultValue={auth.address || ''}
+                                    value={values.address}
                                     onChange={(e) => handleChange('address', e.target.value)}
                                 />
                             </div>
@@ -140,7 +137,7 @@ function PaymentInfor() {
                             </div>
                         </div>
                         <div className={cx('delivery-payment')}>
-                            <h3 className={cx('delivery-h3')}>Vận chuyển</h3>
+                            {/* <h3 className={cx('delivery-h3')}>Vận chuyển</h3>
                             <div className={cx('payment')}>
                                 <input
                                     type="radio"
@@ -152,7 +149,7 @@ function PaymentInfor() {
                                 />
                                 <label htmlFor="delivery">Giao hàng tận nơi</label>
                                 <span>40.000 ₫</span>
-                            </div>
+                            </div> */}
                             <h3 className={cx('payment-h3')}>Thanh toán</h3>
                             <div className={cx('payment')}>
                                 <input type="radio" id="cod" name="payment" className={cx('radio-input')} />
@@ -173,10 +170,10 @@ function PaymentInfor() {
                                         </div>
                                     </div>
                                 ))}
-                            <div className={cx('discount')}>
+                            {/* <div className={cx('discount')}>
                                 <input type="text" placeholder="Nhập mã giảm giá" />
                                 <button>Áp dụng</button>
-                            </div>
+                            </div> */}
                             <div className={cx('totals')}>
                                 <div>
                                     Tạm tính
@@ -184,9 +181,9 @@ function PaymentInfor() {
                                         <span className={cx('price')}>{VND.format(cart.products[0].totalPrice)}</span>
                                     )}
                                 </div>
-                                <div>
+                                {/* <div>
                                     Phí vận chuyển <span className={cx('price')}>40.000 ₫</span>
-                                </div>
+                                </div> */}
                                 <div className={cx('total')}>
                                     <strong>Tổng cộng</strong>{' '}
                                     <span className={cx('price-total')}>

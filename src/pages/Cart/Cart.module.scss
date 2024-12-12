@@ -76,15 +76,18 @@
                 }
             }
             .item-information {
+                text-align: center;
                 .name {
                     padding: 0 12px;
+                    text-align: center;
                     color: var(--black);
                     font-size: 1.6rem;
                     font-weight: 400;
                     margin-bottom: 10px;
                 }
                 .btn-remove {
-                    // margin-top: 5px;
+                    text-align: center;
+                    display: inline-block;
                     padding: 6px 26px;
                     font-size: 1.5rem;
                     color: var(--secondary);

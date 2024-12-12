@@ -29,22 +29,17 @@ import gallery_2 from '~/assets/Home/gallery_2.webp';
 import gallery_3 from '~/assets/Home/gallery_3.webp';
 import gallery_4 from '~/assets/Home/gallery_4.webp';
 import bannerHoursBook from '~/assets/Home/banner-hours-book.webp';
+import bgCf from '~/assets/Coffee/bg-cf.png';
 
 const sliderHomeData = [
     {
-        img: slider1,
+        img: bgCf,
         name: 'coffee',
         // title: ' Nơi thưởng thức cà phê và kết nối cộng đồng',
     },
     {
-        img: slider2,
-        name: 'rewards',
-        // title: 'Cà phê chất lượng cao và thức uống đa dạng',
-    },
-    {
         img: slider3,
-        name: 'starbucks',
-        // title: 'Không gian ấm cúng hiện đại, dịch vụ khách hàng chu đáo',
+        name: 'rewards',
     },
 ];
 

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPhone, faMap } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import cookies from 'react-cookies';
+import Review from './Review';
 
 import * as AuthService from '~/services/authService';
 import { Link } from 'react-router-dom';
@@ -12,6 +13,13 @@ import config from '~/config';
 const cx = classNames.bind(styles);
 
 function Account() {
+    const [isOpen, setIsOpen] = useState(false);
+    const [itemData, setItemData] = useState({});
+    const toggleOpen = (data) => {
+        setIsOpen(true);
+        setItemData(data);
+    };
+
     const [data, setData] = useState([]);
     const [auth, setAuth] = useState([]);
     const [totalOrder, setTotalOrder] = useState(0);
@@ -49,6 +57,7 @@ function Account() {
                                         <th>Địa chỉ</th>
                                         <th>Giá trị đơn hàng</th>
                                         <th>TT thanh toán</th>
+                                        {/* <th>Đánh giá</th> */}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -65,6 +74,12 @@ function Account() {
                                                     ? 'Hủy'
                                                     : 'Đã thanh toán'}
                                             </td>
+                                            {/* <td>
+                                                <a href="javascript:;" onClick={() => toggleOpen(data)}>
+                                                    Đánh giá
+                                                </a>
+                                                {isOpen && <Review isOpen={setIsOpen} data={itemData} />}
+                                            </td> */}
                                         </tr>
                                     ))}
                                 </tbody>

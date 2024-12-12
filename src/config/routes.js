@@ -12,14 +12,15 @@ export const routes = {
 
     //product
     categoryProducts: '/category-products/:slug',
-    categorySnacks: '/category-snacks',
+    categorySnacks: '/tat-ca-san-pham',
     categoryFood: '/category-food',
 
     //store
     store: '/store-coffee',
 
     //about us
-    aboutUs: '/about-us',
+    aboutUs: '/about-us/:slug',
+    blogDetail: '/blog/:slug',
 
     // pay
     paymentInfor: '/checkout',

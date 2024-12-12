@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './AccountItem.module.scss';
-
+import { Link } from 'react-router-dom';
+import config from '~/config';
 const cx = classNames.bind(styles);
 
 function AccountItem({ data }) {
@@ -10,13 +11,15 @@ function AccountItem({ data }) {
     });
 
     return (
-        <div className={cx('wrapper')}>
-            <div className={cx('information')}>
-                <img src={data.image} alt="" />
-                <p className={cx('name')}>{data.name}</p>
+        <Link to={config.routes.detail.replace(':slugProduct', data.slug)}>
+            <div className={cx('wrapper')}>
+                <div className={cx('information')}>
+                    <img src={data.thumbnail} alt="" />
+                    <p className={cx('name')}>{data.title}</p>
+                </div>
+                <span className={cx('price')}>{VND.format(data.price)}</span>
             </div>
-            <span className={cx('price')}>{VND.format(data.description)}</span>
-        </div>
+        </Link>
     );
 }
 

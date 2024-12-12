@@ -4,8 +4,6 @@ import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Footer from '~/layout/components/Footer';
 
 import Button from '~/components/Button';
 import * as AuthService from '~/services/authService';
@@ -28,7 +26,11 @@ function ForgotPassword() {
         e.preventDefault();
         console.log(formData.email);
         const res = await AuthService.forgetPassword(formData.email);
-        console.log(res);
+        if (res.code === 200) {
+            navigate(config.routes.optPassword, {
+                state: { email: formData.email }, // Gửi dữ liệu email qua state
+            });
+        }
     };
 
     return (
@@ -60,7 +62,6 @@ function ForgotPassword() {
                     </form>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

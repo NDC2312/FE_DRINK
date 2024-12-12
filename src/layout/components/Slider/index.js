@@ -72,7 +72,7 @@ export const SliderCustomers = () => {
                 modules={[Navigation, Pagination, Autoplay, EffectFade]}
                 pagination={{ clickable: true }}
                 effect
-                speed={3000}
+                speed={5000}
                 slidesPerView={1}
                 loop
                 autoplay={{ delay: 5000, disableOnInteraction: false }}

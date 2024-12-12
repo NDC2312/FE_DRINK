@@ -8,9 +8,11 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateCart as updateCartAction } from '~/actions/cartActions';
+import { useNavigate } from 'react-router-dom';
 
 import * as clientService from '~/services/p-clientService';
 import * as CartService from '~/services/cartService';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +21,7 @@ function Detail() {
     const [data, setData] = useState({});
     const [quantity, setQuantity] = useState(1);
     const { slugProduct } = useParams();
+    const navigate = useNavigate();
     console.log(slugProduct);
     useEffect(() => {
         const fetch = async () => {
@@ -61,7 +64,9 @@ function Detail() {
                 <span>
                     <FontAwesomeIcon icon={faChevronLeft} />
                 </span>
-                <Link>Quay lại</Link>
+                <div onClick={() => navigate(-1)} style={{ cursor: 'pointer' }}>
+                    Quay lại
+                </div>
             </div>
             <div className={cx('container')}>
                 <div className={cx('product-image')}>

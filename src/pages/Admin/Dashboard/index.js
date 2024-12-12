@@ -11,7 +11,8 @@ const cx = classNames.bind(styles);
 function Dashboard() {
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('over-view')}>
+            <h2>Trang ADMIN </h2>
+            {/* <div className={cx('over-view')}>
                 <div className={cx('achievements')}>
                     <div>
                         <span>
@@ -48,7 +49,7 @@ function Dashboard() {
                     </div>
                     <div className={cx('count')}>1500</div>
                 </div>
-            </div>
+            </div> */}
             {/* <div className={cx('statistics')}>
                 <div style={{ maxWidth: '650px' }}>
                     <Bar

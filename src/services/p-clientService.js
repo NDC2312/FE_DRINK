@@ -1,8 +1,9 @@
 import httpRequest from '~/components/utils/httpRequest';
 
-export const getProducts = async () => {
+export const getProducts = async (params) => {
     try {
-        const res = await httpRequest.get('products-client');
+        const res = await httpRequest.get('products-client', { params });
+        console.log(res.data);
         return res.data;
     } catch (error) {}
 };
