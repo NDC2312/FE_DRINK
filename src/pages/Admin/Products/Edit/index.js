@@ -158,7 +158,7 @@ function Edit() {
                                 placeholder="Vị trí tự động tăng"
                             />
                         </div>
-                        <div className={cx('form-group')}>
+                        {/* <div className={cx('form-group')}>
                             <label htmlFor="demo_url">Demo URL</label>
                             <input
                                 type="text"
@@ -168,7 +168,7 @@ function Edit() {
                                 value={productData.demo_url}
                                 onChange={(e) => updateProductData('demo_url', e.target.value)}
                             />
-                        </div>
+                        </div> */}
                         <div className={cx('featured')}>
                             <div className={cx('form-check')}>
                                 <input

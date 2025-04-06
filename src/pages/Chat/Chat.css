@@ -1,0 +1,133 @@
+.chat-container {
+    position: fixed;
+    top: 20%;
+    left: 25%;
+    z-index: 9999;
+}
+
+/* Chat Button */
+.chat-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Chat Window */
+.chat-window {
+    width: 720px;
+    height: 480px;
+    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    background-color: var(--primary-text);
+    color: #fff;
+    padding: 12px 8px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.chat-header h4 {
+    font-size: 1.7rem;
+    color: var(--white);
+    font-weight: 500;
+}
+.chat-header .close-chat {
+    position: absolute;
+    top: -10px;
+    right: 0;
+    cursor: pointer;
+    color: var(--white);
+    font-size: 2.1rem;
+    font-weight: 700;
+    background: none;
+}
+
+.chat-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.online-users {
+    width: 120px;
+    border-right: 1px solid #ccc;
+    padding: 8px;
+    overflow-y: auto;
+}
+.online-users h5 {
+    margin-bottom: 10px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-align: left;
+}
+
+.online-users button {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 4px 6px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.online-users button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 8px 8px 14px;
+    display: flex;
+    flex-direction: column;
+}
+.chat-messages h5 {
+    margin-bottom: 10px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-align: left;
+}
+.messages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 8px;
+}
+
+.message {
+    margin: 4px 0;
+}
+
+.message.me {
+    text-align: right;
+}
+
+.input-group {
+    display: flex;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 6px;
+    font-size: 14px;
+}
+
+.input-group button {
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}

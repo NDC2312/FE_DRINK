@@ -1,3 +1,36 @@
 .container {
     margin-top: 152px;
 }
+
+.content {
+    input[type='checkbox'] {
+        position: relative;
+    }
+
+    input[type='checkbox']::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 14px;
+        height: 14px;
+        background-color: var(--white);
+        border: 1px solid var(--secondary);
+        cursor: pointer;
+    }
+
+    input[type='checkbox']:checked::before {
+        border: 1px solid var(--primary);
+        background-color: var(--primary);
+    }
+
+    input[type='checkbox']:checked::after {
+        content: '\2714';
+        position: absolute;
+        top: 0.5px;
+        left: 4.5px;
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--white);
+    }
+}

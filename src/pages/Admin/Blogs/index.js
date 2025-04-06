@@ -59,7 +59,7 @@ function BlogsInAdmin() {
     };
 
     const handleChangeStatus = async (productID, newStatus) => {
-        const status = { newStatus };
+        const status = newStatus;
         await blogsService.changeStatusBlogs(productID, status);
         const index = data.findIndex((item) => item._id === productID);
         if (index !== -1) {
@@ -146,7 +146,7 @@ function BlogsInAdmin() {
             console.log(res.message);
         }
     };
-    console.log(data);
+    // console.log(data);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -284,7 +284,7 @@ function BlogsInAdmin() {
                                     <td>{item.updateFullName}</td>
                                     <td>
                                         <Button to={config.routes.adminDetailBlogs.replace(':id', item._id)} btnDetail>
-                                            Chi tiết
+                                            Xem
                                         </Button>
                                         <Button
                                             to={config.routes.adminEditBlogs.replace(':id', item._id)}

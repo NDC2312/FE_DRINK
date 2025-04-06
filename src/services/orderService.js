@@ -60,9 +60,9 @@ export const orderSuccess = async (orderId) => {
 };
 
 // list order
-export const getOrder = async (orderId) => {
+export const getOrder = async (params) => {
     try {
-        const res = await httpRequest.get(`order`);
+        const res = await httpRequest.get(`order`, { params });
         return res.data;
     } catch (error) {
         error(error());

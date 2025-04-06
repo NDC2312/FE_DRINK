@@ -185,9 +185,9 @@ function AdminAuth() {
                         <div className={cx('act-product-status')}></div>
                         <div className={cx('form-input')}>
                             <Search setKeyword={setKeyword} />
-                            <Link to={config.routes.adminAddAccount} className={`${cx('btn')} ${styles.add}`}>
+                            {/* <Link to={config.routes.adminAddAccount} className={`${cx('btn')} ${styles.add}`}>
                                 + Thêm mới
-                            </Link>
+                            </Link> */}
                         </div>
                     </div>
                 </div>

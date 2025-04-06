@@ -12,7 +12,9 @@ export const getProducts = async (params) => {
 
 export const changeStatusProduct = async (id, status) => {
     try {
-        const res = await httpRequest.patch(`products/change-status/${id}`, status);
+        const res = await httpRequest.patch(`products/change-status/${id}`, { status });
+        console.log(status);
+
         if (res.data.code === 200) {
             success(res.data.message);
         } else {

@@ -41,13 +41,16 @@
         justify-content: space-between;
         .act-select-form {
             display: flex;
+            align-items: center;
         }
         .btn-apply {
+            margin-top: 0;
             margin-left: 15px;
             background-color: var(--primary);
         }
         .act-product-status {
             display: flex;
+            align-items: center;
         }
 
         .form-input {
@@ -130,6 +133,7 @@
 
 // BTN
 .btnStatus {
+    margin-top: 0;
     padding: 6px 10px;
     font-size: 1.4rem;
     font-weight: 400;

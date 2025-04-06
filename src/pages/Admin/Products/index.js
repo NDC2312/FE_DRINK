@@ -59,7 +59,7 @@ function ProductInAdmin() {
     };
 
     const handleChangeStatus = async (productID, newStatus) => {
-        const status = { newStatus };
+        const status = newStatus;
         await productService.changeStatusProduct(productID, status);
         const index = data.findIndex((item) => item._id === productID);
         if (index !== -1) {

@@ -19,7 +19,8 @@ function Order() {
     //change status va changeMulti chua hoan thien
     const [data, setData] = useState([]);
     const [status, setStatus] = useState('');
-
+    const [totalPages, setTotalPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const [keyword, setKeyword] = useState('');
 
     let filterStatus = [
@@ -29,11 +30,11 @@ function Order() {
         },
         {
             name: 'Đã xử lý',
-            status: 'active',
+            status: 'finish',
         },
         {
             name: 'Bị hủy',
-            status: 'inActive',
+            status: 'cancel',
         },
     ];
 
@@ -119,33 +120,37 @@ function Order() {
     };
 
     useEffect(() => {
+        let params = {};
+        if (currentPage) params.page = currentPage;
+        if (status) params.status = status;
+        if (keyword) params.keyword = keyword;
         const fetch = async () => {
-            const res = await OrderService.getOrder();
+            const res = await OrderService.getOrder(params);
             setData(res.order);
+            setTotalPages(Math.ceil(res.totalOrder / 4));
         };
         fetch();
-    }, []);
+    }, [currentPage, keyword, status]);
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
-    console.log(data);
+    console.log(totalPages);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <div className={cx('sort-product')}>
                     <div>Danh sách đơn hàng</div>
                     <div className={cx('act-product')}>
-                        <div className={cx('act-select-form')}>
+                        {/* <div className={cx('act-select-form')}>
                             <select className={cx('form-control')} name="act">
                                 <option disabled="disable" value="">
                                     --- Chọn hành động ---
                                 </option>
-                                <option value="status-active">Hoạt động</option>
-                                <option value="status-inActive">Dừng hoạt động</option>
+
                                 <option value="delete">Xóa tất cả</option>
                             </select>
                             <button className={`${cx('btn-apply')} ${styles.btn}`} onClick={handleChangMulti}>
                                 Áp dụng
                             </button>
-                        </div>
+                        </div> */}
                         <div className={cx('act-product-status')}>
                             <span>Trạng thái: </span>
                             {filterStatus.map((item, index) => (
@@ -246,6 +251,9 @@ function Order() {
                             ))}
                     </tbody>
                 </table>
+                {totalPages && (
+                    <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} countTotalPage={totalPages} />
+                )}
             </div>
         </div>
     );

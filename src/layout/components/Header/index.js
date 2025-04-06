@@ -79,7 +79,7 @@ function Header() {
         cookie.remove('tokenAuth');
     };
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
-    console.log(blog);
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('h-top')}>

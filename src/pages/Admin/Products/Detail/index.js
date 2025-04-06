@@ -43,9 +43,9 @@ function Detail() {
                     <div>
                         Vị trí sản phẩm: <b>{data.position}</b>
                     </div>
-                    <div>
+                    {/* <div>
                         URL: <b>{data.demo_url}</b>
-                    </div>
+                    </div> */}
                     <div>
                         Sản phẩm nổi bật: <b>{data.featured ? 'có' : 'Không'}</b>
                     </div>

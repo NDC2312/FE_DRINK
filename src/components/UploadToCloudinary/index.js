@@ -21,6 +21,12 @@ const uploadImageToCloudinary = async (image, folderName) => {
     }
 };
 
+const uploadMultipleImagesToCloudinary = async (images, folderName) => {
+    const filesToUpload = images.slice(0, 5);
+    const uploadPromises = filesToUpload.map((image) => uploadImageToCloudinary(image, folderName));
+    return await Promise.all(uploadPromises);
+};
+
 const UploadToCloudinary = ({ handleImageChange, currentImage }) => {
     const [imagePreview, setImagePreview] = useState(`${currentImage ? currentImage : ''}`);
     const handleImagePreview = (e) => {
@@ -55,4 +61,4 @@ const UploadToCloudinary = ({ handleImageChange, currentImage }) => {
     );
 };
 
-export { UploadToCloudinary, uploadImageToCloudinary };
+export { UploadToCloudinary, uploadImageToCloudinary, uploadMultipleImagesToCloudinary };

@@ -12,7 +12,7 @@ export const getBlogs = async (params) => {
 
 export const changeStatusBlogs = async (id, status) => {
     try {
-        const res = await httpRequest.patch(`blogs/change-status/${id}`, status);
+        const res = await httpRequest.patch(`blogs/change-status/${id}`, { status });
         if (res.data.code === 200) {
             success(res.data.message);
         } else {
@@ -25,6 +25,7 @@ export const changeStatusBlogs = async (id, status) => {
 
 export const changeMultiBlogs = async (data) => {
     try {
+        console.log(data);
         const res = await httpRequest.patch('blogs/change-multi', data);
         if (res.data.code === 200) {
             success(res.data.message);

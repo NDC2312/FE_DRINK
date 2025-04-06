@@ -156,9 +156,9 @@ function BlogsCategoryInAdmin() {
                             <input type="checkbox" value={item._id} name="id" />
                         </td>
                         <td>{index}</td>
-                        <td>
+                        {/* <td>
                             <img src={item.thumbnail} alt={item.title} width="40px" height="40px" />
-                        </td>
+                        </td> */}
                         <td>
                             <p
                                 style={{
@@ -195,7 +195,7 @@ function BlogsCategoryInAdmin() {
                                     handleChangeStatus(item._id, `${item.status === 'active' ? 'inActive' : 'active'}`)
                                 }
                             >
-                                {item.status === 'active' ? 'Hoạt động' : 'Dừng hoạt động'}
+                                {/* {item.status === 'active' ? 'Hoạt động' : 'Dừng hoạt động'} */}
                             </Button>
                         </td>
                         <td>
@@ -294,7 +294,7 @@ function BlogsCategoryInAdmin() {
                                     <input type="checkbox" name="checkAll" onClick={handleCheckAll} />
                                 </th>
                                 <th>STT</th>
-                                <th>Hình ảnh</th>
+                                {/* <th>Hình ảnh</th> */}
                                 <th>Tiêu đề</th>
                                 <th>Vị trí sản phẩm</th>
                                 <th>Trạng thái</th>

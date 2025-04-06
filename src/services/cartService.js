@@ -24,7 +24,6 @@ export const getCart = async () => {
 export const addProduct = async (productId, quantity) => {
     try {
         const res = await httpRequest.post(`cart/add/${productId}`, { quantity }, { withCredentials: true });
-        console.log(res);
         if (res.data.code === 200) {
             success(res.data.message);
         } else {
@@ -38,7 +37,6 @@ export const addProduct = async (productId, quantity) => {
 export const removeProduct = async (productId) => {
     try {
         const res = await httpRequest.get(`cart/delete/${productId}`, { withCredentials: true });
-        console.log(res);
         if (res.data.code === 200) {
             success(res.data.message);
         } else {
@@ -52,7 +50,6 @@ export const removeProduct = async (productId) => {
 export const order = async (user_id, userInfo) => {
     try {
         const res = await httpRequest.post(`checkout/order/${user_id}`, userInfo, { withCredentials: true });
-        console.log(res);
         if (res.status === 200) {
             success('Đặt hàng thành công');
             return res.data;

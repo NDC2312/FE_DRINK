@@ -74,7 +74,7 @@ function AddProducts() {
             );
         });
     };
-    console.log(productData.product_category_id);
+    //console.log(productData.product_category_id);
     const handleImageChange = (imageUrl) => {
         updateProductData('thumbnail', imageUrl);
     };

@@ -22,13 +22,12 @@ function PermissionGroup() {
         dispatch(fetchData());
     }, [dispatch]);
     const handleBtnDelete = async (id) => {
-        if (window.confirm('Bạn chắc chắn muốn xóa người dùng này chứ')) {
+        if (window.confirm('Bạn chắc chắn muốn xóa quyền này chứ')) {
             console.log(id);
             const res = await PermissionGroupService.deletePermissionGroup(id);
             console.log(res);
-            if (res.code === 200) {
-                dispatch(fetchData());
-            }
+
+            dispatch(fetchData());
         }
     };
     return (

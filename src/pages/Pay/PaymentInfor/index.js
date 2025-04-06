@@ -187,7 +187,7 @@ function PaymentInfor() {
                                 <div className={cx('total')}>
                                     <strong>Tổng cộng</strong>{' '}
                                     <span className={cx('price-total')}>
-                                        {cart.products && VND.format(cart.products[0].totalPrice + 40000)}
+                                        {cart.products && VND.format(cart.products[0].totalPrice)}
                                     </span>
                                 </div>
                             </div>

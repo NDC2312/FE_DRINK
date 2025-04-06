@@ -21,7 +21,7 @@ function Settings() {
                     <li className={cx('list-block')}>
                         <p>Giao diện</p>
 
-                        <Link to={config.routes.adminAddProducts}>
+                        <Link to={config.routes.adminInterfaceEditing}>
                             <span>
                                 <FontAwesomeIcon icon={faBoxOpen} />
                             </span>

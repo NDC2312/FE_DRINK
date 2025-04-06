@@ -16,6 +16,7 @@ import { login } from '~/actions/authAction';
 import Button from '~/components/Button';
 import * as AuthService from '~/services/authService';
 import config from '~/config';
+import socket from '~/services/socket.io';
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +27,9 @@ function SignIn() {
         email: '',
         password: '',
     });
+    let id = '';
+    let fullName = '';
+
     const [showPassword, setShowPassword] = useState(false);
 
     const handleShowPassword = () => {
@@ -49,10 +53,14 @@ function SignIn() {
             setRemember(true);
         }
     }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const res = await AuthService.login(formData);
         if (res.code === 200) {
+            // console.log(res.user);
+            id = res.user;
+            fullName = res.userInfo;
             console.log(res);
             if (remember) {
                 const thirty = 30 * 24 * 60 * 60 * 1000;
@@ -73,7 +81,11 @@ function SignIn() {
                 });
                 navigate(config.routes.home);
             }
-            dispatch(login());
+
+            const aa = { id, fullName, role: 'customer' };
+            socket.emit('SET_USER', aa);
+            // console.log('aa', aa);
+            dispatch(login(aa));
         } else {
             alert('not found');
         }

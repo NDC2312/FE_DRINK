@@ -11,6 +11,9 @@ import Device from '~/pages/Device';
 import TeaAtHome from '~/pages/Tea/TeaAtHome';
 import TeaDamViTra from '~/pages/Tea/TeaDamViTra';
 
+// chat
+import Chat from '~/pages/Chat';
+
 //products
 import Products from '~/pages/Product/Products';
 import Snacks from '~/pages/Product/Snacks';
@@ -89,12 +92,15 @@ import Role from '~/pages/Admin/Role';
 
 // ADMIN Settings
 import Settings from '~/pages/Admin/Settings';
+import InterfaceEditing from '~/pages/Admin/Settings/Interface-editing';
 import Report from '~/pages/Admin/Report';
 import Account from '~/pages/Account';
 import ForgotPassword from '~/pages/Auth/forgot-password';
 import OtpPassword from '~/pages/Auth/otp-password';
 import ResetPassword from '~/pages/Auth/reset-password';
 import BlogDetail from '~/pages/AboutUs/BlogDetail';
+import InfoOrder from '~/pages/Account/InfoOrder';
+import ReviewInAdmin from '~/pages/Admin/Review';
 
 const publicRoute = [
     { path: config.routes.home, component: Home },
@@ -137,6 +143,8 @@ const publicRoute = [
 
     { path: config.routes.paymentSuccess, component: PaymentSuccess, layout: null },
     { path: config.routes.myAuth, component: Account },
+    { path: config.routes.infoOrder, component: InfoOrder },
+    { path: config.routes.chat, component: Chat },
 ];
 
 const privateRoute = [
@@ -276,6 +284,12 @@ const privateRoute = [
         component: Report,
         protected: ProtectedRoute,
     },
+    // review
+    {
+        path: config.routes.adminReview,
+        component: ReviewInAdmin,
+        protected: ProtectedRoute,
+    },
     // permission-group
     {
         path: config.routes.adminPermissionGroup,
@@ -308,6 +322,7 @@ const privateRoute = [
 
     // settings
     { path: config.routes.adminSettings, component: Settings, protected: ProtectedRoute },
+    { path: config.routes.adminInterfaceEditing, component: InterfaceEditing, protected: ProtectedRoute },
 ];
 
 export { publicRoute, privateRoute };

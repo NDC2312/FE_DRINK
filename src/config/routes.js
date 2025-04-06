@@ -2,6 +2,7 @@ export const routes = {
     home: '/',
     cart: '/cart',
     myAuth: '/thong-tin-ca-nhan',
+    infoOrder: '/danh-gia/:orderId',
 
     //coffee
     coffeeAtHome: '/coffee-tai-nha',
@@ -9,6 +10,9 @@ export const routes = {
 
     //device
     device: '/device-coffee',
+
+    //chat
+    chat: '/chat',
 
     //product
     categoryProducts: '/category-products/:slug',
@@ -84,6 +88,9 @@ export const routes = {
     // ADMIN ListOrder
     adminOrder: '/admin/order',
 
+    // ADMIN Review
+    adminReview: '/admin/review',
+
     // ADMIN Report
     adminReport: '/admin/report',
     // adminAddAuth: '/admin/auth/add',
@@ -101,4 +108,5 @@ export const routes = {
 
     // ADMIN settings
     adminSettings: '/admin/settings',
+    adminInterfaceEditing: '/admin/interface-editing',
 };

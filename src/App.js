@@ -4,6 +4,7 @@ import { Fragment } from 'react';
 import DefaultLayout from './layout/DefaultLayout';
 import DefaultLayoutAdmin from './layout/Admin/DefaultLayout';
 import Forbidden from './components/403/forbidden';
+import Chat from './pages/Chat';
 
 import { publicRoute, privateRoute } from './Routes';
 
@@ -60,6 +61,7 @@ function App() {
                     })}
                     <Route path="/403" element={<Forbidden />} />
                 </Routes>
+                <Chat />
             </div>
         </Router>
     );

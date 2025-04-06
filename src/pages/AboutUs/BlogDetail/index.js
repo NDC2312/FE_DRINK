@@ -20,7 +20,7 @@ function BlogDetail() {
         fetch();
     }, [slug]);
 
-    console.log(data);
+    // console.log(data);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>

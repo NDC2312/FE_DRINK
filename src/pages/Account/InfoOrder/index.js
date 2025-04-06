@@ -1,43 +1,54 @@
 import classNames from 'classnames/bind';
-import styles from './Store.module.scss';
+import styles from '../Store.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faPhone, faMap } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import cookies from 'react-cookies';
-import Review from './Review';
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import Review from '../Review';
 
 import * as AuthService from '~/services/authService';
-import { Link } from 'react-router-dom';
-import config from '~/config';
+import * as OrderService from '~/services/orderService';
 
 const cx = classNames.bind(styles);
 
-function Account() {
+function InfoOrder() {
+    const { orderId } = useParams();
     const [isOpen, setIsOpen] = useState(false);
     const [itemData, setItemData] = useState({});
-    const toggleOpen = (data) => {
-        setIsOpen(true);
-        setItemData(data);
-    };
-
     const [data, setData] = useState([]);
     const [auth, setAuth] = useState([]);
+    const [comment, setComment] = useState('');
+
     const [totalOrder, setTotalOrder] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
     const tokenAuth = cookies.load('tokenAuth');
+    const toggleOpen = (item) => {
+        const product_id = item.product_id;
+        const user_id = auth._id;
+        const order_id = orderId;
+        const thumbnail = item.productInfo.thumbnail;
+        const title = item.productInfo.title;
+        const fullName = auth.fullName;
+        const totalPrice = item.totalPrice;
+        const ob = { order_id, product_id, user_id, thumbnail, title, fullName, totalPrice };
+        // console.log(ob);
+        setIsOpen(true);
+        setItemData(ob);
+    };
     useEffect(() => {
         const fetch = async () => {
             const myAuth = await AuthService.myAuth(tokenAuth);
+            const order = await OrderService.orderSuccess(orderId);
             setAuth(myAuth.auth);
-            setData(myAuth.order);
+            setData(order);
             setTotalOrder(myAuth.totalOrder);
             setTotalPrice(myAuth.totalPrice);
         };
         fetch();
-    }, [tokenAuth]);
+    }, [tokenAuth, orderId]);
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
-    console.log(data);
+    console.log('data ', data);
     return (
         <div className={cx('wrapper')}>
             {data && (
@@ -53,36 +64,32 @@ function Account() {
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Đơn hàng</th>
-                                        <th>Ngày</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Giá trị đơn hàng</th>
-                                        <th>TT thanh toán</th>
-                                        <th>Chi tiết</th>
+                                        <th>Ảnh</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Số lượng</th>
+                                        <th>Thành tiền</th>
+                                        <th>Đánh giá</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {data.map((item) => (
                                         <tr key={item._id}>
-                                            <td>{item._id}</td>
-                                            <td>{new Date(item.createdAt).toLocaleDateString()}</td>
-                                            <td>{item.userInfo.address}</td>
+                                            <td>
+                                                <img
+                                                    src={item.productInfo.thumbnail}
+                                                    alt=""
+                                                    width="60px"
+                                                    height="60px"
+                                                />
+                                            </td>
+                                            <td>{item.productInfo.title}</td>
+                                            <td>{VND.format(item.productInfo.price)}</td>
+                                            <td style={{ textAlign: 'center' }}>{item.quantity}</td>
                                             <td>{VND.format(item.totalPrice)}</td>
                                             <td>
-                                                {item.status === 'spending'
-                                                    ? 'Chờ xử lý'
-                                                    : item.status === 'cancel'
-                                                    ? 'Hủy'
-                                                    : 'Đã thanh toán'}
-                                            </td>
-                                            <td>
-                                                {/* <a href="javascript:;" onClick={() => toggleOpen(data)}>
-                                                    Đánh giá
-                                                </a>
-                                                {isOpen && <Review isOpen={setIsOpen} data={itemData} />} */}
-                                                {item.status === 'finish' && (
-                                                    <Link to={`/danh-gia/${item._id}`}>Xem</Link>
-                                                )}
+                                                <button onClick={() => toggleOpen(item)}>Đánh giá</button>
+                                                {isOpen && <Review isOpen={setIsOpen} data={itemData} />}
                                             </td>
                                         </tr>
                                     ))}
@@ -120,4 +127,4 @@ function Account() {
     );
 }
 
-export default Account;
+export default InfoOrder;

@@ -235,17 +235,18 @@ function Sidebar({ setHeaderText, menu }) {
                         </span>
                         <p> Khách hàng</p>
                     </Link>
-                    {/* <Link
+                    <Link
                         className={isActive === 11 ? cx('active') : ''}
                         onClick={() => {
                             handleActive(11);
                         }}
+                        to={config.routes.adminReview}
                     >
                         <span>
                             <FontAwesomeIcon icon={faComments} />
                         </span>
                         <p> Đánh giá</p>
-                    </Link> */}
+                    </Link>
                 </li>
                 {/* end customers */}
 

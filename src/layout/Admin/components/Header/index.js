@@ -11,6 +11,7 @@ import config from '~/config';
 import Button from '~/components/Button';
 
 import cookie from 'react-cookies';
+import { logout } from '~/actions/authAction';
 
 const cx = classNames.bind(styles);
 
@@ -23,6 +24,7 @@ function Header({ headerText }) {
     const handleLogout = () => {
         cookie.remove('token');
         dispatch(removePermission);
+        dispatch(logout());
         localStorage.removeItem('isActive');
         navigate(config.routes.admin);
     };
@@ -46,7 +48,7 @@ function Header({ headerText }) {
                 <div className={cx('container')}>
                     <div className={cx('header-text')}>
                         {/* <h1>{headerText}</h1> */}
-                        <span className={cx('date-now')}>{formatter.format(currentTime).replace(/\s+/g, ' ')}</span>
+                        {/* <span className={cx('date-now')}>{formatter.format(currentTime).replace(/\s+/g, ' ')}</span> */}
                     </div>
                     <div className={cx('h-right')}>
                         {/* <div className={cx('header-btn-switch')}>

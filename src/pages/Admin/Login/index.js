@@ -10,6 +10,8 @@ import Button from '~/components/Button';
 import * as AccountService from '~/services/accountService';
 import config from '~/config';
 import { setPermission } from '~/actions/permissionsAction';
+import { login } from '~/actions/authAction';
+import socket from '~/services/socket.io';
 
 const cx = classNames.bind(styles);
 
@@ -21,6 +23,10 @@ function Login() {
     const [password, setPassword] = useState('');
     const [token, setToken] = useState('');
     const [remember, setRemember] = useState(false);
+
+    let id = '';
+    let fullName = '';
+
     useEffect(() => {
         const email = cookie.load('email');
         const password = cookie.load('password');
@@ -30,6 +36,7 @@ function Login() {
             setRemember(true);
         }
     }, [email, password]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = {
@@ -42,6 +49,9 @@ function Login() {
         if (res.code === 200) {
             setToken(res.token);
             dispatch(setPermission(res.permissions));
+            id = res.user;
+            fullName = res.userInfo;
+
             if (remember) {
                 const thirty = 30 * 24 * 60 * 60 * 1000;
                 cookie.save('email', email, { expires: new Date(Date.now() + thirty) });
@@ -50,6 +60,10 @@ function Login() {
                 cookie.remove('email');
                 cookie.remove('password');
             }
+            const aa = { id, fullName, role: 'employee' };
+            socket.emit('SET_USER', aa);
+            // console.log(aa);
+            dispatch(login(aa));
         }
     };
 

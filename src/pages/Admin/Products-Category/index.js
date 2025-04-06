@@ -160,9 +160,9 @@ function ProductsCategory() {
                             <input type="checkbox" value={item._id} name="id" />
                         </td>
                         <td>{index}</td>
-                        <td>
+                        {/* <td>
                             <img src={item.thumbnail} alt={item.title} width="40px" height="40px" />
-                        </td>
+                        </td> */}
                         <td>
                             <p
                                 style={{
@@ -299,7 +299,7 @@ function ProductsCategory() {
                                     <input type="checkbox" name="checkAll" onClick={handleCheckAll} />
                                 </th>
                                 <th>STT</th>
-                                <th>Hình ảnh</th>
+                                {/* <th>Hình ảnh</th> */}
                                 <th>Tiêu đề</th>
                                 <th>Vị trí sản phẩm</th>
                                 <th>Trạng thái</th>
