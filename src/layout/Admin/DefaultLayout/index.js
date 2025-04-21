@@ -28,7 +28,7 @@ function DefaultLayoutAdmin({ children }) {
                     <FontAwesomeIcon icon={faBars} fontSize={23} />
                 </span> */}
                 <Header headerText={headerText} />
-                <div className={cx('content')}>{children}</div>\
+                <div className={cx('content')}>{children}</div>
             </div>
         </div>
     );

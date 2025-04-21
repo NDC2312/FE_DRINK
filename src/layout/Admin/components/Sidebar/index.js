@@ -17,6 +17,7 @@ import {
     faGears,
     faChevronDown,
     faCircle,
+    faLayerGroup,
 } from '@fortawesome/free-solid-svg-icons';
 import config from '~/config';
 
@@ -217,6 +218,18 @@ function Sidebar({ setHeaderText, menu }) {
                         </span>
                         <p>Báo cáo</p>
                     </Link>
+                    <Link
+                        className={isActive === 9 ? cx('active') : ''}
+                        onClick={() => {
+                            handleActive(9);
+                        }}
+                        to={config.routes.adminStock}
+                    >
+                        <span>
+                            <FontAwesomeIcon icon={faLayerGroup} />
+                        </span>
+                        <p>Hàng tồn kho</p>
+                    </Link>
                 </li>
                 {/* end products  */}
 
@@ -248,6 +261,7 @@ function Sidebar({ setHeaderText, menu }) {
                         <p> Đánh giá</p>
                     </Link>
                 </li>
+
                 {/* end customers */}
 
                 {/* <li>

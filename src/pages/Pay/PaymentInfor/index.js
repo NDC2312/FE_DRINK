@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 
 import * as AuthService from '~/services/authService';
 import * as CartService from '~/services/cartService';
+import * as checkoutZalo from '~/services/orderService';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
@@ -24,6 +25,7 @@ function PaymentInfor() {
         phone: '',
         address: '',
         note: '',
+        payment: '',
     });
 
     useEffect(() => {
@@ -74,9 +76,32 @@ function PaymentInfor() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(values);
-        const order = await CartService.order(auth._id, values);
-        Navigate(`/payment-success/${order._id}`, { state: { values, auth } });
+        const data = { cart, auth };
+
+        if (values.payment === 'zalopay') {
+            try {
+                const res = await checkoutZalo.checkoutZalo(data);
+                console.log('thanh toan', res);
+                if (res?.order_url) {
+                    window.location.href = res.order_url;
+                }
+            } catch (err) {
+                console.error('Lỗi gọi ZaloPay:', err);
+            }
+        } else if (values.payment === 'momo') {
+            try {
+                const res = await checkoutZalo.momo();
+                console.log('thanh toan', res);
+                if (res?.payUrl) {
+                    window.location.href = res.payUrl;
+                }
+            } catch (err) {
+                console.error('Lỗi gọi ZaloPay:', err);
+            }
+        } else {
+            const order = await CartService.order(auth._id, values);
+            Navigate(`/payment-success/${order._id}`, { state: { values, auth } });
+        }
     };
     return (
         <div className={cx('wrapper')}>
@@ -137,23 +162,44 @@ function PaymentInfor() {
                             </div>
                         </div>
                         <div className={cx('delivery-payment')}>
-                            {/* <h3 className={cx('delivery-h3')}>Vận chuyển</h3>
+                            <h3 className={cx('payment-h3')}>Thanh toán</h3>
                             <div className={cx('payment')}>
                                 <input
                                     type="radio"
-                                    id="delivery"
-                                    checked={values.address !== ''}
-                                    name="delivery"
+                                    id="cod"
+                                    name="payment"
+                                    value="cod"
+                                    checked={values.payment === 'cod'}
+                                    onChange={(e) => handleChange('payment', e.target.value)}
                                     className={cx('radio-input')}
-                                    readOnly
                                 />
-                                <label htmlFor="delivery">Giao hàng tận nơi</label>
-                                <span>40.000 ₫</span>
-                            </div> */}
-                            <h3 className={cx('payment-h3')}>Thanh toán</h3>
-                            <div className={cx('payment')}>
-                                <input type="radio" id="cod" name="payment" className={cx('radio-input')} />
                                 <label htmlFor="cod">Thanh toán khi giao hàng (COD)</label>
+                                <FontAwesomeIcon icon={faMoneyBill} />
+                            </div>
+                            <div className={cx('payment')}>
+                                <input
+                                    type="radio"
+                                    id="zalopay"
+                                    name="payment"
+                                    value="zalopay"
+                                    checked={values.payment === 'zalopay'}
+                                    onChange={(e) => handleChange('payment', e.target.value)}
+                                    className={cx('radio-input')}
+                                />
+                                <label htmlFor="zalopay">Thanh toán qua ZaloPay</label>
+                                <FontAwesomeIcon icon={faMoneyBill} />
+                            </div>
+                            <div className={cx('payment')}>
+                                <input
+                                    type="radio"
+                                    id="momo"
+                                    name="payment"
+                                    value="momo"
+                                    checked={values.payment === 'momo'}
+                                    onChange={(e) => handleChange('payment', e.target.value)}
+                                    className={cx('radio-input')}
+                                />
+                                <label htmlFor="momo">Thanh toán qua Momo</label>
                                 <FontAwesomeIcon icon={faMoneyBill} />
                             </div>
                         </div>

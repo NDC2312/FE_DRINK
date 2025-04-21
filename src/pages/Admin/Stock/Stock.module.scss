@@ -1,0 +1,117 @@
+.stock-page {
+    padding: 0 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .stock-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .new-stock-btn {
+            background-color: #2563eb;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+
+            &:hover {
+                background-color: #1d4ed8;
+            }
+
+            .icon {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+
+    .stock-filters {
+        border-top: 1px solid #f1e3e3;
+        border-bottom: 1px solid #f1e3e3;
+        display: flex;
+        padding: 16px 0;
+        gap: 16px;
+
+        .status-filter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .calendar-icon {
+                color: #6b7280;
+                width: 20px;
+                height: 20px;
+            }
+
+            .select-status {
+                padding: 8px 12px;
+                border-radius: 6px;
+                border: 1px solid #ccc;
+            }
+        }
+    }
+
+    .stock-table-wrapper {
+        overflow-x: auto;
+        table {
+            border: none;
+            th,
+            td {
+                border: none;
+            }
+        }
+
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+
+            thead {
+                background-color: #f3f4f6;
+                th {
+                    text-align: center;
+                    background: none;
+                    color: var(--black);
+                    font-size: 1.7rem;
+                    border-bottom: 1px solid #e5e7eb;
+                }
+            }
+
+            tbody {
+                tr {
+                    border-bottom: 1px solid #e5e7eb;
+
+                    td {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        color: white;
+
+        &--completed {
+            background-color: #22c55e;
+        }
+
+        &--pending {
+            background-color: #eab308;
+        }
+    }
+}

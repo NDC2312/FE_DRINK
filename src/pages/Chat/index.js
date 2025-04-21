@@ -31,10 +31,7 @@ const Chat = () => {
                 socket.emit('SET_USER', auth.userInfo);
             }
         });
-        if (auth.isLoggedIn && auth.userInfo?.id) {
-            console.log('Emit SET_USER với userInfo:', auth.userInfo);
-            socket.emit('SET_USER', auth.userInfo);
-        }
+
         const handleOnlineUsers = (users) => {
             console.log('users_online', users);
             const employees = users.filter((user) => user.role === 'employee');

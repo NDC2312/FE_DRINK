@@ -43,7 +43,7 @@ export const routes = {
     // detail product
     detail: '/detail/:slugProduct',
 
-    // cart
+    //
 
     admin: '/admin', // admin
     // ADMIN dashboard
@@ -84,6 +84,9 @@ export const routes = {
     adminAddAuth: '/admin/auth/add',
     adminDetailAuth: '/admin/auth/detail/:id',
     adminEditAuth: '/admin/auth/edit/:id',
+
+    // ADMIN Stock
+    adminStock: '/admin/stock',
 
     // ADMIN ListOrder
     adminOrder: '/admin/order',

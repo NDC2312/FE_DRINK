@@ -87,6 +87,9 @@ import AddPermissionGroup from '~/pages/Admin/PermissionGroup/Add';
 import EditPermissionGroup from '~/pages/Admin/PermissionGroup/Edit';
 import DetailPermissionGroup from '~/pages/Admin/PermissionGroup/Detail';
 
+// ADMIN Stock
+import Stock from '~/pages/Admin/Stock';
+
 // ADMIN Role
 import Role from '~/pages/Admin/Role';
 
@@ -310,6 +313,9 @@ const privateRoute = [
         protected: ProtectedRoute,
         permission: 'role-edit',
     },
+
+    // stock
+    { path: config.routes.adminStock, component: Stock, protected: ProtectedRoute },
 
     // role
     { path: config.routes.adminRole, component: Role, protected: ProtectedRoute, permission: 'role-view' },

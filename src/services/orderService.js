@@ -59,6 +59,28 @@ export const orderSuccess = async (orderId) => {
     }
 };
 
+// checkout_zaloPay
+export const checkoutZalo = async (data) => {
+    try {
+        const res = await httpRequest.post('checkout/order/zalopay', data);
+        // console.log('zalo', res);
+        return res.data;
+    } catch (error) {
+        error(error());
+    }
+};
+
+// check_momo
+export const momo = async (data) => {
+    try {
+        const res = await httpRequest.post('checkout/order/momo');
+        // console.log('zalo', res);
+        return res.data;
+    } catch (error) {
+        error(error());
+    }
+};
+
 // list order
 export const getOrder = async (params) => {
     try {
