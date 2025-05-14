@@ -16,7 +16,6 @@ import { login } from '~/actions/authAction';
 import Button from '~/components/Button';
 import * as AuthService from '~/services/authService';
 import config from '~/config';
-import socket from '~/services/socket.io';
 
 const cx = classNames.bind(styles);
 
