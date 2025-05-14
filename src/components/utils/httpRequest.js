@@ -2,8 +2,8 @@ import axios from 'axios';
 import cookie from 'react-cookies';
 
 const httpRequest = axios.create({
-    // baseURL: 'http://localhost:8000/api/v1/',
-    baseURL: 'https://ndev-backend.vercel.app/api/v1/',
+    baseURL: 'http://localhost:8000/api/v1/',
+    // baseURL: 'https://ndev-backend.vercel.app/api/v1/',
     headers: {
         'Content-Type': 'application/json',
     },
