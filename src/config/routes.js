@@ -49,6 +49,9 @@ export const routes = {
     // ADMIN dashboard
     adminDashBoard: '/admin/dashboard',
 
+    // ADMIN CHAT
+    admin_chat: '/admin/chat',
+
     // ADMIN Blogs
     adminBlogs: '/admin/blogs',
     adminAddBlogs: '/admin/blogs/add',
@@ -87,6 +90,12 @@ export const routes = {
 
     // ADMIN Stock
     adminStock: '/admin/stock',
+    adminAddIngredient: '/admin/ingredient-create',
+    adminAddOrderStock: '/admin/order-stock',
+
+    // ADMIN Supplier
+    adminSupplier: '/admin/supplier',
+    adminAddSupplier: '/admin/supplier-create',
 
     // ADMIN ListOrder
     adminOrder: '/admin/order',

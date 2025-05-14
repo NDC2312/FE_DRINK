@@ -89,6 +89,12 @@ import DetailPermissionGroup from '~/pages/Admin/PermissionGroup/Detail';
 
 // ADMIN Stock
 import Stock from '~/pages/Admin/Stock';
+import AddIngredient from '~/pages/Admin/Stock/AddIngredient/AddIngredient';
+import AddOrderStock from '~/pages/Admin/Stock/AddOrder/AddOrder';
+
+// ADMIN Supplier
+import Supplier from '~/pages/Admin/Supplier';
+import AddSupplier from '~/pages/Admin/Supplier/AddSupplier/AddSupplier';
 
 // ADMIN Role
 import Role from '~/pages/Admin/Role';
@@ -104,6 +110,7 @@ import ResetPassword from '~/pages/Auth/reset-password';
 import BlogDetail from '~/pages/AboutUs/BlogDetail';
 import InfoOrder from '~/pages/Account/InfoOrder';
 import ReviewInAdmin from '~/pages/Admin/Review';
+import AdminChat from '~/pages/Admin/AdminChat';
 
 const publicRoute = [
     { path: config.routes.home, component: Home },
@@ -316,6 +323,12 @@ const privateRoute = [
 
     // stock
     { path: config.routes.adminStock, component: Stock, protected: ProtectedRoute },
+    { path: config.routes.adminAddIngredient, component: AddIngredient, protected: ProtectedRoute },
+    { path: config.routes.adminAddOrderStock, component: AddOrderStock, protected: ProtectedRoute },
+
+    // supplier
+    { path: config.routes.adminSupplier, component: Supplier, protected: ProtectedRoute },
+    { path: config.routes.adminAddSupplier, component: AddSupplier, protected: ProtectedRoute },
 
     // role
     { path: config.routes.adminRole, component: Role, protected: ProtectedRoute, permission: 'role-view' },
@@ -325,6 +338,9 @@ const privateRoute = [
     { path: config.routes.adminAddAuth, component: AddAuth, protected: ProtectedRoute },
     { path: config.routes.adminDetailAuth, component: DetailAuth, protected: ProtectedRoute },
     { path: config.routes.adminEditAuth, component: EditAuth, protected: ProtectedRoute },
+
+    // chat
+    { path: config.routes.admin_chat, component: AdminChat, protected: ProtectedRoute },
 
     // settings
     { path: config.routes.adminSettings, component: Settings, protected: ProtectedRoute },

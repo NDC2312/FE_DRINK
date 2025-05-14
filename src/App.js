@@ -61,7 +61,6 @@ function App() {
                     })}
                     <Route path="/403" element={<Forbidden />} />
                 </Routes>
-                <Chat />
             </div>
         </Router>
     );

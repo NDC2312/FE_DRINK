@@ -83,8 +83,6 @@ function SignIn() {
             }
 
             const aa = { id, fullName, role: 'customer' };
-            socket.emit('SET_USER', aa);
-            // console.log('aa', aa);
             dispatch(login(aa));
         } else {
             alert('not found');

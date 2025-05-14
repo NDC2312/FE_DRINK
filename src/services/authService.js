@@ -102,7 +102,7 @@ export const editAuth = async (id, data) => {
 export const forgetPassword = async (email) => {
     try {
         const res = await axios.post(
-            'http://localhost:5000/api/v1/auth/password/forgot',
+            'http:///api/v1/auth/password/forgot',
             {
                 email,
             },
@@ -123,7 +123,7 @@ export const forgetPassword = async (email) => {
 
 export const otpPassword = async (data) => {
     try {
-        const res = await axios.post('http://localhost:5000/api/v1/auth/password/otp', data, {
+        const res = await axios.post('http://localhost:8000/api/v1/auth/password/otp', data, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -139,7 +139,7 @@ export const otpPassword = async (data) => {
 
 export const resetPassword = async (data) => {
     try {
-        const res = await axios.post('http://localhost:5000/api/v1/auth/password/reset', data, {
+        const res = await axios.post('http://localhost:8000/api/v1/auth/password/reset', data, {
             headers: {
                 'Content-Type': 'application/json',
             },

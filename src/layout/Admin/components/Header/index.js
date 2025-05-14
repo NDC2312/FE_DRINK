@@ -11,7 +11,7 @@ import config from '~/config';
 import Button from '~/components/Button';
 
 import cookie from 'react-cookies';
-import { logout } from '~/actions/authAction';
+import { logout_admin } from '~/actions/accountAction';
 
 const cx = classNames.bind(styles);
 
@@ -24,7 +24,7 @@ function Header({ headerText }) {
     const handleLogout = () => {
         cookie.remove('token');
         dispatch(removePermission);
-        dispatch(logout());
+        dispatch(logout_admin());
         localStorage.removeItem('isActive');
         navigate(config.routes.admin);
     };

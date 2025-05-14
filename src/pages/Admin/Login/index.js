@@ -10,8 +10,7 @@ import Button from '~/components/Button';
 import * as AccountService from '~/services/accountService';
 import config from '~/config';
 import { setPermission } from '~/actions/permissionsAction';
-import { login } from '~/actions/authAction';
-import socket from '~/services/socket.io';
+import { login_admin } from '~/actions/accountAction';
 
 const cx = classNames.bind(styles);
 
@@ -61,9 +60,7 @@ function Login() {
                 cookie.remove('password');
             }
             const aa = { id, fullName, role: 'employee' };
-            socket.emit('SET_USER', aa);
-            // console.log(aa);
-            dispatch(login(aa));
+            dispatch(login_admin(aa));
         }
     };
 

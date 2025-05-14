@@ -18,6 +18,8 @@ import {
     faChevronDown,
     faCircle,
     faLayerGroup,
+    faComment,
+    faTruckFieldUn,
 } from '@fortawesome/free-solid-svg-icons';
 import config from '~/config';
 
@@ -230,6 +232,18 @@ function Sidebar({ setHeaderText, menu }) {
                         </span>
                         <p>Hàng tồn kho</p>
                     </Link>
+                    <Link
+                        className={isActive === 9 ? cx('active') : ''}
+                        onClick={() => {
+                            handleActive(9);
+                        }}
+                        to={config.routes.adminSupplier}
+                    >
+                        <span>
+                            <FontAwesomeIcon icon={faTruckFieldUn} />
+                        </span>
+                        <p>Nhà cung cấp</p>
+                    </Link>
                 </li>
                 {/* end products  */}
 
@@ -259,6 +273,19 @@ function Sidebar({ setHeaderText, menu }) {
                             <FontAwesomeIcon icon={faComments} />
                         </span>
                         <p> Đánh giá</p>
+                    </Link>
+
+                    <Link
+                        className={isActive === 12 ? cx('active') : ''}
+                        onClick={() => {
+                            handleActive(12);
+                        }}
+                        to={config.routes.admin_chat}
+                    >
+                        <span>
+                            <FontAwesomeIcon icon={faComment} />
+                        </span>
+                        <p> Chat</p>
                     </Link>
                 </li>
 
@@ -314,7 +341,13 @@ function Sidebar({ setHeaderText, menu }) {
                 </li> */}
 
                 <li className={cx('list-block')}>
-                    <Link to={config.routes.adminSettings}>
+                    <Link
+                        className={isActive === 13 ? cx('active') : ''}
+                        onClick={() => {
+                            handleActive(13);
+                        }}
+                        to={config.routes.adminSettings}
+                    >
                         <span>
                             <FontAwesomeIcon icon={faGears} />
                         </span>

@@ -86,3 +86,19 @@
         color: var(--white);
     }
 }
+
+.sidebar {
+    scrollbar-width: thin;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 2px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+}
+
+// .sidebar::-webkit-scrollbar-track {
+//     background: transparent;
+// }

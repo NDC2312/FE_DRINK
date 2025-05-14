@@ -3,6 +3,7 @@ import styles from './DefaultLayout.module.scss';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Chat from '~/pages/Chat';
 
 const cx = classNames.bind(styles);
 
@@ -12,6 +13,7 @@ function DefaultLayout({ children }) {
             <Header />
             <div className={cx('container')}>{children}</div>
             <Footer />
+            <Chat />
         </div>
     );
 }

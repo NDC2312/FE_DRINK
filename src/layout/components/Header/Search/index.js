@@ -42,7 +42,7 @@ function Search() {
         }
         if (searchValue) {
             axios
-                .get(`http://localhost:5000/api/v1/products-client/search?name=${searchValue}`)
+                .get(`http://localhost:8000/api/v1/products-client/search?name=${searchValue}`)
                 .then((response) => response.data)
                 .then((data) => setSearchResults(data.data));
         } else {
