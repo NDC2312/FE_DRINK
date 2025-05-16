@@ -62,7 +62,9 @@ function SignUp() {
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <h2>Đăng ký tài khoản</h2>
-                <div>Đăng ký ngay tài khoản để nhận được những ưu đãi hấp dẫn khi mua hàng</div>
+                <div className={cx('sub-title')}>
+                    Đăng ký ngay tài khoản để nhận được những ưu đãi hấp dẫn khi mua hàng
+                </div>
                 <form onSubmit={handleSubmit}>
                     <div className={cx('input-group')}>
                         <input
@@ -107,7 +109,7 @@ function SignUp() {
                             </span>
                         )}
                     </div>
-                    <Button type="submit" full>
+                    <Button type="submit" large>
                         Đăng ký tài khoản
                     </Button>
                     <div className={cx('register')}>

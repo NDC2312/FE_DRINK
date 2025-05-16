@@ -1,5 +1,12 @@
 import httpRequest from '~/components/utils/httpRequest';
 
+export const getBlogNews = async () => {
+    try {
+        const res = await httpRequest.get('blogs-client/blogs-new');
+        return res.data;
+    } catch (error) {}
+};
+
 export const getBlogCategory = async () => {
     try {
         const res = await httpRequest.get('blogs-client/blogs-category');

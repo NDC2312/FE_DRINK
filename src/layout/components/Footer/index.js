@@ -107,7 +107,7 @@ function Footer() {
                     </Grid>
                 </Grid>
             </div>
-            <div className={cx('copyright')}>© 2024 Coffee House. Mọi quyền được bảo lưu.</div>
+            <div className={cx('copyright')}>© 2024 Coffee NTK. Mọi quyền được bảo lưu.</div>
         </footer>
     );
 }

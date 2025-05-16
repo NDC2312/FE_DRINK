@@ -41,7 +41,7 @@ function Products() {
 
     const title = convertSlugToTitle(slug);
 
-    console.log(data);
+    console.log('sao');
 
     const VND = new Intl.NumberFormat('vi-Vn', { style: 'currency', currency: 'VND' });
     return (
@@ -65,7 +65,7 @@ function Products() {
                                                     <span className={cx('name')}>{item.title}</span>
                                                     <span className={cx('price')}>{VND.format(item.priceNew)}</span>
                                                     <Button
-                                                        small
+                                                        btn_border
                                                         iconRight={
                                                             <FontAwesomeIcon icon={faAngleRight} fontSize={12} />
                                                         }

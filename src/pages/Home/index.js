@@ -12,6 +12,7 @@ import Slider from '~/layout/components/Slider';
 import Button from '~/components/Button';
 import { SliderCustomers } from '~/layout/components/Slider';
 import * as homeService from '~/services/homeService';
+import * as BlogService from '~/services/b-clientService';
 import config from '~/config';
 import {
     coffeeHouse,
@@ -34,6 +35,7 @@ const cx = classNames.bind(styles);
 
 function Home() {
     const [data, setData] = useState([]);
+    const [blogs, setBlogs] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [itemData, setItemData] = useState({});
     const [showImg, setShowImg] = useState(false);
@@ -42,7 +44,9 @@ function Home() {
     useEffect(() => {
         const fetch = async () => {
             const res = await homeService.getFeatured();
+            const blogs = await BlogService.getBlogNews();
             setData(res.products);
+            setBlogs(blogs);
         };
         fetch();
     }, [token]);
@@ -55,6 +59,7 @@ function Home() {
         style: 'currency',
         currency: 'VND',
     });
+    console.log(blogs);
     return (
         <>
             <Slider />
@@ -235,86 +240,31 @@ function Home() {
                 <div className={cx('wrapper-bottom')}>
                     <h2 className={cx('blog-title')}>Blog</h2>
                     <div className={cx('blog')}>
-                        <Grid container spacing={0} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                            <Grid item xs={12} md={4}>
-                                <div className={cx('blog-card')}>
+                        {blogs &&
+                            blogs.map((item) => (
+                                <div key={item._id} className={cx('blog-card')}>
                                     <div className={cx('blog-img')}>
-                                        <img src={blog1} alt="space" />
+                                        <img src={item.thumbnail} alt={item.title} />
                                     </div>
                                     <div className={cx('content')}>
                                         <div className={cx('date-time')}>
                                             <span className={cx('time')}>
                                                 <FontAwesomeIcon icon={faClock} />
-                                                <span> 00:02 </span>
+                                                <span> {new Date(item.createdAt).toLocaleDateString()} </span>
                                             </span>
                                             |
                                             <span className={cx('date')}>
                                                 <FontAwesomeIcon icon={faCalendar} />
-                                                <span> 31/03/2024</span>
+                                                <span> {new Date(item.createdAt).toLocaleTimeString()}</span>
                                             </span>
                                         </div>
-                                        <Link>STARBUCKS THE WATERFRONT SAIGON XIN CHÀO!</Link>
-                                        <p>
-                                            Nằm tại góc phố cà phê "hot hit" nhất trung tâm Quận 1 với chiếc view toàn
-                                            cảnh sông Sài Gòn và cầu Ba Son độc nhất vô nhị, Starbucks The Waterfront
-                                            Saigon mang đến một không gian thật chill, sẵn sàng để chào đón bạn
-                                        </p>
+                                        <Link to={config.routes.blogDetail.replace(':slug', item.slug)}>
+                                            {item.title}
+                                        </Link>
+                                        <p>{item.description}</p>
                                     </div>
                                 </div>
-                            </Grid>
-                            <Grid item xs={12} md={4}>
-                                <div className={cx('blog-card')}>
-                                    <div className={cx('blog-img')}>
-                                        <img src={blog2} alt="blog" />
-                                    </div>
-                                    <div className={cx('content')}>
-                                        <div className={cx('date-time')}>
-                                            <span className={cx('time')}>
-                                                <FontAwesomeIcon icon={faClock} />
-                                                <span> 00:02 </span>
-                                            </span>
-                                            |
-                                            <span className={cx('date')}>
-                                                <FontAwesomeIcon icon={faCalendar} />
-                                                <span> 31/03/2024</span>
-                                            </span>
-                                        </div>
-                                        <Link>STARBUCKS THE WATERFRONT SAIGON XIN CHÀO!</Link>
-                                        <p>
-                                            Nằm tại góc phố cà phê "hot hit" nhất trung tâm Quận 1 với chiếc view toàn
-                                            cảnh sông Sài Gòn và cầu Ba Son độc nhất vô nhị, Starbucks The Waterfront
-                                            Saigon mang đến một không gian thật chill, sẵn sàng để chào đón bạn
-                                        </p>
-                                    </div>
-                                </div>
-                            </Grid>
-                            <Grid item xs={12} md={4}>
-                                <div className={cx('blog-card')}>
-                                    <div className={cx('blog-img')}>
-                                        <img src={blog3} alt="space" />
-                                    </div>
-                                    <div className={cx('content')}>
-                                        <div className={cx('date-time')}>
-                                            <span className={cx('time')}>
-                                                <FontAwesomeIcon icon={faClock} />
-                                                <span> 00:02 </span>
-                                            </span>
-                                            |
-                                            <span className={cx('date')}>
-                                                <FontAwesomeIcon icon={faCalendar} />
-                                                <span> 31/03/2024</span>
-                                            </span>
-                                        </div>
-                                        <Link>STARBUCKS THE WATERFRONT SAIGON XIN CHÀO!</Link>
-                                        <p>
-                                            Nằm tại góc phố cà phê "hot hit" nhất trung tâm Quận 1 với chiếc view toàn
-                                            cảnh sông Sài Gòn và cầu Ba Son độc nhất vô nhị, Starbucks The Waterfront
-                                            Saigon mang đến một không gian thật chill, sẵn sàng để chào đón bạn
-                                        </p>
-                                    </div>
-                                </div>
-                            </Grid>
-                        </Grid>
+                            ))}
                     </div>
                 </div>
             </div>

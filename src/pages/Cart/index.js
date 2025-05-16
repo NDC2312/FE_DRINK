@@ -44,6 +44,7 @@ function Cart() {
                 {data.products?.length > 0 ? (
                     <Grid container justify="space-around" spacing={1}>
                         <Grid item xs={12} md={12}>
+                            <h2>Giỏ hàng của bạn |</h2>
                             <div className={cx('table')}>
                                 <table>
                                     <thead className={cx('header')}>
@@ -69,14 +70,16 @@ function Cart() {
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td className={cx('item-information')}>
-                                                        <p className={cx('name')}>{item.productInfo.title}</p>
-                                                        <p
-                                                            className={cx('btn-remove')}
-                                                            onClick={() => handleRemove(item.product_id)}
-                                                        >
-                                                            <FontAwesomeIcon icon={faTrashCan} />
-                                                        </p>
+                                                    <td>
+                                                        <div className={cx('item-information')}>
+                                                            <p className={cx('name')}>{item.productInfo.title}</p>
+                                                            <p
+                                                                className={cx('btn-remove')}
+                                                                onClick={() => handleRemove(item.product_id)}
+                                                            >
+                                                                <FontAwesomeIcon icon={faTrashCan} />
+                                                            </p>
+                                                        </div>
                                                     </td>
                                                     <td className={cx('item-price')}>
                                                         <span>{VND.format(item.priceNew)}</span>
@@ -110,16 +113,14 @@ function Cart() {
                             <div className={cx('last')}>
                                 <Link to={config.routes.categoryProducts} className={cx('back')}>
                                     <FontAwesomeIcon icon={faArrowLeft} />
-                                    <p className={cx('text')}> Tiếp tục mua hàng</p>
+                                    Tiếp tục mua hàng
                                 </Link>
 
                                 <div className={cx('payment')}>
                                     {data.products && (
                                         <div className={cx('sum-price')}>
-                                            <span>Tổng tiền thanh toán : </span>
-                                            <span className={cx('total')}>
-                                                {VND.format(data.products[0].totalPrice)}
-                                            </span>
+                                            <div>Tổng tiền thanh toán: </div>
+                                            <div className={cx('total')}>{VND.format(data.products[0].totalPrice)}</div>
                                         </div>
                                     )}
                                     <Button to={config.routes.paymentInfor} large>

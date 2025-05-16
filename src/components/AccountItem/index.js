@@ -14,7 +14,9 @@ function AccountItem({ data }) {
         <Link to={config.routes.detail.replace(':slugProduct', data.slug)}>
             <div className={cx('wrapper')}>
                 <div className={cx('information')}>
-                    <img src={data.thumbnail} alt="" />
+                    <div className={cx('img')}>
+                        <img src={data.thumbnail} alt="" />
+                    </div>
                     <p className={cx('name')}>{data.title}</p>
                 </div>
                 <span className={cx('price')}>{VND.format(data.price)}</span>

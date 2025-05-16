@@ -69,7 +69,7 @@ function Products() {
                                                     <span className={cx('name')}>{item.title}</span>
                                                     <span className={cx('price')}>{VND.format(item.priceNew)}</span>
                                                     <Button
-                                                        small
+                                                        btn_border
                                                         iconRight={
                                                             <FontAwesomeIcon icon={faAngleRight} fontSize={12} />
                                                         }

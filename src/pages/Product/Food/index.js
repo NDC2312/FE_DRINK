@@ -4,7 +4,7 @@ import { Grid, Button } from '@mui/material';
 import { useState } from 'react';
 
 import { productFood } from '~/utils/imageProducts';
-import Product from '..';
+// import Product from '..';
 import { bgf } from '~/utils/imageProducts';
 import Menu from '~/components/Menu';
 import SliderBanner from '~/components/Slider';
@@ -23,11 +23,12 @@ function Food() {
         style: 'currency',
         currency: 'VND',
     });
+    console.log('food');
 
     return (
         <>
             <SliderBanner image={bgf} />
-            <Product />
+            {/* <Product /> */}
             <div className={cx('wrapper')}>
                 <div className={cx('container')}>
                     <Grid container rowSpacing={5} spacing={0}>

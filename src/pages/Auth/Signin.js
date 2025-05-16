@@ -110,7 +110,7 @@ function SignIn() {
             <div className={cx('wrapper')}>
                 <div className={cx('container')}>
                     <h2>Đăng nhập tài khoản</h2>
-                    <div>Bạn đã có tài khoản vui lòng đăng nhập ở đây</div>
+                    <div className={cx('sub-title')}>Bạn đã có tài khoản vui lòng đăng nhập ở đây</div>
                     <form onSubmit={handleSubmit}>
                         <div className={cx('input-group')}>
                             <input
@@ -141,7 +141,7 @@ function SignIn() {
                             )}
                         </div>
                         <div className={cx('remember')}>
-                            <div>
+                            <div className={cx('label-remember')}>
                                 <input
                                     type="checkbox"
                                     id="remember"
@@ -155,7 +155,7 @@ function SignIn() {
                                 <Link to={config.routes.forgotPassword}>Quên mật khẩu</Link>
                             </div>
                         </div>
-                        <Button type="submit" full>
+                        <Button type="submit" large>
                             Đăng nhập
                         </Button>
                         <div className={cx('register')}>
@@ -172,7 +172,6 @@ function SignIn() {
                     </form>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

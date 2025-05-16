@@ -17,7 +17,7 @@ import Chat from '~/pages/Chat';
 //products
 import Products from '~/pages/Product/Products';
 import Snacks from '~/pages/Product/Snacks';
-import Food from '~/pages/Product/Food';
+// import Food from '~/pages/Product/Food';
 import Detail from '~/pages/Product/Detail';
 
 // store
@@ -130,7 +130,7 @@ const publicRoute = [
     //product
     { path: config.routes.categoryProducts, component: Products },
     { path: config.routes.categorySnacks, component: Snacks },
-    { path: config.routes.categoryFood, component: Food },
+    // { path: config.routes.categoryFood, component: Food },
     { path: config.routes.detail, component: Detail },
 
     // store
