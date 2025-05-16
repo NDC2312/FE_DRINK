@@ -45,31 +45,31 @@ const sliderHomeData = [
 
 const sliderHomeCustommer = [
     {
-        img: slider1,
+        img: bgCf,
         name: 'Trần Nhật Nam',
         comment:
             'Tôi rất hài lòng về thái độ phục vụ của quán, cafe đa dạng, bánh ngon và không gian rất đẹp, mình thích sống ảo nên tại đây mình có thể chụp được những tấm ảnh đẹp cùng bạn bè, để hẹn hò cũng rất lãng mạn .',
     },
     {
-        img: slider2,
+        img: bgCf,
         name: 'Trần Nhật Nam',
         comment:
             'Tôi rất hài lòng về thái độ phục vụ của quán, cafe đa dạng, bánh ngon và không gian rất đẹp, mình thích sống ảo nên tại đây mình có thể chụp được những tấm ảnh đẹp cùng bạn bè, để hẹn hò cũng rất lãng mạn .',
     },
     {
-        img: slider3,
+        img: bgCf,
         name: 'Trần Nhật Nam',
         comment:
             'Tôi rất hài lòng về thái độ phục vụ của quán, cafe đa dạng, bánh ngon và không gian rất đẹp, mình thích sống ảo nên tại đây mình có thể chụp được những tấm ảnh đẹp cùng bạn bè, để hẹn hò cũng rất lãng mạn .',
     },
     {
-        img: slider3,
+        img: bgCf,
         name: 'Trần Nhật Nam',
         comment:
             'Tôi rất hài lòng về thái độ phục vụ của quán, cafe đa dạng, bánh ngon và không gian rất đẹp, mình thích sống ảo nên tại đây mình có thể chụp được những tấm ảnh đẹp cùng bạn bè, để hẹn hò cũng rất lãng mạn .',
     },
     {
-        img: slider3,
+        img: bgCf,
         name: 'Trần Nhật Nam',
         comment:
             'Tôi rất hài lòng về thái độ phục vụ của quán, cafe đa dạng, bánh ngon và không gian rất đẹp, mình thích sống ảo nên tại đây mình có thể chụp được những tấm ảnh đẹp cùng bạn bè, để hẹn hò cũng rất lãng mạn .',

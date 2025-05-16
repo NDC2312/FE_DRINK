@@ -19,9 +19,9 @@
         align-items: center;
         .item {
             position: relative;
-            &:hover .item-about {
-                display: flex;
-            }
+            // &:hover .item-about {
+            //     display: flex;
+            // }
             > a {
                 font-size: 1.7rem;
                 font-weight: 500;
@@ -29,7 +29,6 @@
                 padding: 12px 18px;
                 color: var(--white);
             }
-
             ul {
                 display: none;
                 position: absolute;
@@ -48,16 +47,22 @@
                 li {
                     position: relative;
                     background-color: var(--white);
-                    box-shadow: var(--box-shadow);
                     width: 100%;
                     cursor: pointer;
                     color: var(--black);
+                    border-bottom: 1px solid #ccc;
                     transition: 0.4s ease-in-out;
+                    &:last-child {
+                        border: none;
+                    }
                     a {
                         color: var(--black);
                         display: block;
                         padding: 10px 15px;
-                        transition: 0.3s ease;
+                        transition: 0.3s ease-in;
+                        &:hover {
+                            color: var(--white);
+                        }
                     }
                     ul {
                         position: absolute;
@@ -68,7 +73,7 @@
                         display: block;
                     }
                     &:hover {
-                        background: var(--primary-text);
+                        background: var(--background);
                     }
                 }
             }

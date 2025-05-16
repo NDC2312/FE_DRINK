@@ -11,6 +11,7 @@ function Button({
     primary = false,
     large = false,
     small = false,
+    btn_border = false,
     full = false,
     btnDetail = false,
     btnEdit = false,
@@ -49,13 +50,16 @@ function Button({
         btnDetail,
         btnEdit,
         btnConfirm,
+        btn_border,
     });
 
     return (
         <Comp className={classes} {...props}>
-            {iconLeft && <span className={cx('icon-left')}>{iconLeft}</span>}
-            {children}
-            {iconRight && <span className={cx('icon-right')}>{iconRight}</span>}
+            <span className={cx('btn_content')}>
+                {iconLeft && <span className={cx('icon-left')}>{iconLeft}</span>}
+                {children}
+                {iconRight && <span className={cx('icon-right')}>{iconRight}</span>}
+            </span>
         </Comp>
     );
 }

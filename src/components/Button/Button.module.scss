@@ -73,6 +73,43 @@
     }
 }
 
+.btn_border {
+    // min-height: 40px;
+    position: relative;
+    min-height: 34px;
+    font-size: 1.4rem;
+    background: transparent;
+    border: 2px solid var(--background);
+    border-radius: 4px;
+    color: var(--black);
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.5s ease-out;
+
+    &:hover {
+        color: var(--white);
+    }
+    &::after {
+        position: absolute;
+        content: '';
+        width: 0%;
+        height: 100%;
+        color: var(--black);
+        background: var(--background);
+        transform: translateX(0);
+        transition: 0.5s ease-out;
+        z-index: 0;
+    }
+    &:hover::after {
+        width: 100%;
+    }
+    .btn_content {
+        position: relative;
+        z-index: 2;
+        font-weight: 500;
+    }
+}
+
 // btn-add-new
 .btn-add-new {
     min-height: 40px;

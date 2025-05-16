@@ -3,7 +3,7 @@ import styles from './Home.module.scss';
 import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faSearch, faMugSaucer, faHeart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faClock, faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { useState, useEffect } from 'react';
 import cookie from 'react-cookies';
@@ -88,31 +88,31 @@ function Home() {
                 </div>
                 <div className={cx('menu')}>
                     <div className={cx('products')}>
-                        <Grid container>
-                            <div className={cx('coffee-favorite')}>Những món cà phê được yêu thích nhất</div>
+                        <div className={cx('coffee-favorite')}>
+                            Những món cà phê được yêu thích nhất <FontAwesomeIcon icon={faHeart} />
+                        </div>
+                        <div className={cx('list-wrapper')}>
                             {data &&
                                 data.map((item) => (
-                                    <Grid key={item._id} item xs={6} md={3}>
-                                        <div className={cx('list')}>
-                                            <div className={cx('sale')}>{item.discountPercentage} %</div>
-                                            <div className={cx('list-img')}>
-                                                <img src={item.thumbnail} alt={item.title} />
-                                            </div>
-                                            <div className={cx('list-infor')}>
-                                                <span className={cx('name')}>{item.title}</span>
-                                                <span className={cx('price')}>{VND.format(item.priceNew)}</span>
-                                                <Button
-                                                    small
-                                                    iconRight={<FontAwesomeIcon icon={faAngleRight} fontSize={12} />}
-                                                    to={config.routes.detail.replace(':slugProduct', item.slug)}
-                                                >
-                                                    Xem chi tiết
-                                                </Button>
-                                            </div>
+                                    <div key={item._id} className={cx('list')}>
+                                        <div className={cx('sale')}>{item.discountPercentage} %</div>
+                                        <div className={cx('list-img')}>
+                                            <img src={item.thumbnail} alt={item.title} />
                                         </div>
-                                    </Grid>
+                                        <div className={cx('list-infor')}>
+                                            <div className={cx('name')}>{item.title}</div>
+                                            <div className={cx('price')}>{VND.format(item.priceNew)}</div>
+                                            <Button
+                                                btn_border
+                                                iconRight={<FontAwesomeIcon icon={faAngleRight} fontSize={12} />}
+                                                to={config.routes.detail.replace(':slugProduct', item.slug)}
+                                            >
+                                                Xem chi tiết
+                                            </Button>
+                                        </div>
+                                    </div>
                                 ))}
-                        </Grid>
+                        </div>
                         <div className={cx('view-more')}>
                             <Link to={config.routes.categoryProducts}>Xem thêm</Link>
                         </div>
@@ -122,7 +122,10 @@ function Home() {
                 <div className={cx('wrapper-top')}>
                     <Grid container>
                         <Grid item xs={12} md={12} className={cx('title')}>
-                            <h2> Hình ảnh tại quán coffee</h2>
+                            <h2>
+                                {' '}
+                                Hình ảnh tại quán coffee <FontAwesomeIcon icon={faMugSaucer} />
+                            </h2>
                         </Grid>
                         <Grid item md={6} xs={12}>
                             <div
@@ -200,7 +203,9 @@ function Home() {
                     </div>
                 )}
                 <div className={cx('slider-customers')}>
-                    <h2>Khách hàng nói gì</h2>
+                    <h2>
+                        Khách hàng nói gì <FontAwesomeIcon icon={faUser} />
+                    </h2>
                     <SliderCustomers />
                 </div>
                 <div className={cx('hours-book')}>
@@ -210,9 +215,9 @@ function Home() {
                             <p>
                                 Hãy đến và trải nghiệm không gian ấm cúng, những ly cafe hảo hạng cùng với thực đơn
                                 phong phú. Đặc biệt, chúng tôi có chương trình khuyến mãi hấp dẫn: Giảm 20% cho đơn hàng
-                                đầu tiên khi bạn đặt bàn trực tuyến! Đừng bỏ lỡ cơ hội thưởng thức những khoảnh khắc
-                                tuyệt vời bên bạn bè và gia đình. Hãy đặt bàn ngay hôm nay và khám phá hương vị tuyệt
-                                vời của chúng tôi!
+                                đầu tiên khi bạn đặt trực tuyến! Đừng bỏ lỡ cơ hội thưởng thức những khoảnh khắc tuyệt
+                                vời bên bạn bè và gia đình. Hãy đặt bàn ngay hôm nay và khám phá hương vị tuyệt vời của
+                                chúng tôi!
                             </p>
                             <div className={cx('phone-contact')}>
                                 <div>Số điện thoại</div>
@@ -222,7 +227,7 @@ function Home() {
                         <div className={cx('hours-book-r')}>
                             <div className={cx('book-img')}>
                                 <img src={bannerHoursBook} alt="" width="500" />
-                                <Link to={config.routes.setTable}>Đặt bàn</Link>
+                                <Link to={config.routes.categorySnacks}>Đặt hàng</Link>
                             </div>
                         </div>
                     </div>

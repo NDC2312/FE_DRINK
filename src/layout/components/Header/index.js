@@ -89,7 +89,6 @@ function Header() {
                     </span> */}
 
                     <span>Chào mừng bạn đến với Coffee NTK.</span>
-
                     <div className={cx('action')}>
                         {isLoggedIn ? (
                             <div className={cx('userLogin')}>
@@ -116,20 +115,6 @@ function Header() {
                             </div>
                         )}
                     </div>
-                    <div className={cx('user-phone')}>
-                        {/* {user ? (
-                            <div className={cx('userLogin')}>
-                                <img className={cx('img-user')} src={user.photoURL ? user.photoURL : noAvatar} alt="" />
-                                <Link to="/" className={cx('log-out')} onClick={singOutHandler}>
-                                    <div className={cx('logout-text')}> Đăng xuất</div>
-                                </Link>
-                            </div>
-                        ) : (
-                            <Link to={config.routes.sigin} className={cx('account')}>
-                                <span>Đăng nhập</span>
-                            </Link>
-                        )} */}
-                    </div>
                 </div>
             </div>
 
@@ -147,27 +132,6 @@ function Header() {
                                 Trang Chủ
                             </NavLink>
                         </li>
-                        {/* <li className={cx('item')}>
-                            <NavLink
-                                onClick={toggleMenu}
-                                to={config.routes.coffeeAtHome}
-                                style={({ isActive }) => ({
-                                    color: isActive ? ' var(--primary-text)' : '',
-                                })}
-                            >
-                                Cà Phê
-                            </NavLink>
-                            <div className={cx('item-child')}>
-                                <ul className={cx('list')}>
-                                    <li>
-                                        <Link to={config.routes.coffeeAtHome}>Cà phê tại nhà</Link>
-                                    </li>
-                                    <li>
-                                        <Link to={config.routes.coffeeDamViCaPhe}>Hạt cà phê chất lượng</Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li> */}
                         <li className={cx('item')}>
                             <NavLink
                                 onClick={toggleMenu}
