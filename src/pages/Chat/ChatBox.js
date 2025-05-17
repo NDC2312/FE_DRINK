@@ -11,8 +11,11 @@ import send from '~/assets/send.webp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const SOCKET_URL = 'http://localhost:8000';
-const REST_URL = 'http://localhost:8000';
+// http://localhost:8000
+// https://be-drink.vercel.app
+
+const SOCKET_URL = 'https://be-drink.vercel.app';
+const REST_URL = 'https://be-drink.vercel.app';
 
 const socket = io(SOCKET_URL, { withCredentials: true });
 

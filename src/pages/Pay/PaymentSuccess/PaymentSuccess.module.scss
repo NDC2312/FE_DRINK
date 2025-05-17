@@ -8,7 +8,7 @@
         width: var(--width-default);
         height: 100%;
         margin: auto;
-        margin-top: 70px;
+        margin-top: 20px;
         padding: 20px;
         background-color: #fff;
         border-radius: 5px;
@@ -29,9 +29,12 @@
         .thank-you {
             display: flex;
             justify-content: center;
-            column-gap: 10px;
+            column-gap: 5px;
             align-items: center;
             margin-bottom: 5px;
+            span {
+                color: var(--primary-text);
+            }
         }
     }
 
@@ -117,14 +120,11 @@
             opacity: 0.6;
         }
         .totals {
-            padding-top: 20px;
             border-top: 1px solid rgba(175, 175, 175, 0.34);
-            margin: 20px 0;
             .total {
                 margin-top: 15px;
                 padding-top: 15px;
                 position: relative;
-                border-top: 1px solid rgba(175, 175, 175, 0.34);
             }
         }
         .totals div {
@@ -139,8 +139,8 @@
         }
         .price-total {
             font-size: 1.6rem;
-            font-weight: 500;
-            color: #2a9dcc;
+            font-weight: 600;
+            color: var(--red);
         }
 
         .order {

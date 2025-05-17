@@ -1,7 +1,13 @@
 import classNames from 'classnames/bind';
 import styles from './PaymentInfor.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faUser, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
+import {
+    faChevronLeft,
+    faUser,
+    faMoneyBill,
+    faMoneyCheckDollar,
+    faCartShopping,
+} from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import cookie from 'react-cookies';
 import { useNavigate } from 'react-router-dom';
@@ -76,6 +82,10 @@ function PaymentInfor() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!tokenAuth) {
+            Navigate(config.routes.signIn);
+            return;
+        }
         const data = { cart, auth };
 
         if (values.payment === 'zalopay') {
@@ -107,11 +117,15 @@ function PaymentInfor() {
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <form onSubmit={handleSubmit}>
-                    <h2>Coffee NTK</h2>
+                    <h2>
+                        <Link to={config.routes.home}>Coffee NTK</Link>
+                    </h2>
                     <div className={cx('checkout')}>
                         <div className={cx('shipping-info')}>
                             <div className={cx('shipping-header')}>
-                                <h3>Thông tin nhận hàng</h3>
+                                <h3>
+                                    Thông tin nhận hàng <FontAwesomeIcon icon={faUser} />
+                                </h3>
                                 {!tokenAuth && (
                                     <Link to={config.routes.signIn}>
                                         <FontAwesomeIcon icon={faUser} /> Đăng nhập
@@ -161,8 +175,11 @@ function PaymentInfor() {
                                 <textarea name="note" onChange={(e) => handleChange('note', e.target.value)}></textarea>
                             </div>
                         </div>
+
                         <div className={cx('delivery-payment')}>
-                            <h3 className={cx('payment-h3')}>Thanh toán</h3>
+                            <h3 className={cx('payment-h3')}>
+                                Thanh toán <FontAwesomeIcon icon={faMoneyCheckDollar} />
+                            </h3>
                             <div className={cx('payment')}>
                                 <input
                                     type="radio"
@@ -205,7 +222,9 @@ function PaymentInfor() {
                         </div>
 
                         <div className={cx('order-summary')}>
-                            <h3>Đơn hàng </h3>
+                            <h3>
+                                Đơn hàng <FontAwesomeIcon icon={faCartShopping} />
+                            </h3>
                             {cart.products &&
                                 cart.products.map((item) => (
                                     <div key={item._id}>

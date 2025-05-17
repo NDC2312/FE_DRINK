@@ -41,7 +41,10 @@ function PaymentSuccess() {
                     <div className={cx('header')}>NTK</div>
                     <div className={cx('success-message')}>
                         <p className={cx('thank-you')}>
-                            Cảm ơn bạn đã đặt hàng <FontAwesomeIcon icon={faCheckCircle} fontSize={30} />
+                            Cảm ơn bạn đã đặt hàng{' '}
+                            <span>
+                                <FontAwesomeIcon icon={faCheckCircle} fontSize={20} />
+                            </span>
                         </p>
                         <div>Một email xác nhận đã được gửi tới {auth2.email} Xin vui lòng kiểm tra email của bạn</div>
                     </div>
