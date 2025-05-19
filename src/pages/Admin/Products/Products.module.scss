@@ -102,6 +102,12 @@
         border-collapse: collapse;
         margin-bottom: 20px;
     }
+    table,
+    tr,
+    th,
+    td {
+        border: none;
+    }
     table thead tr th {
         text-align: center;
         font-size: 1.7rem;
@@ -136,9 +142,11 @@
         font-weight: 500;
     }
 
-    table tbody tr td:last-child {
+    table tbody tr td:last-child div {
         display: flex;
+        height: 100%;
         align-items: center;
+        justify-content: center;
         column-gap: 4px;
         button {
             margin-top: 0;

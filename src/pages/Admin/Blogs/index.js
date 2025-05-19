@@ -283,19 +283,24 @@ function BlogsInAdmin() {
                                     <td>{item.accountFullName}</td>
                                     <td>{item.updateFullName}</td>
                                     <td>
-                                        <Button to={config.routes.adminDetailBlogs.replace(':id', item._id)} btnDetail>
-                                            Xem
-                                        </Button>
-                                        <Button
-                                            to={config.routes.adminEditBlogs.replace(':id', item._id)}
-                                            state={{ product: item }}
-                                            btnEdit
-                                        >
-                                            Sửa
-                                        </Button>
-                                        <Button onClick={() => handleBtnDelete(data._id)} btnDelete>
-                                            Xóa
-                                        </Button>
+                                        <div>
+                                            <Button
+                                                to={config.routes.adminDetailBlogs.replace(':id', item._id)}
+                                                btnDetail
+                                            >
+                                                Xem
+                                            </Button>
+                                            <Button
+                                                to={config.routes.adminEditBlogs.replace(':id', item._id)}
+                                                state={{ product: item }}
+                                                btnEdit
+                                            >
+                                                Sửa
+                                            </Button>
+                                            <Button onClick={() => handleBtnDelete(data._id)} btnDelete>
+                                                Xóa
+                                            </Button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

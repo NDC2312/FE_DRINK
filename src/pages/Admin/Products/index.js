@@ -239,7 +239,7 @@ function ProductInAdmin() {
                                         <img src={item.thumbnail} alt={item.title} width="60px" height="60px" />
                                     </td>
                                     <td>{item.title}</td>
-                                    <td>{item.price}$</td>
+                                    <td>{item.price} đ</td>
                                     <td>
                                         <input
                                             type="number"
@@ -280,22 +280,24 @@ function ProductInAdmin() {
                                     <td>{item.accountFullName}</td>
                                     <td>{item.updateFullName}</td>
                                     <td>
-                                        <Button
-                                            to={config.routes.adminDetailProducts.replace(':id', item._id)}
-                                            btnDetail
-                                        >
-                                            Xem
-                                        </Button>
-                                        <Button
-                                            to={config.routes.adminEditProducts.replace(':id', item._id)}
-                                            state={{ product: item }}
-                                            btnEdit
-                                        >
-                                            Sửa
-                                        </Button>
-                                        <Button onClick={() => handleBtnDelete(item._id)} btnDelete>
-                                            Xóa
-                                        </Button>
+                                        <div>
+                                            <Button
+                                                to={config.routes.adminDetailProducts.replace(':id', item._id)}
+                                                btnDetail
+                                            >
+                                                Xem
+                                            </Button>
+                                            <Button
+                                                to={config.routes.adminEditProducts.replace(':id', item._id)}
+                                                state={{ product: item }}
+                                                btnEdit
+                                            >
+                                                Sửa
+                                            </Button>
+                                            <Button onClick={() => handleBtnDelete(item._id)} btnDelete>
+                                                Xóa
+                                            </Button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

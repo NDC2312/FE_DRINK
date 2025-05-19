@@ -14,8 +14,8 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 // http://localhost:8000
 // https://be-drink.vercel.app
 
-const SOCKET_URL = 'https://be-drink.vercel.app';
-const REST_URL = 'https://be-drink.vercel.app';
+const SOCKET_URL = 'http://localhost:8000';
+const REST_URL = 'http://localhost:8000';
 
 const socket = io(SOCKET_URL, { withCredentials: true });
 

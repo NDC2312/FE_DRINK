@@ -86,13 +86,13 @@ function Report() {
                         {data &&
                             data.map((data) => (
                                 <tr key={data._id}>
-                                    <td>{data.userInfo.fullName}</td>
-                                    <td>{data.userInfo.phone}</td>
-                                    <td>{data.userInfo.address}</td>
+                                    <td>{data.userInfo?.fullName}</td>
+                                    <td>{data.userInfo?.phone}</td>
+                                    <td>{data.userInfo?.address}</td>
                                     <td>{data._id}</td>
                                     <td>{new Date(data.createdAt).toLocaleString()}</td>
                                     <td>{VND.format(data.totalPrice)}</td>
-                                    <td>Thanh toán khi giao hàng (COD)</td>
+                                    <td>{data.payment ? data.payment : 'Thanh toán khi giao hàng (COD)'}</td>
                                     <td>
                                         <Button
                                             to="#"

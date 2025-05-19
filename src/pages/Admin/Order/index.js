@@ -133,6 +133,8 @@ function Order() {
     }, [currentPage, keyword, status]);
     const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
     console.log(totalPages);
+    console.log('data', data);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -197,9 +199,16 @@ function Order() {
                                     </td>
                                     <td>{data._id}</td>
                                     <td>{new Date(data.createdAt).toLocaleString()}</td>
-                                    <td>{data.userInfo.fullName}</td>
-                                    <td>{VND.format(data.totalPrice)}</td>
-                                    <td>Thanh toán khi giao hàng (COD)</td>
+                                    <td>{data.userInfo?.fullName}</td>
+                                    <td
+                                        style={{
+                                            color: 'var(--red)',
+                                            fontWeight: 500,
+                                        }}
+                                    >
+                                        {VND.format(data.totalPrice)}
+                                    </td>
+                                    <td>{data.payment ? data.payment : 'Thanh toán khi giao hàng (COD)'}</td>
                                     <td>
                                         <Button
                                             to="#"

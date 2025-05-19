@@ -19,9 +19,11 @@
         > div {
             display: flex;
             align-items: center;
+            justify-content: center;
             column-gap: 10px;
             margin-bottom: 5px;
-            color: var(--secondary);
+            color: var(--primary-text);
+
             span {
                 font-size: 1.8rem;
             }

@@ -221,9 +221,9 @@ function Sidebar({ setHeaderText, menu }) {
                         <p>Báo cáo</p>
                     </Link>
                     <Link
-                        className={isActive === 9 ? cx('active') : ''}
+                        className={isActive === 10 ? cx('active') : ''}
                         onClick={() => {
-                            handleActive(9);
+                            handleActive(10);
                         }}
                         to={config.routes.adminStock}
                     >
@@ -233,9 +233,9 @@ function Sidebar({ setHeaderText, menu }) {
                         <p>Hàng tồn kho</p>
                     </Link>
                     <Link
-                        className={isActive === 9 ? cx('active') : ''}
+                        className={isActive === 11 ? cx('active') : ''}
                         onClick={() => {
-                            handleActive(9);
+                            handleActive(11);
                         }}
                         to={config.routes.adminSupplier}
                     >
@@ -251,9 +251,9 @@ function Sidebar({ setHeaderText, menu }) {
                 <li className={cx('list-block')}>
                     <p>Khách hàng </p>
                     <Link
-                        className={isActive === 10 ? cx('active') : ''}
+                        className={isActive === 12 ? cx('active') : ''}
                         onClick={() => {
-                            handleActive(10);
+                            handleActive(12);
                         }}
                         to={config.routes.adminAuth}
                     >
@@ -263,9 +263,9 @@ function Sidebar({ setHeaderText, menu }) {
                         <p> Khách hàng</p>
                     </Link>
                     <Link
-                        className={isActive === 11 ? cx('active') : ''}
+                        className={isActive === 13 ? cx('active') : ''}
                         onClick={() => {
-                            handleActive(11);
+                            handleActive(13);
                         }}
                         to={config.routes.adminReview}
                     >
@@ -276,9 +276,9 @@ function Sidebar({ setHeaderText, menu }) {
                     </Link>
 
                     <Link
-                        className={isActive === 12 ? cx('active') : ''}
+                        className={isActive === 14 ? cx('active') : ''}
                         onClick={() => {
-                            handleActive(12);
+                            handleActive(14);
                         }}
                         to={config.routes.admin_chat}
                     >
@@ -342,9 +342,9 @@ function Sidebar({ setHeaderText, menu }) {
 
                 <li className={cx('list-block')}>
                     <Link
-                        className={isActive === 13 ? cx('active') : ''}
+                        className={isActive === 15 ? cx('active') : ''}
                         onClick={() => {
-                            handleActive(13);
+                            handleActive(15);
                         }}
                         to={config.routes.adminSettings}
                     >

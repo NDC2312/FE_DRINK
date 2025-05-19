@@ -30,6 +30,7 @@ function PermissionGroup() {
             dispatch(fetchData());
         }
     };
+    console.log(data);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>

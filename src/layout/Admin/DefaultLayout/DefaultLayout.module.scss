@@ -2,7 +2,7 @@
     display: flex;
     position: relative;
     transition: 0.5s all;
-    --height-header-admin: 100px;
+    --height-header-admin: 80px;
 }
 
 .w-left {
@@ -30,7 +30,7 @@
     transition: 0.5s all;
 
     .content {
-        margin-top: calc(var(--height-header-admin) + 20px);
+        margin-top: calc(var(--height-header-admin) + 10px);
         max-width: 100%;
         overflow-x: hidden;
     }

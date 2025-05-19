@@ -201,22 +201,24 @@ function ProductsCategory() {
                             ></Button>
                         </td>
                         <td>
-                            <Link
-                                to={config.routes.adminDetailProductsCategory.replace(':id', item._id)}
-                                className={`${cx('btn-detail')} ${styles.btn}`}
-                            >
-                                Chi tiết
-                            </Link>
-                            <Link
-                                to={config.routes.adminEditProductsCategory.replace(':id', item._id)}
-                                className={`${cx('btn-edit')} ${styles.btn}`}
-                                state={{ product: item }}
-                            >
-                                Sửa
-                            </Link>
-                            <Button btnDelete onClick={() => handleDelete(item._id)}>
-                                Xóa
-                            </Button>
+                            <div>
+                                <Link
+                                    to={config.routes.adminDetailProductsCategory.replace(':id', item._id)}
+                                    className={`${cx('btn-detail')} ${styles.btn}`}
+                                >
+                                    Chi tiết
+                                </Link>
+                                <Link
+                                    to={config.routes.adminEditProductsCategory.replace(':id', item._id)}
+                                    className={`${cx('btn-edit')} ${styles.btn}`}
+                                    state={{ product: item }}
+                                >
+                                    Sửa
+                                </Link>
+                                <Button btnDelete onClick={() => handleDelete(item._id)}>
+                                    Xóa
+                                </Button>
+                            </div>
                         </td>
                     </tr>
                     {item.children && render(item.children, level + 1)}
